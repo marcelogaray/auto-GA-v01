@@ -5,6 +5,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
+        //glue = {"'--glue org.umssdiplo.automationv01 ' +"}
         format = {"pretty",
                 "html:build/cucumber",
                 "json:build/cucumber/cucumber.json",
