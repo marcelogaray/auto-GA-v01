@@ -8,8 +8,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
         format = {"pretty",
                 "html:build/cucumber",
                 "json:build/cucumber/cucumber.json",
-                "junit:build/test-report.xml"},
-        tags = { "@bvt"}
+                "junit:build/test-report.xml"}
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests{
 }
