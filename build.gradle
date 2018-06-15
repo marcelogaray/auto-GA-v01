@@ -47,6 +47,7 @@ task runFeatures(type: Test) {
                            '--plugin pretty ' +
                            '--plugin json:build/cucumber/cucumber.json ' +
                            '--plugin rerun:build/cucumber/rerun.txt ']
+        jvmArgs = ['-Dbrowser=' + browser]
     }
 
     // show standard out and standard error of the test JVM(s) on the console
@@ -71,7 +72,7 @@ def generateReport(String pathCucumber, String pathReport){
     jsonFiles.add(pathCucumber)
 
     String buildNumber = "1"
-    String projectName = "cucumberProject"
+    String projectName = "UMSS Diplomado"
     boolean runWithJenkins = false
     boolean parallelTesting = false
 
