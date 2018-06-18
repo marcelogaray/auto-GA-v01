@@ -8,6 +8,7 @@ import java.util.Properties;
 public class PropertyAccessor {
     private static final String BROWSER = "browser";
     private static final String BASE_URL = "baseurl";
+    private static final String SSIA_BASE_URL = "ssia.baseUrl";
     private static final String USER_NAME = "username";
     private static final String PASSWORD = "password";
 
@@ -55,6 +56,10 @@ public class PropertyAccessor {
 
     public String getBaseUrl() {
         return getDataProperty(BASE_URL);
+    }
+
+    public String getSSIABaseUrl() {
+        return getDataProperty(SSIA_BASE_URL);
     }
 
     public String getUser() {
