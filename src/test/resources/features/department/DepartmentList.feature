@@ -1,6 +1,6 @@
-# Role List feature
-Feature: RoleList
+# Department List feature
+Feature: DepartmentList
 
-  Scenario: Department displayed once home page is load
+  Scenario: Department list is displayed once home page is load
     Given 'SSI-A' home page is loaded
-    Then Load Department list
+    Then Load role list
