@@ -10,13 +10,13 @@ import org.umssdiplo.automationv01.core.managepage.Employee.EmployeeList;
 
 public class EmployeesListSteps {
 
-    @Then("Load Employee List")
-    public void employeeListLoaded() throws Throwable{
-        EmployeeList.load();
-    }
-
     @And("Clicking on NewEmployee button")
     public void clickNewEmployeeBtn() throws Throwable{
         EmployeeList.clickNewEmployeeButton();
+    }
+
+    @Then("Employee List loads correctly")
+    public void verifyEmployeeList() throws Throwable{
+        EmployeeList.verifyEmployeeList();
     }
 }

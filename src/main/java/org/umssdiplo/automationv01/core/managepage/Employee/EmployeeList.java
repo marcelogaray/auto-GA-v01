@@ -1,10 +1,9 @@
 package org.umssdiplo.automationv01.core.managepage.Employee;
 
-
-import org.openqa.selenium.By;
-import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
-import org.umssdiplo.automationv01.core.utils.Constants;
+import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
 /**
  * @Author: Lizeth Salazar
@@ -12,13 +11,19 @@ import org.umssdiplo.automationv01.core.utils.Constants;
 
 public class EmployeeList extends BasePage {
 
-    public static final String EMPLOYEE_LIST_PATH = Constants.SSIA_BASE_URL + "/employeeList";
-
-    public static void load(){
-        ManageDriver.getInstance().getWebDriver().navigate().to(EMPLOYEE_LIST_PATH);
-    }
+    //Web Elements
+    @FindBy(id = "NewEmployeeBtn")
+    private WebElement newEmployeeButton;
 
     public static void clickNewEmployeeButton(){
-        ManageDriver.getInstance().getWebDriver().findElement(By.id("NewEmployeeBtn")).click();
+        CommonEvents.clickButton(new EmployeeList().getNewEmployeeButton());
+    }
+
+    public static void verifyEmployeeList(){
+        CommonEvents.isPresent(new EmployeeList().getNewEmployeeButton());
+    }
+
+    public WebElement getNewEmployeeButton() {
+        return newEmployeeButton;
     }
 }
