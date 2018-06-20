@@ -1,8 +1,8 @@
-package org.umssdiplo.automationv01.stepdefinitionproject.EmployeeSteps;
+package org.umssdiplo.automationv01.stepdefinitionproject.employee;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import org.umssdiplo.automationv01.core.managepage.Employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 
 /**
  * @Author: Lizeth Salazar

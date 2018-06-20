@@ -1,4 +1,4 @@
-package org.umssdiplo.automationv01.core.managepage.Employee;
+package org.umssdiplo.automationv01.core.managepage.employee;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

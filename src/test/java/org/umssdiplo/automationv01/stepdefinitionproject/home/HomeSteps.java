@@ -1,9 +1,9 @@
-package org.umssdiplo.automationv01.stepdefinitionproject.HomeSteps;
+package org.umssdiplo.automationv01.stepdefinitionproject.home;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
-import org.umssdiplo.automationv01.core.managepage.Home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 
 /**
  * @Author: Lizeth Salazar

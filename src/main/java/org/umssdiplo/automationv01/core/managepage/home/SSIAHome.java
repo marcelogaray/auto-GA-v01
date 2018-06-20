@@ -1,4 +1,4 @@
-package org.umssdiplo.automationv01.core.managepage.Home;
+package org.umssdiplo.automationv01.core.managepage.home;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
