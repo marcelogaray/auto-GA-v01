@@ -15,15 +15,11 @@ public class EmployeeList extends BasePage {
     @FindBy(id = "NewEmployeeBtn")
     private WebElement newEmployeeButton;
 
-    public static void clickNewEmployeeButton(){
-        CommonEvents.clickButton(new EmployeeList().getNewEmployeeButton());
+    public void clickNewEmployeeButton(){
+        CommonEvents.clickButton(newEmployeeButton);
     }
 
-    public static void verifyEmployeeList(){
-        CommonEvents.isPresent(new EmployeeList().getNewEmployeeButton());
-    }
-
-    public WebElement getNewEmployeeButton() {
-        return newEmployeeButton;
+    public void verifyEmployeeList(){
+        CommonEvents.isPresent(newEmployeeButton);
     }
 }

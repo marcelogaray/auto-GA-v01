@@ -2,10 +2,9 @@ package org.umssdiplo.automationv01.core.managepage.home;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
-import org.umssdiplo.automationv01.core.utils.Constants;
 
 /**
  * @Author: Lizeth Salazar
@@ -13,34 +12,20 @@ import org.umssdiplo.automationv01.core.utils.Constants;
  */
 
 public class SSIAHome extends BasePage {
-    public static final String SSIA_HOME_PATH = Constants.SSIA_BASE_URL;
 
-    // Web Elements
     @FindBy(id = "personnelMenu")
     private WebElement personnelMenu;
 
     @FindBy(id = "employeeMenu")
     private WebElement employeeMenu;
 
-    public static void load() {
-        ManageDriver.getInstance().getWebDriver()
-                .navigate().to(SSIA_HOME_PATH);
-        ManageDriver.getInstance().getWebDriver().manage().window().maximize();
+    public void clickOnPersonnelMenu(){
+        CommonEvents.clickButton(personnelMenu);
     }
 
-    public static void clickOnPersonnelMenu(){
-        CommonEvents.clickButton((new SSIAHome()).getPersonnelMenu());
+    public EmployeeList clickOnEmployeeMenu(){
+        CommonEvents.clickButton(employeeMenu);
+        return new EmployeeList();
     }
 
-    public static void clickOnEmployeeMenu(){
-        CommonEvents.clickButton((new SSIAHome()).getEmployeeMenu());
-    }
-
-    public WebElement getPersonnelMenu() {
-        return personnelMenu;
-    }
-
-    public WebElement getEmployeeMenu() {
-        return employeeMenu;
-    }
 }
