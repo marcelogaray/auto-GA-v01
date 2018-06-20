@@ -3,6 +3,7 @@ package org.umssdiplo.automationv01.stepdefinitionproject.ssia;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
@@ -39,8 +40,9 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @Then("'Employee List' page loads correctly")
-    public void verifyEmployeeList() throws Throwable{
-        employeeList.verifyEmployeeList();
+    public void isEmployeeListPresent() throws Throwable{
+        boolean result = employeeList.isEmployeeListPresent();
+        Assert.assertTrue(result);
     }
 
     // Role List

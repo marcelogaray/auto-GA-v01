@@ -19,7 +19,7 @@ public class EmployeeList extends BasePage {
         CommonEvents.clickButton(newEmployeeButton);
     }
 
-    public void verifyEmployeeList(){
-        CommonEvents.isPresent(newEmployeeButton);
+    public boolean isEmployeeListPresent(){
+        return CommonEvents.isPresent(newEmployeeButton);
     }
 }
