@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+# out application folder
+/out/
+
 # Log file
 *.log
 

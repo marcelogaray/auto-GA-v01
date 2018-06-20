@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
 /**
@@ -19,6 +20,9 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "employeeMenu")
     private WebElement employeeMenu;
 
+    @FindBy(id = "roleMenu")
+    private WebElement roleMenu;
+
     public void clickOnPersonnelMenu(){
         CommonEvents.clickButton(personnelMenu);
     }
@@ -28,4 +32,8 @@ public class SSIAHome extends BasePage {
         return new EmployeeList();
     }
 
+    public RoleList clickOnRoleMenu() {
+        CommonEvents.clickButton(roleMenu);
+        return new RoleList();
+    }
 }

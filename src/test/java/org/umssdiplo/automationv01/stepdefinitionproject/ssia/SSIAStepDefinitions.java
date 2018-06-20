@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -46,6 +47,17 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     // Role List
+    private RoleList roleList;
+
+    @And("^Click in sub menu 'Roles' of menu 'personnel'$")
+    public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
+        roleList = ssiaHome.clickOnRoleMenu();
+    }
+
+    @Then("^'Role list' is showed in page$")
+    public void roleListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(roleList.isRoleListPresent(), "Fail, Role list is not loaded");
+    }
 
     // Work Item List
 
