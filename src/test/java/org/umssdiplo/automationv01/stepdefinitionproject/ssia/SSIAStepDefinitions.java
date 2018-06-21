@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
@@ -62,6 +63,19 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
 
     // Manual List
+    private FunctionManual functionManual;
+
+    @And("^Clicking on function manual on 'Header' page$")
+    public void selectFunctionManualLink() throws  Throwable{
+        functionManual = ssiaHome.clickOnManualMenu();
+
+    }
+
+    @Then("^'function manual' page loads correctly$")
+    public void verifyFunctionManualList() throws Throwable{
+        boolean result = functionManual.searchFunctionManualTable();
+        Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    }
 
     // Safety List
 
