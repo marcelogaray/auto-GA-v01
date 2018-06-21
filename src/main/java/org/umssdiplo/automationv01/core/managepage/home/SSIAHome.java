@@ -18,8 +18,8 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "personnelMenu")
     private WebElement personnelMenu;
 
-    @FindBy(id = "ppeMainMenu")
-    private WebElement ppeMainMenu;
+    @FindBy(id = "ppeMenu")
+    private WebElement ppeMenu;
 
     @FindBy(id = "employeeMenu")
     private WebElement employeeMenu;
@@ -27,15 +27,15 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "roleMenu")
     private WebElement roleMenu;
 
-    @FindBy(id = "ppeClassificationMenu")
-    private WebElement ppeClassificationMenu;
+    @FindBy(id = "ppeClassificationSubMenu")
+    private WebElement ppeClassificationSubMenu;
 
     public void clickOnPersonnelMenu(){
         CommonEvents.clickButton(personnelMenu);
     }
 
-    public void clickOnPpeMainMenu(){
-        CommonEvents.clickButton(ppeMainMenu);
+    public void clickOnPpeMenu(){
+        CommonEvents.clickButton(ppeMenu);
     }
 
     public EmployeeList clickOnEmployeeMenu(){
@@ -48,8 +48,8 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public PpeClassificationList clickOnPpeClassificationMenu() {
-        CommonEvents.clickButton(ppeClassificationMenu);
+    public PpeClassificationList clickOnPpeClassificationSubMenu() {
+        CommonEvents.clickButton(ppeClassificationSubMenu);
         return new PpeClassificationList();
     }
 }

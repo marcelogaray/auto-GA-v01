@@ -32,7 +32,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("Clicking on PPE menu on 'Header' page")
     public void clickPpeMenu() throws Throwable{
-        ssiaHome.clickOnPpeMainMenu();
+        ssiaHome.clickOnPpeMenu();
     }
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
@@ -76,10 +76,10 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("^Click in sub menu 'PPE Classification' of menu 'PPE'$")
     public void clickInSubMenuPpeClassificationOfMenuPpe() throws Throwable {
-        ppeClassificationList = ssiaHome.clickOnPpeClassificationMenu();
+        ppeClassificationList = ssiaHome.clickOnPpeClassificationSubMenu();
     }
 
-    @Then("^'Ppe Classification list' is showed in page$")
+    @Then("^'Ppe Classification list' page loads correctly$")
     public void ppeClassificationListIsShowedInPage() throws Throwable {
         Assert.assertTrue(ppeClassificationList.isPpeClassificationListPresent(), "Fail, PPE Classification list is not loaded");
     }
