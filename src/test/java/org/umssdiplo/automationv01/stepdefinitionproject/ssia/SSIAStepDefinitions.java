@@ -8,6 +8,7 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
@@ -66,27 +67,22 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Safety List
 
+    private SafetyMenu safetyMenu;
     private AccidentList accidentList;
 
     @Given("clicking on Safety menu 'Header' Safety page")
     public void clickingSafetyMenu() throws  Throwable{
-        ssiaHome.clickOnSafetyMenu();
+        safetyMenu = ssiaHome.clickOnSafetyMenu();
     }
 
     @And("clicking on sub menu into 'Accident' menu")
     public void clickingAccidentMenu() throws  Throwable{
-        accidentList = ssiaHome.clickOnAccidentMenu();
+        accidentList = safetyMenu.clickOnAccidentMenu();
     }
-
-    /*@And("clicking on new Accident button")
-    public void clickNewAccidentButton() throws  Throwable{
-        accidentList.clickOnCreateAccidentButton();
-    }*/
 
     @Then("'Accident list' page loads correctly")
     public void isAccidentListPresent() throws  Throwable{
-        boolean result = accidentList.isAccidentListPresent();
-        Assert.assertTrue(result);
+        Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
     // PPE List
 
