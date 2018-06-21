@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.personlProtectionEquipment.PpeClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
@@ -27,6 +28,11 @@ public class SSIAStepDefinitions extends BasePage {
     @And("Clicking on Personnel menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable{
         ssiaHome.clickOnPersonnelMenu();
+    }
+
+    @And("Clicking on PPE menu on 'Header' page")
+    public void clickPpeMenu() throws Throwable{
+        ssiaHome.clickOnPpeMainMenu();
     }
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
@@ -65,7 +71,24 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Safety List
 
+    // PPE Classification List
+    private PpeClassificationList ppeClassificationList;
+
+    @And("^Click in sub menu 'PPE Classification' of menu 'PPE'$")
+    public void clickInSubMenuPpeClassificationOfMenuPpe() throws Throwable {
+        ppeClassificationList = ssiaHome.clickOnPpeClassificationMenu();
+    }
+
+    @Then("^'Ppe Classification list' is showed in page$")
+    public void ppeClassificationListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeClassificationList.isPpeClassificationListPresent(), "Fail, PPE Classification list is not loaded");
+    }
+
     // PPE List
+
+    // Existing PPE List
+
+    // Existing PPE Assigned List
 
     // Audit List
 
