@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -65,6 +66,28 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Safety List
 
+    private AccidentList accidentList;
+
+    @Given("clicking on Safety menu 'Header' Safety page")
+    public void clickingSafetyMenu() throws  Throwable{
+        ssiaHome.clickOnSafetyMenu();
+    }
+
+    @And("clicking on sub menu into 'Accident' menu")
+    public void clickingAccidentMenu() throws  Throwable{
+        accidentList = ssiaHome.clickOnAccidentMenu();
+    }
+
+    /*@And("clicking on new Accident button")
+    public void clickNewAccidentButton() throws  Throwable{
+        accidentList.clickOnCreateAccidentButton();
+    }*/
+
+    @Then("'Accident list' page loads correctly")
+    public void isAccidentListPresent() throws  Throwable{
+        boolean result = accidentList.isAccidentListPresent();
+        Assert.assertTrue(result);
+    }
     // PPE List
 
     // Audit List
