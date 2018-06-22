@@ -41,7 +41,7 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public SafetyMenu clickOnSafetyMenu() {
+    public SafetyMenu clickSafetyMenu() {
         CommonEvents.clickButton(safetyMenu);
         return new SafetyMenu();
     }

@@ -70,13 +70,13 @@ public class SSIAStepDefinitions extends BasePage {
     private SafetyMenu safetyMenu;
     private AccidentList accidentList;
 
-    @Given("clicking on Safety menu 'Header' Safety page")
-    public void clickingSafetyMenu() throws  Throwable{
-        safetyMenu = ssiaHome.clickOnSafetyMenu();
+    @Given("click Safety 'menu' on 'Header' page")
+    public void clickSafetyMenu() throws  Throwable{
+        safetyMenu = ssiaHome.clickSafetyMenu();
     }
 
-    @And("clicking on sub menu into 'Accident' menu")
-    public void clickingAccidentMenu() throws  Throwable{
+    @And("click 'Accident' sub menu on 'Safety' menu")
+    public void clickAccidentMenu() throws  Throwable{
         accidentList = safetyMenu.clickAccidentMenu();
     }
 
