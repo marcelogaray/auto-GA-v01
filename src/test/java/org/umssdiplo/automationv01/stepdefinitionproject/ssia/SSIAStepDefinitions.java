@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
@@ -87,5 +88,15 @@ public class SSIAStepDefinitions extends BasePage {
     // PPE List
 
     // Audit List
+    private AuditList auditList;
 
+    @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
+    public void clickAuditMenu() throws Throwable{
+        auditList = ssiaHome.clickAuditMenu();
+    }
+
+    @Then("^'Audit List' page loads correctly$")
+    public void auditListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(auditList.isAuditListPresent(), "Fail, Audit list is not loaded");
+    }
 }
