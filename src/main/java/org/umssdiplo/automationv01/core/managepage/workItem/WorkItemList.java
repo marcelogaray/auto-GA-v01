@@ -1,6 +1,3 @@
-/**
- * @author Linet Torrico
- */
 package org.umssdiplo.automationv01.core.managepage.workItem;
 
 import org.openqa.selenium.WebElement;

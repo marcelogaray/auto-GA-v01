@@ -31,7 +31,6 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemMenu")
     private WebElement workItemMenu;
 
-
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
@@ -52,12 +51,10 @@ public class SSIAHome extends BasePage {
     public SafetyMenu clickSafetyMenu() {
         CommonEvents.clickButton(safetyMenu);
         return new SafetyMenu();
-
     }
 
     public WorkItemsMenu clickWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
         return new WorkItemsMenu();
-
     }
 }
