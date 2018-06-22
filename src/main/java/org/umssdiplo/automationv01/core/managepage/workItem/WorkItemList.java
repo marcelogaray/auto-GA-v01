@@ -13,8 +13,8 @@ public class WorkItemList extends BasePage {
     @FindBy(id = "newWorkBtn")
     private WebElement newWorkButton;
 
-    public WorkItemList(WebElement newWorkButton) {
-        this.newWorkButton = newWorkButton;
+    public WorkItemList() {
+        CommonEvents.isVisible(newWorkButton);
     }
 
     public boolean isWorkItemListPresent() {
