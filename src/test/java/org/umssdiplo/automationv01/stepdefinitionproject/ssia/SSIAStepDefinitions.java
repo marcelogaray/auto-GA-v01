@@ -68,7 +68,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemList workItemList;
 
-    @And("Click Work Item submenu into 'Work Items' menu")
+    @And("Click Work Item submenu on 'Work Items' menu")
     public void clickWorkItemMenu() throws Throwable {
         workItemList = ssiaHome.clickOnWorkItemMenu();
     }
