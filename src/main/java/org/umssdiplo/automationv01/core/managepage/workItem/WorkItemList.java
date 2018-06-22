@@ -1,5 +1,5 @@
 /**
- * @author Miguel Rojas
+ * @author Linet Torrico
  */
 package org.umssdiplo.automationv01.core.managepage.workItem;
 
@@ -13,8 +13,8 @@ public class WorkItemList extends BasePage {
     @FindBy(id = "newWorkBtn")
     private WebElement newWorkButton;
 
-    public void clickNewWorkItemButton() {
-        CommonEvents.clickButton(newWorkButton);
+    public WorkItemList(WebElement newWorkButton) {
+        this.newWorkButton = newWorkButton;
     }
 
     public boolean isWorkItemListPresent() {

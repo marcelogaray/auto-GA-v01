@@ -11,6 +11,7 @@ import org.umssdiplo.automationv01.core.utils.CommonEvents;
 /**
  * @Author: Lizeth Salazar
  * This class will be used for everyone
+ *
  */
 
 public class SSIAHome extends BasePage {
@@ -31,13 +32,12 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
-    //workItemSubMenu
 
-    public void clickOnPersonnelMenu(){
+    public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
 
-    public EmployeeList clickOnEmployeeMenu(){
+    public EmployeeList clickOnEmployeeMenu() {
         CommonEvents.clickButton(employeeMenu);
         return new EmployeeList();
     }
@@ -47,15 +47,13 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public void clickOnWorkItemsMenu(){
+    public void clickOnWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
     }
 
-    public WorkItemList clickOnWorkItemMenu(){
+    public WorkItemList clickOnWorkItemMenu() {
         CommonEvents.clickButton(workItemSubMenu);
-        return new WorkItemList();
+        return new WorkItemList(workItemSubMenu);
     }
-
-
-
+    
 }

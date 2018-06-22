@@ -30,6 +30,11 @@ public class SSIAStepDefinitions extends BasePage {
         ssiaHome.clickOnPersonnelMenu();
     }
 
+    @And("Clicking on Work Items menu on 'Header' page")
+    public void clickWorkItemsMenu() throws Throwable {
+        ssiaHome.clickOnWorkItemsMenu();
+    }
+
     @And("Clicking on Employee submenu into 'Personnel' menu")
     public void clickEmployeeMenu() throws Throwable {
         employeeList = ssiaHome.clickOnEmployeeMenu();
@@ -44,7 +49,7 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Employee List' page loads correctly")
     public void isEmployeeListPresent() throws Throwable {
         boolean result = employeeList.isEmployeeListPresent();
-        Assert.assertTrue(result);
+        Assert.assertTrue(result, "Fail, Employe list is not loaded");
     }
 
     // Role List
@@ -63,19 +68,9 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemList workItemList;
 
-    @And("Clicking on Work Items menu on 'Header' page")
-    public void clickWorkItemsMenu() throws Throwable {
-        ssiaHome.clickOnWorkItemsMenu();
-    }
-
     @And("Clicking on Work Item submenu into 'Work Items' menu")
     public void clickWorkItemMenu() throws Throwable {
         workItemList = ssiaHome.clickOnWorkItemMenu();
-    }
-
-    @And("Clicking on NewWorkItem button")
-    public void clickNewWorkItemBtn() throws Throwable {
-        workItemList.clickNewWorkItemButton();
     }
 
     @Then("^'Work Item List' page loads correctly$")
