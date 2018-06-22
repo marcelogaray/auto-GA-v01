@@ -14,10 +14,6 @@ public class AuditList extends BasePage {
     @FindBy(id = "NewAuditBtn")
     private WebElement newAuditButton;
 
-    public void clickNewAuditButton() {
-        CommonEvents.clickButton(newAuditButton);
-    }
-
     public boolean isAuditListPresent() {
         return CommonEvents.isPresent(newAuditButton);
     }

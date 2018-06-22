@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
@@ -30,11 +31,14 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "auditMenu")
     private WebElement auditMenu;
 
-    public void clickOnPersonnelMenu(){
+    @FindBy(id = "safetyHealthAdministrationId")
+    private WebElement safetyMenu;
+
+    public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
 
-    public EmployeeList clickOnEmployeeMenu(){
+    public EmployeeList clickOnEmployeeMenu() {
         CommonEvents.clickButton(employeeMenu);
         return new EmployeeList();
     }
@@ -48,5 +52,10 @@ public class SSIAHome extends BasePage {
         CommonEvents.clickButton(auditsMenu);
         CommonEvents.clickButton(auditMenu);
         return new AuditList();
+    }
+
+    public SafetyMenu clickSafetyMenu() {
+        CommonEvents.clickButton(safetyMenu);
+        return new SafetyMenu();
     }
 }
