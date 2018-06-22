@@ -48,7 +48,7 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public FunctionManual clickOnManualMenu() {
+    public FunctionManual clickManualMenu() {
         CommonEvents.clickButton(manualMenu);
         return  new FunctionManual();
     }
