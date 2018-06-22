@@ -72,7 +72,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("^'function manual' page loads correctly$")
     public void verifyFunctionManualList() throws Throwable{
-        boolean result = functionManual.searchFunctionManualTable();
+        boolean result = functionManual.isFuntionalManualtableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 

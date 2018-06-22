@@ -11,7 +11,7 @@ public class FunctionManual extends BasePage {
     @FindBy(id = "manualTable")
     private WebElement functionManual;
 
-    public boolean searchFunctionManualTable() {
+    public boolean isFuntionalManualtableDisplayed() {
         return CommonEvents.isPresent(functionManual);
     }
 }
