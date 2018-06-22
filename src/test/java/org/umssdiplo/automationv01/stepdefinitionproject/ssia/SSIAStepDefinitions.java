@@ -5,10 +5,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -28,11 +31,6 @@ public class SSIAStepDefinitions extends BasePage {
     @And("Clicking on Personnel menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
         ssiaHome.clickOnPersonnelMenu();
-    }
-
-    @And("Click Work Items menu on 'Header' page")
-    public void clickWorkItemsMenu() throws Throwable {
-        ssiaHome.clickOnWorkItemsMenu();
     }
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
@@ -66,22 +64,46 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     // Work Item List
+    private WorkItemsMenu workItemsMenu;
     private WorkItemList workItemList;
 
-    @And("Click Work Item submenu on 'Work Items' menu")
-    public void clickWorkItemMenu() throws Throwable {
-        workItemList = ssiaHome.clickOnWorkItemMenu();
+    @Given("click Work Items 'menu' on 'Header' page")
+    public void clickWorkItemsMenu() throws  Throwable{
+        workItemsMenu = ssiaHome.clickWorkItemsMenu();
     }
 
-    @Then("^'Work Item List' page loads correctly$")
-    public void workItemListIsShowedInPage() throws Throwable {
-        Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item list is not loaded");
+    @And("click 'Work Item' sub menu on 'Work Items' menu")
+    public void clickWorkItemSubMenu() throws  Throwable{
+        workItemList = workItemsMenu.clickAccidentMenu();
     }
+
+    @Then("'Work Item list' page loads correctly")
+    public void workItemListIsShowedInPage() throws  Throwable{
+        Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
+    }
+
 
     // Manual List
 
     // Safety List
 
+    private SafetyMenu safetyMenu;
+    private AccidentList accidentList;
+
+    @Given("click Safety 'menu' on 'Header' page")
+    public void clickSafetyMenu() throws  Throwable{
+        safetyMenu = ssiaHome.clickSafetyMenu();
+    }
+
+    @And("click 'Accident' sub menu on 'Safety' menu")
+    public void clickAccidentMenu() throws  Throwable{
+        accidentList = safetyMenu.clickAccidentMenu();
+    }
+
+    @Then("'Accident list' page loads correctly")
+    public void isAccidentListPresent() throws  Throwable{
+        Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
     // PPE List
 
     // Audit List

@@ -4,8 +4,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
 /**
@@ -25,13 +27,15 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "roleMenu")
     private WebElement roleMenu;
 
+    @FindBy(id = "safetyHealthAdministrationId")
+    private WebElement safetyMenu;
+
     @FindBy(id = "workItemMenu")
     private WebElement workItemMenu;
 
 
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
-
 
     public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
@@ -47,13 +51,15 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public void clickOnWorkItemsMenu() {
+    public SafetyMenu clickSafetyMenu() {
+        CommonEvents.clickButton(safetyMenu);
+        return new SafetyMenu();
+
+    }
+
+    public WorkItemsMenu clickWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
-    }
+        return new WorkItemsMenu ();
 
-    public WorkItemList clickOnWorkItemMenu() {
-        CommonEvents.clickButton(workItemSubMenu);
-        return new WorkItemList();
     }
-
 }
