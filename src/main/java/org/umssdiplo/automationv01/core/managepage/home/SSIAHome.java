@@ -1,12 +1,12 @@
 package org.umssdiplo.automationv01.core.managepage.home;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.umssdiplo.automationv01.core.managepage.BasePage;
-import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
-import org.umssdiplo.automationv01.core.managepage.personlProtectionEquipment.PpeClassificationList;
-import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.utils.CommonEvents;
+        import org.openqa.selenium.WebElement;
+        import org.openqa.selenium.support.FindBy;
+        import org.umssdiplo.automationv01.core.managepage.BasePage;
+        import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+        import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
+        import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+        import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
 /**
  * @Author: Lizeth Salazar
@@ -30,15 +30,15 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "ppeClassificationSubMenu")
     private WebElement ppeClassificationSubMenu;
 
-    public void clickOnPersonnelMenu(){
+    public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
 
-    public void clickOnPpeMenu(){
+    public void clickPPEMenu() {
         CommonEvents.clickButton(ppeMenu);
     }
 
-    public EmployeeList clickOnEmployeeMenu(){
+    public EmployeeList clickOnEmployeeMenu() {
         CommonEvents.clickButton(employeeMenu);
         return new EmployeeList();
     }
@@ -48,8 +48,8 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public PpeClassificationList clickOnPpeClassificationSubMenu() {
+    public PPEClassificationList clickPPEClassificationSubMenu() {
         CommonEvents.clickButton(ppeClassificationSubMenu);
-        return new PpeClassificationList();
+        return new PPEClassificationList();
     }
 }
