@@ -44,7 +44,7 @@ public class SSIAHome extends BasePage {
         return new RoleList();
     }
 
-    public AuditList clickOnAuditMenu() {
+    public AuditList clickAuditMenu() {
         CommonEvents.clickButton(auditsMenu);
         CommonEvents.clickButton(auditMenu);
         return new AuditList();

@@ -4,6 +4,6 @@
 Feature: AuditList
   Scenario: List of Audit is displayed after selecting "Audit" option
     Given 'SSI-A' home page is loaded
-    And Clicking on Audit submenu into 'Audits' menu
+    And Click 'Audit' submenu into 'Audits' menu on 'Header' page
     Then 'Audit List' page loads correctly
 
