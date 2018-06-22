@@ -55,5 +55,5 @@ public class SSIAHome extends BasePage {
         CommonEvents.clickButton(workItemSubMenu);
         return new WorkItemList(workItemSubMenu);
     }
-    
+
 }
