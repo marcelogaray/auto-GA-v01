@@ -77,7 +77,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("clicking on sub menu into 'Accident' menu")
     public void clickingAccidentMenu() throws  Throwable{
-        accidentList = safetyMenu.clickOnAccidentMenu();
+        accidentList = safetyMenu.clickAccidentMenu();
     }
 
     @Then("'Accident list' page loads correctly")
