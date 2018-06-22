@@ -30,7 +30,7 @@ public class SSIAStepDefinitions extends BasePage {
         ssiaHome.clickOnPersonnelMenu();
     }
 
-    @And("Clicking on Work Items menu on 'Header' page")
+    @And("Click on Work Items menu on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
         ssiaHome.clickOnWorkItemsMenu();
     }
@@ -68,7 +68,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemList workItemList;
 
-    @And("Clicking on Work Item submenu into 'Work Items' menu")
+    @And("Click on Work Item submenu into 'Work Items' menu")
     public void clickWorkItemMenu() throws Throwable {
         workItemList = ssiaHome.clickOnWorkItemMenu();
     }

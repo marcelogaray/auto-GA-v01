@@ -4,7 +4,7 @@
 Feature: WorkItemList
   Scenario: List of work items is displayed after selecting "WorkItems" option
     Given 'SSI-A' home page is loaded
-    And Clicking on Work Items menu on 'Header' page
-    And Clicking on Work Item submenu into 'Work Items' menu
+    And Click on Work Items menu on 'Header' page
+    And Click on Work Item submenu into 'Work Items' menu
     Then 'Work Item List' page loads correctly
 
