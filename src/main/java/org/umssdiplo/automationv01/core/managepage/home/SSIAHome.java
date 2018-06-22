@@ -27,6 +27,13 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "manualMenu")
     private WebElement manualMenu;
 
+    @FindBy(id = "contenedor")
+    private WebElement ssiaHomeContainer;
+
+    public SSIAHome(){
+        CommonEvents.isPresent(ssiaHomeContainer);
+    }
+
     public void clickOnPersonnelMenu(){
         CommonEvents.clickButton(personnelMenu);
     }

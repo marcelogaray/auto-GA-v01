@@ -68,7 +68,6 @@ public class SSIAStepDefinitions extends BasePage {
     @And("^Clicking on function manual on 'Header' page$")
     public void selectFunctionManualLink() throws  Throwable{
         functionManual = ssiaHome.clickOnManualMenu();
-
     }
 
     @Then("^'function manual' page loads correctly$")
