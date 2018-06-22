@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
+import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
@@ -19,6 +20,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     private SSIAHome ssiaHome;
     private EmployeeList employeeList;
+    private EmployeeCreate employeeCreate;
 
     //SSIA Home
     @Given("'SSI-A' home page is loaded")
@@ -26,26 +28,44 @@ public class SSIAStepDefinitions extends BasePage {
         ssiaHome = LoadPage.SSIAHomePage();
     }
 
-    @And("Clicking on Personnel menu on 'Header' page")
+    @And("Click 'Personnel' menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable{
         ssiaHome.clickOnPersonnelMenu();
     }
 
-    @And("Clicking on Employee submenu into 'Personnel' menu")
+    @And("Click 'Employee' submenu into 'Personnel' menu")
     public void clickEmployeeMenu() throws Throwable{
         employeeList = ssiaHome.clickOnEmployeeMenu();
     }
 
     // Employees List
-    @And("Clicking on NewEmployee button")
+    @And("Click 'New Employee' button in 'Employees List' page")
     public void clickNewEmployeeBtn() throws Throwable{
-        employeeList.clickNewEmployeeButton();
+        employeeCreate = employeeList.clickNewEmployeeButton();
     }
 
     @Then("'Employee List' page loads correctly")
     public void isEmployeeListPresent() throws Throwable{
         boolean result = employeeList.isEmployeeListPresent();
         Assert.assertTrue(result);
+    }
+
+    // Employee Create
+    @And("Click 'Save' button in 'New Employee' page")
+    public void clickSaveEmployee() throws Throwable{
+        employeeCreate.clickSaveEmployeeBtn();
+    }
+
+    @Then("'Please fill required fields' error pops up")
+    public void isRequiredErrorDisplayed() throws Throwable{
+        String actualResult = employeeCreate.isRequiredErrorDisplayed();
+        employeeCreate.clickOKInAlert();
+        Assert.assertEquals(actualResult, "Please fill required fields");
+    }
+
+    @And("Click 'OK' button in 'Alert'")
+    public void clickOKBtnInAlert() throws Throwable{
+        employeeCreate.clickOKInAlert();
     }
 
     // Role List
