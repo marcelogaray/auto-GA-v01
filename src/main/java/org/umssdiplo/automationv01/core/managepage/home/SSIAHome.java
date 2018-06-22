@@ -6,14 +6,12 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
 /**
  * @Author: Lizeth Salazar
  * This class will be used for everyone
- *
  */
 
 public class SSIAHome extends BasePage {
@@ -59,7 +57,7 @@ public class SSIAHome extends BasePage {
 
     public WorkItemsMenu clickWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
-        return new WorkItemsMenu ();
+        return new WorkItemsMenu();
 
     }
 }

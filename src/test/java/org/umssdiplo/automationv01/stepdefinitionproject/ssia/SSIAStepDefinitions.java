@@ -11,7 +11,7 @@ import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -68,17 +68,17 @@ public class SSIAStepDefinitions extends BasePage {
     private WorkItemList workItemList;
 
     @Given("click Work Items 'menu' on 'Header' page")
-    public void clickWorkItemsMenu() throws  Throwable{
+    public void clickWorkItemsMenu() throws Throwable {
         workItemsMenu = ssiaHome.clickWorkItemsMenu();
     }
 
     @And("click 'Work Item' sub menu on 'Work Items' menu")
-    public void clickWorkItemSubMenu() throws  Throwable{
+    public void clickWorkItemSubMenu() throws Throwable {
         workItemList = workItemsMenu.clickAccidentMenu();
     }
 
-    @Then("'Work Item list' page loads correctly")
-    public void workItemListIsShowedInPage() throws  Throwable{
+    @Then("'Work Item List' page loads correctly")
+    public void workItemListIsShowedInPage() throws Throwable {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
 
@@ -91,17 +91,17 @@ public class SSIAStepDefinitions extends BasePage {
     private AccidentList accidentList;
 
     @Given("click Safety 'menu' on 'Header' page")
-    public void clickSafetyMenu() throws  Throwable{
+    public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
     }
 
     @And("click 'Accident' sub menu on 'Safety' menu")
-    public void clickAccidentMenu() throws  Throwable{
+    public void clickAccidentMenu() throws Throwable {
         accidentList = safetyMenu.clickAccidentMenu();
     }
 
     @Then("'Accident list' page loads correctly")
-    public void isAccidentListPresent() throws  Throwable{
+    public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
     // PPE List
