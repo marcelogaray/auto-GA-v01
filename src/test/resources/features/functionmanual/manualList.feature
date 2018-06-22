@@ -5,5 +5,5 @@ Feature: Function Manual
 
   Scenario: Function manual is displayed ones you select the tab function manual
     Given 'SSI-A' home page is loaded
-    And Clicking on function manual on 'Header' page
+    And Clicking function manual on 'Header' page
     Then 'function manual' page loads correctly
