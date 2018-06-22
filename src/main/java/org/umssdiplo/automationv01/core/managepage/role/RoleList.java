@@ -20,7 +20,7 @@ public class RoleList extends BasePage {
         return CommonEvents.isPresent(newRoleButton);
     }
 
-    public RoleCreate clickOnNewRoleButton() {
+    public RoleCreate clickNewRoleButton() {
         CommonEvents.clickButton(newRoleButton);
         return new RoleCreate();
     }

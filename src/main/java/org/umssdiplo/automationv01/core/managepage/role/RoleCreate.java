@@ -37,7 +37,7 @@ public class RoleCreate extends BasePage {
         CommonEvents.setInputField(descriptionInput, description);
     }
 
-    public RoleList clickOnSaveButton() {
+    public RoleList clickSaveButton() {
         CommonEvents.clickButton(saveRoleButton);
         return new RoleList();
     }

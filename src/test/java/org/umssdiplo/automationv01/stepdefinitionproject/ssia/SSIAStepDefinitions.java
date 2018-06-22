@@ -62,22 +62,22 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(roleList.isRoleListPresent(), "Fail, Role list is not loaded");
     }
 
-    @And("^Click in button 'New Role' of role list page$")
+    @And("^click in button 'New Role' of role list page$")
     public void clickInButtonNewRoleOfRoleListPage() throws Throwable {
-        roleCreate = roleList.clickOnNewRoleButton();
+        roleCreate = roleList.clickNewRoleButton();
     }
 
-    @And("^Set 'role' data in create form page$")
+    @And("^set 'role' data in create form page$")
     public void setRoleDataInCreateFormPage() throws Throwable {
         roleCreate.fillRole();
     }
 
-    @And("^Click in button 'Create' into create form page$")
+    @And("^click in button 'Create' into create form page$")
     public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
-        roleList = roleCreate.clickOnSaveButton();
+        roleList = roleCreate.clickSaveButton();
     }
 
-    @Then("^Created 'Role' is showed in role list page$")
+    @Then("^created 'Role' is showed in role list page$")
     public void createdRoleIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), SSIAResourceManager.i.getKey("Role.create.name"), "Fail, Role is not created");
     }
