@@ -121,15 +121,15 @@ public class CommonEvents {
      *
      * @return the text content of the Alert.
      */
-    public static String getTextFromAlert(){
+    public static String getTextFromWindowsAlert(){
         try {
             return ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).getText();
         }catch (Exception e){
-            return "";
+            return null;
         }
     }
 
-    public static void clickOKInAlert(){
+    public static void clickOKInWindowsAlert(){
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).accept();
     }
 

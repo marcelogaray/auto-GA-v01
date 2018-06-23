@@ -18,10 +18,10 @@ public class EmployeeCreate extends BasePage {
     }
 
     public String isRequiredErrorDisplayed(){
-        return CommonEvents.getTextFromAlert();
+        return CommonEvents.getTextFromWindowsAlert();
     }
 
     public void clickOKInAlert(){
-        CommonEvents.clickOKInAlert();
+        CommonEvents.clickOKInWindowsAlert();
     }
 }
