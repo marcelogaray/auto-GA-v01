@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
-import org.umssdiplo.automationv01.core.utils.SSIAResourceManager;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
 public class RoleCreate extends BasePage {
 
@@ -24,9 +24,9 @@ public class RoleCreate extends BasePage {
         CommonEvents.isVisible(nameInput);
     }
 
-    public void fillRole() {
-        fillName(SSIAResourceManager.i.getKey("Role.create.name"));
-        fillDescription(SSIAResourceManager.i.getKey("Role.create.description"));
+    public void fillRoleUsingDataDriverTest() {
+        fillName(DataDriverTest.readValues.getValue("Role.create.name"));
+        fillDescription(DataDriverTest.readValues.getValue("Role.create.description"));
     }
 
     private void fillName(String name) {

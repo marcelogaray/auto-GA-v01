@@ -5,22 +5,27 @@ package org.umssdiplo.automationv01.core.utils;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class SSIAResourceManager {
+public class DataDriverTest {
+
+    private static Logger LOGGER = Logger.getLogger(DataDriverTest.class.getName());
 
     private static final String BUNDLE = "SSIAResource";
 
-    public static final SSIAResourceManager i = new SSIAResourceManager();
+    public static final DataDriverTest readValues = new DataDriverTest();
 
-    private SSIAResourceManager() {
+    private DataDriverTest() {
     }
 
-    public String getKey(String key) {
+    public String getValue(String key) {
         String value = "???" + key + "???";
         ResourceBundle resourceBundle = ResourceBundle.getBundle(BUNDLE);
         try {
             value = resourceBundle.getString(key);
         } catch (MissingResourceException e) {
+            LOGGER.log(Level.INFO, "Not found value for key: " + key, e);
             return value;
         }
         return value;

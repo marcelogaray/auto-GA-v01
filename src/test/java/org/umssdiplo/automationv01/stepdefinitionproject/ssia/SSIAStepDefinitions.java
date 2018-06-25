@@ -15,7 +15,7 @@ import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
-import org.umssdiplo.automationv01.core.utils.SSIAResourceManager;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
 /**
  * @Author: Lizeth Salazar
@@ -57,7 +57,7 @@ public class SSIAStepDefinitions extends BasePage {
     private RoleList roleList;
     private RoleCreate roleCreate;
 
-    @And("^Click in sub menu 'Roles' of menu 'personnel'$")
+    @And("^click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
         roleList = ssiaHome.clickOnRoleMenu();
     }
@@ -72,9 +72,9 @@ public class SSIAStepDefinitions extends BasePage {
         roleCreate = roleList.clickNewRoleButton();
     }
 
-    @And("^set 'role' data in create form page$")
-    public void setRoleDataInCreateFormPage() throws Throwable {
-        roleCreate.fillRole();
+    @And("^fill 'Role' form using Data Driver Test on create 'Role' page$")
+    public void fillRoleFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        roleCreate.fillRoleUsingDataDriverTest();
     }
 
     @And("^click in button 'Create' into create form page$")
@@ -84,7 +84,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("^created 'Role' is showed in role list page$")
     public void createdRoleIsShowedInRoleListPage() throws Throwable {
-        Assert.assertEquals(roleList.getLastRoleNameInTable(), SSIAResourceManager.i.getKey("Role.create.name"), "Fail, Role is not created");
+        Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.create.name"), "Fail, Role is not created");
     }
 
     // Work Item List
