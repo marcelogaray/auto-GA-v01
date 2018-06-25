@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
@@ -41,6 +42,12 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
+    @FindBy(id = "manualMenu")
+    private WebElement manualMenu;
+
+    @FindBy(id = "contenedor")
+    private WebElement ssiaHomeContainer;
+
     public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
@@ -69,5 +76,14 @@ public class SSIAHome extends BasePage {
     public WorkItemsMenu clickWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
         return new WorkItemsMenu();
+    }
+
+    public SSIAHome(){
+        CommonEvents.isPresent(ssiaHomeContainer);
+    }
+
+    public FunctionManual clickManualMenu() {
+        CommonEvents.clickButton(manualMenu);
+        return  new FunctionManual();
     }
 }

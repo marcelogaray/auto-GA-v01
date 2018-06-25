@@ -8,6 +8,7 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -83,8 +84,19 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
 
-
     // Manual List
+    private FunctionManual functionManual;
+
+    @And("^Clicking 'function manual' on 'Header' page$")
+    public void selectFunctionManualLink() throws  Throwable{
+        functionManual = ssiaHome.clickManualMenu();
+    }
+
+    @Then("^'function manual' page loads correctly$")
+    public void verifyFunctionManualList() throws Throwable{
+        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    }
 
     // Safety List
 
