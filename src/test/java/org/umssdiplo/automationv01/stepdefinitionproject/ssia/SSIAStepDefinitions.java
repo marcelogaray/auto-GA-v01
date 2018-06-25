@@ -12,6 +12,7 @@ import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
@@ -56,6 +57,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Role List
     private RoleList roleList;
     private RoleCreate roleCreate;
+    private RoleUpdate roleUpdate;
 
     @And("^click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
@@ -85,6 +87,26 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^created 'Role' is showed in role list page$")
     public void createdRoleIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.create.name"), "Fail, Role is not created");
+    }
+
+    @And("^click in button 'Edit' of 'Role list' page$")
+    public void clickInButtonEditOfRoleListPage() throws Throwable {
+        roleUpdate = roleList.clickEditButton();
+    }
+
+    @And("^update 'Role' in form using Data Driver Test on update 'Role' page$")
+    public void updateRoleInFormUsingDataDriverTestOnUpdateRolePage() throws Throwable {
+        roleUpdate.updateRoleUsingDataDriverTest();
+    }
+
+    @And("^click in button 'Update' into update 'Role' form page$")
+    public void clickInButtonUpdateIntoUpdateRoleFormPage() throws Throwable {
+        roleList = roleUpdate.clickUpdateButton();
+    }
+
+    @Then("^updated 'Role' is showed in 'Role list' page$")
+    public void updatedRoleIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.update.name"), "Fail, Role is not updated");
     }
 
     // Work Item List

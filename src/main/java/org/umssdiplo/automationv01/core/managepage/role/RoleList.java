@@ -13,6 +13,9 @@ public class RoleList extends BasePage {
     @FindBy(id = "newRoleBtn")
     private WebElement newRoleButton;
 
+    @FindBy(xpath = "//table[@id='roleTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' editBtn ')]")
+    private WebElement editButton;
+
     @FindBy(xpath = "//table[@id='roleTable']/descendant::tr[last()]/td[count(//table[@id='roleTable']/descendant::th[text()='Name'])]")
     private WebElement lastRoleName;
 
@@ -23,6 +26,11 @@ public class RoleList extends BasePage {
     public RoleCreate clickNewRoleButton() {
         CommonEvents.clickButton(newRoleButton);
         return new RoleCreate();
+    }
+
+    public RoleUpdate clickEditButton() {
+        CommonEvents.clickButton(editButton);
+        return new RoleUpdate();
     }
 
     public String getLastRoleNameInTable() {
