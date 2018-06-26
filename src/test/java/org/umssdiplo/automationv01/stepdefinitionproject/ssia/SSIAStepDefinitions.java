@@ -10,9 +10,12 @@ import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -31,12 +34,17 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("Clicking on Personnel menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
-        ssiaHome.clickOnPersonnelMenu();
+        ssiaHome.clickPersonnelMenu();
+    }
+
+    @And("Click 'PPE' menu on 'Header' page")
+    public void clickPPEMenu() throws Throwable {
+        ssiaHome.clickPPEMenu();
     }
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
     public void clickEmployeeMenu() throws Throwable {
-        employeeList = ssiaHome.clickOnEmployeeMenu();
+        employeeList = ssiaHome.clickEmployeeMenu();
     }
 
     // Employees List
@@ -56,7 +64,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("^Click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
-        roleList = ssiaHome.clickOnRoleMenu();
+        roleList = ssiaHome.clickRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
@@ -105,13 +113,60 @@ public class SSIAStepDefinitions extends BasePage {
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
-    // PPE List
+
+    // PPE Classification List
+    private PPEClassificationList ppeClassificationList;
+
+    @And("^Click 'PPE Classification' sub menu of 'PPE' menu$")
+    public void clickSubMenuPPEClassification() throws Throwable {
+        ppeClassificationList = ssiaHome.clickPPEClassificationSubMenu();
+    }
+
+    @Then("^'PPE Classification list' page loads correctly$")
+    public void PPEClassificationListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeClassificationList.isPPEClassificationListPresent(), "Fail, PPE Classification list is not loaded");
+    }
+
+    private PPEClassificationCreate ppeClassificationCreate;
+
+    @And("^Click 'New PPE Classification' button of 'PPE Classification list' page$")
+    public void clickButtonNewPPEClassification() throws Throwable {
+        ppeClassificationCreate = ppeClassificationList.clickNewPPEClassification();
+    }
+
+    @And("^Fill 'PPE Classification' form using Data Driver Test on create 'PPE Classification' page$")
+    public void fillRoleFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        ppeClassificationCreate.fillPPEClassificatinUsingDataDriverTest();
+    }
+
+    @And("^Click 'Save' button into create 'PPE Classification' form page$")
+    public void clickSaveButtonInCreateNewPPEClassificationFormPage() throws Throwable {
+        ppeClassificationList = ppeClassificationCreate.clickSaveButton();
+    }
+
+    @Then("^Created 'PPE Classification' is showed in PPE Classification list page$")
+    public void createdPPEClassificationIsShowedInPPEClassificationListPage() throws Throwable {
+        Assert.assertEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
+    }
+
+    @And("^Click 'Cancel' button into create 'PPE Classification' form page$")
+    public void clickCancelButtonInCreateNewPPEClassificationFormPage() throws Throwable {
+        ppeClassificationList = ppeClassificationCreate.clickCancelButton();
+    }
+
+    @Then("^Cancel creation 'PPE Classification' is not showed in PPE Classification list page$")
+    public void cancelCreationPPEClassificationIsNotShowedInPPEClassificationListPage() throws Throwable {
+        Assert.assertNotEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
+    }
+    // Existing PPE List
+
+    // Existing PPE Assigned List
 
     // Audit List
     private AuditList auditList;
 
     @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
-    public void clickAuditMenu() throws Throwable{
+    public void clickAuditMenu() throws Throwable {
         auditList = ssiaHome.clickAuditMenu();
     }
 
