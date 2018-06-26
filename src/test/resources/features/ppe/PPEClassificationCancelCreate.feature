@@ -1,6 +1,6 @@
 # @Author: Walker Colina
-# feature to review behaviour of create ppe classification
-Feature: PPEClassificationCreate
+# feature to review behaviour of cancel create ppe classification
+Feature: PPEClassificationCancelCreate
 
   Scenario: La inserción de registro Clasificación de equipo de protección personal se muestra en la lista de Clasificación de equipo de protección personal cuando presiono botón Save
     Given 'SSI-A' home page is loaded
