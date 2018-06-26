@@ -34,7 +34,7 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "ppeClassificationSubMenu")
     private WebElement ppeClassificationSubMenu;
 
-    public void clickOnPersonnelMenu() {
+    public void clickPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
 
@@ -42,12 +42,12 @@ public class SSIAHome extends BasePage {
         CommonEvents.clickButton(ppeMenu);
     }
 
-    public EmployeeList clickOnEmployeeMenu() {
+    public EmployeeList clickEmployeeMenu() {
         CommonEvents.clickButton(employeeMenu);
         return new EmployeeList();
     }
 
-    public RoleList clickOnRoleMenu() {
+    public RoleList clickRoleMenu() {
         CommonEvents.clickButton(roleMenu);
         return new RoleList();
     }

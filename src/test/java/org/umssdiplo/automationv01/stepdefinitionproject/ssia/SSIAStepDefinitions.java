@@ -29,7 +29,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("Clicking on Personnel menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
-        ssiaHome.clickOnPersonnelMenu();
+        ssiaHome.clickPersonnelMenu();
     }
 
     @And("Click 'PPE' menu on 'Header' page")
@@ -39,7 +39,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
     public void clickEmployeeMenu() throws Throwable {
-        employeeList = ssiaHome.clickOnEmployeeMenu();
+        employeeList = ssiaHome.clickEmployeeMenu();
     }
 
     // Employees List
@@ -59,7 +59,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("^Click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
-        roleList = ssiaHome.clickOnRoleMenu();
+        roleList = ssiaHome.clickRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
@@ -77,17 +77,17 @@ public class SSIAStepDefinitions extends BasePage {
     private AccidentList accidentList;
 
     @Given("click Safety 'menu' on 'Header' page")
-    public void clickSafetyMenu() throws  Throwable{
+    public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
     }
 
     @And("click 'Accident' sub menu on 'Safety' menu")
-    public void clickAccidentMenu() throws  Throwable{
+    public void clickAccidentMenu() throws Throwable {
         accidentList = safetyMenu.clickAccidentMenu();
     }
 
     @Then("'Accident list' page loads correctly")
-    public void isAccidentListPresent() throws  Throwable{
+    public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
 
