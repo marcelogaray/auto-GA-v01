@@ -13,7 +13,10 @@ import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyM
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemCreate;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
+
 
 /**
  * @Author: Lizeth Salazar
@@ -67,6 +70,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemsMenu workItemsMenu;
     private WorkItemList workItemList;
+    private WorkItemCreate workItemCreate;
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -83,6 +87,25 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
 
+    @And("click in button 'New Work Item' of Work Item list page")
+    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+        workItemCreate = workItemList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Work Item' form using Data Driver Test on create 'Work Item' page")
+    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+        workItemCreate.fillWorkItemUsingDataDriverTest();
+    }
+
+    @And("click in button 'Create' into create form page")
+    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+        workItemList = workItemCreate.clickSaveButton();
+    }
+
+    @Then("created 'WorkItem' is showed in Work Item List page")
+    public void createdItemIsShowedInWorkItemListPage() throws Throwable {
+        Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.create.name"), "Fail, Work Item is not created");
+    }
 
     // Manual List
 
