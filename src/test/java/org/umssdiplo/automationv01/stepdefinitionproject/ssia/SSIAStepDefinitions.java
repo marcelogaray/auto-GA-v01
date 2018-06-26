@@ -11,9 +11,12 @@ import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
+import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemCreate;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
+
 
 /**
  * @Author: Lizeth Salazar
@@ -66,7 +69,8 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Work Item List
     private WorkItemsMenu workItemsMenu;
-    private WorkItemList workItemList;
+    private ItemClassificationList itemClassificationList;
+    private WorkItemCreate workItemCreate;
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -75,14 +79,33 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("click 'Work Item' sub menu on 'Work Items' menu")
     public void clickWorkItemSubMenu() throws Throwable {
-        workItemList = workItemsMenu.clickAccidentMenu();
+        itemClassificationList = workItemsMenu.clickAccidentMenu();
     }
 
     @Then("'Work Item List' page loads correctly")
     public void workItemListIsShowedInPage() throws Throwable {
-        Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
+        Assert.assertTrue(itemClassificationList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
 
+    @And("click in button 'New Work Item' of Work Item list page")
+    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+        workItemCreate = itemClassificationList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Work Item' form using Data Driver Test on create 'Work Item' page")
+    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+        workItemCreate.fillWorkItemUsingDataDriverTest();
+    }
+
+    @And("click in button 'Create' into create form page")
+    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+        itemClassificationList = workItemCreate.clickSaveButton();
+    }
+
+    @Then("created 'WorkItem' is showed in Work Item List page")
+    public void createdItemIsShowedInWorkItemListPage() throws Throwable {
+        Assert.assertEquals(itemClassificationList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.create.name"), "Fail, Work Item is not created");
+    }
 
     // Manual List
 
