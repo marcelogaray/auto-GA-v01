@@ -13,6 +13,7 @@ import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
@@ -107,6 +108,19 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^updated 'Role' is showed in 'Role list' page$")
     public void updatedRoleIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.update.name"), "Fail, Role is not updated");
+    }
+
+    //Sickness
+    private SicknessList sicknessList;
+
+    @And("^click in sub menu 'Sickness' of menu 'Safety'$")
+    public void clickInSubMenuSicknessOfMenuSafety() throws Throwable {
+        sicknessList = safetyMenu.clickSicknessMenu();
+    }
+
+    @Then("^'Sickness list' is showed in page$")
+    public void sicknessListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(sicknessList.isSicknessListPresent(), "Fail, Sickness list is not loaded");
     }
 
     // Work Item List
