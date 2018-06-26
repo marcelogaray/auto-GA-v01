@@ -17,7 +17,7 @@ public class WorkItemList extends BasePage {
     private WebElement deleteButton;
 
     @FindBy(xpath = "//table[@id='ppeTable']/descendant::tr[last()]/td[count(//table[@id='ppeTable']/descendant::th[text()='Name'])]")
-    private WebElement lastRoleName;
+    private WebElement lastWorkItemNamed;
 
 
     public WorkItemList() {
@@ -38,9 +38,8 @@ public class WorkItemList extends BasePage {
         return new WorkItemDelete(workItemName);
     }
 
-
     public String getLastWorkItemNameInTable() {
-        return lastWorkItemName.getText();
+        return lastWorkItemNamed.getText();
     }
 
 
