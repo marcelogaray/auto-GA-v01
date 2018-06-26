@@ -15,6 +15,7 @@ import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
@@ -133,6 +134,7 @@ public class SSIAStepDefinitions extends BasePage {
     private SicknessList sicknessList;
     private SicknessCreate sicknessCreate;
     private SicknessUpdate sicknessUpdate;
+    private SicknessDeleteAlert sicknessDeleteAlert;
 
     @And("^click in sub menu 'Sickness' of menu 'Safety'$")
     public void clickInSubMenuSicknessOfMenuSafety() throws Throwable {
@@ -182,6 +184,21 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^updated 'Sickness' is showed in 'Sickness list' page$")
     public void updatedSicknessIsShowedInSicknessListPage() throws Throwable {
         Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.update.description"), "Fail, Sickness is not updated");
+    }
+
+    @And("^click in button 'Delete' of 'Sickness list' page$")
+    public void clickInButtonDeleteOfSicknessListPage() throws Throwable {
+        sicknessDeleteAlert = sicknessList.clickDeleteButton();
+    }
+
+    @And("^click in button 'Accept' of delete 'Sickness' confirmation popup$")
+    public void clickInButtonAcceptOfDeleteSicknessConfirmationPopup() throws Throwable {
+        sicknessList = sicknessDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("^deleted 'Sickness' is not showed in 'Sickness list' page$")
+    public void deletedSicknessIsNotShowedInSicknessListPage() throws Throwable {
+        Assert.assertNotEquals(sicknessList.getLastSicknessDescriptionInTable(), sicknessDeleteAlert.getSicknessDescription(), "Fail, Sickness is not deleted");
     }
 
     // Work Item List
