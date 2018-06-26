@@ -11,6 +11,7 @@ import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemDelete;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemCreate;
@@ -71,6 +72,7 @@ public class SSIAStepDefinitions extends BasePage {
     private WorkItemsMenu workItemsMenu;
     private WorkItemList workItemList;
     private WorkItemCreate workItemCreate;
+    private WorkItemDelete workItemDelete;
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -105,6 +107,20 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("created 'WorkItem' is showed in Work Item List page")
     public void createdItemIsShowedInWorkItemListPage() throws Throwable {
         Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.create.name"), "Fail, Work Item is not created");
+    }
+
+    @And("click in button 'Delete' of 'Work Item list' page")
+    public void clickInButtonDeleteOfWorkItemListPage() throws Throwable {
+        workItemDelete = workItemList.clickDeleteButton();
+    }
+    @And("click in button 'Accept' of delete 'WorkItem' confirmation popup")
+    public void clickInButtonAcceptOfDeleteWorkItemConfirmationPopup() throws Throwable {
+        workItemList = workItemDelete.clickAcceptButton();
+    }
+
+    @Then("deleted 'WorkItem' is not showed in 'Work item list' page")
+    public void deletedWorkItemIsNotShowedInWorkItemListPage() throws Throwable {
+        Assert.assertNotEquals(workItemList.getLastWorkItemNameInTable(), workItemDelete.getRoleName(), "Fail, Work Item is not deleted");
     }
 
     // Manual List

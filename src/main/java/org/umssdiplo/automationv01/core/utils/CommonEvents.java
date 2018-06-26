@@ -1,9 +1,6 @@
 package org.umssdiplo.automationv01.core.utils;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
@@ -56,6 +53,14 @@ public class CommonEvents {
     }
 
     /**
+     * This method wait for alert is visible.
+     *
+     */
+    public static void waitForAlertVisible() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+    }
+
+    /**
      * This method perform a click action in a web element.
      *
      * @param webElement Is the web element that will be pressed.
@@ -63,6 +68,12 @@ public class CommonEvents {
     public static void clickButton(WebElement webElement) {
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.click();
+    }
+
+    public static void clickAlertAcceptButton() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+        Alert alert = ManageDriver.getInstance().getWebDriver().switchTo().alert();
+        alert.accept();
     }
 
     /**

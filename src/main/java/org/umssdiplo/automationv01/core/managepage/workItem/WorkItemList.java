@@ -11,8 +11,14 @@ public class WorkItemList extends BasePage {
     private WebElement newWorkButton;
 
     @FindBy(xpath = "//table[@id='ppeTable']/descendant::tr[last()]/td[count(//table[@id='ppeTable']/descendant::th[text()='Name'])]")
-    ////*[@id="ppeTable"]/tbody/tr[14]/td[1]
     private WebElement lastWorkItemName;
+
+    @FindBy(xpath = "//table[@id='ppeTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' deleteBtn ')]")
+    private WebElement deleteButton;
+
+    @FindBy(xpath = "//table[@id='ppeTable']/descendant::tr[last()]/td[count(//table[@id='ppeTable']/descendant::th[text()='Name'])]")
+    private WebElement lastRoleName;
+
 
     public WorkItemList() {
         CommonEvents.isVisible(newWorkButton);
@@ -26,6 +32,12 @@ public class WorkItemList extends BasePage {
         CommonEvents.clickButton(newWorkButton);
         return new WorkItemCreate();
     }
+    public WorkItemDelete clickDeleteButton() {
+        String workItemName = getLastWorkItemNameInTable();
+        CommonEvents.clickButton(deleteButton);
+        return new WorkItemDelete(workItemName);
+    }
+
 
     public String getLastWorkItemNameInTable() {
         return lastWorkItemName.getText();
