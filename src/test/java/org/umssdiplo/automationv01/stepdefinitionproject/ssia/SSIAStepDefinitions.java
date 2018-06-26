@@ -5,12 +5,15 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -51,7 +54,7 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Employee List' page loads correctly")
     public void isEmployeeListPresent() throws Throwable {
         boolean result = employeeList.isEmployeeListPresent();
-        Assert.assertTrue(result);
+        Assert.assertTrue(result, "Fail, Employe list is not loaded");
     }
 
     // Role List
@@ -68,6 +71,24 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     // Work Item List
+    private WorkItemsMenu workItemsMenu;
+    private WorkItemList workItemList;
+
+    @Given("click Work Items 'menu' on 'Header' page")
+    public void clickWorkItemsMenu() throws Throwable {
+        workItemsMenu = ssiaHome.clickWorkItemsMenu();
+    }
+
+    @And("click 'Work Item' sub menu on 'Work Items' menu")
+    public void clickWorkItemSubMenu() throws Throwable {
+        workItemList = workItemsMenu.clickAccidentMenu();
+    }
+
+    @Then("'Work Item List' page loads correctly")
+    public void workItemListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
+    }
+
 
     // Manual List
 
@@ -109,5 +130,15 @@ public class SSIAStepDefinitions extends BasePage {
     // Existing PPE Assigned List
 
     // Audit List
+    private AuditList auditList;
 
+    @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
+    public void clickAuditMenu() throws Throwable{
+        auditList = ssiaHome.clickAuditMenu();
+    }
+
+    @Then("^'Audit List' page loads correctly$")
+    public void auditListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(auditList.isAuditListPresent(), "Fail, Audit list is not loaded");
+    }
 }
