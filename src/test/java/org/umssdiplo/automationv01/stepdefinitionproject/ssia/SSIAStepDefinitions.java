@@ -10,9 +10,12 @@ import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPECreate;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -31,12 +34,17 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("Clicking on Personnel menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
-        ssiaHome.clickOnPersonnelMenu();
+        ssiaHome.clickPersonnelMenu();
+    }
+
+    @And("Click 'PPE' menu on 'Header' page")
+    public void clickPPEMenu() throws Throwable {
+        ssiaHome.clickPPEMenu();
     }
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
     public void clickEmployeeMenu() throws Throwable {
-        employeeList = ssiaHome.clickOnEmployeeMenu();
+        employeeList = ssiaHome.clickEmployeeMenu();
     }
 
     // Employees List
@@ -56,7 +64,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("^Click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
-        roleList = ssiaHome.clickOnRoleMenu();
+        roleList = ssiaHome.clickRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
@@ -105,13 +113,51 @@ public class SSIAStepDefinitions extends BasePage {
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
-    // PPE List
+
+    // PPE Classification List
+    private PPEList ppeList;
+
+    @And("^Click 'PPE' sub menu of 'PPE' menu$")
+    public void clickSubMenuPPE() throws Throwable {
+        ppeList = ssiaHome.clickPPESubMenu();
+    }
+
+    @Then("^'PPE list' page loads correctly$")
+    public void PPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
+    }
+
+    private PPECreate ppeCreate;
+
+    @And("^Click 'New PPE' button of 'PPE list' page$")
+    public void clickButtonNewPPE() throws Throwable {
+        ppeCreate = ppeList.clickNewPPE();
+    }
+
+    @And("^Fill 'PPE' form using Data Driver Test on create 'PPE' page$")
+    public void fillPPEFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        ppeCreate.fillPPEUsingDataDriverTest();
+    }
+
+    @And("^Click 'Save' button into create 'PPE' form page$")
+    public void clickSaveButtonInCreateNewPPEFormPage() throws Throwable {
+        ppeList = ppeCreate.clickSaveButton();
+    }
+
+    @Then("^Created 'PPE' is showed in PPE list page$")
+    public void createdPPEIsShowedInPPEListPage() throws Throwable {
+        Assert.assertEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.create.name"), "Fail, PPE is not created");
+    }
+
+    // Existing PPE List
+
+    // Existing PPE Assigned List
 
     // Audit List
     private AuditList auditList;
 
     @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
-    public void clickAuditMenu() throws Throwable{
+    public void clickAuditMenu() throws Throwable {
         auditList = ssiaHome.clickAuditMenu();
     }
 
