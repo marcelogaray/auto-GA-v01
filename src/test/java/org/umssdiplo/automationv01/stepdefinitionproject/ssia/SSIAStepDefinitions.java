@@ -133,7 +133,7 @@ public class SSIAStepDefinitions extends BasePage {
     private AuditList auditList;
 
     @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
-    public void clickAuditMenu() throws Throwable{
+    public void clickAuditMenu() throws Throwable {
         auditList = ssiaHome.clickAuditMenu();
     }
 
