@@ -6,6 +6,7 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
@@ -41,6 +42,9 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
+    @FindBy(id = "newItemClass")
+    private WebElement newItemClass;
+
     public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
@@ -69,5 +73,11 @@ public class SSIAHome extends BasePage {
     public WorkItemsMenu clickWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
         return new WorkItemsMenu();
+    }
+
+    public ItemClassificationMenu clickItemClassMenu() {
+        CommonEvents.clickButton(workItemMenu);
+        CommonEvents.clickButton(newItemClass);
+        return new ItemClassificationMenu();
     }
 }

@@ -10,7 +10,9 @@ import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
@@ -67,6 +69,8 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemsMenu workItemsMenu;
     private WorkItemList workItemList;
+    private ItemClassificationMenu itemClassMenu;
+    private ItemClassificationList itemClassificationList;
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -75,7 +79,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("click 'Work Item' sub menu on 'Work Items' menu")
     public void clickWorkItemSubMenu() throws Throwable {
-        workItemList = workItemsMenu.clickAccidentMenu();
+        workItemList = workItemsMenu.clickWorkItemtMenu();
     }
 
     @Then("'Work Item List' page loads correctly")
@@ -83,6 +87,15 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
 
+    @And("click 'Item Classification' sub menu on 'Work Items' menu")
+    public void clickItemClassificationSubMenu() throws Throwable {
+        itemClassMenu = ssiaHome.clickItemClassMenu();
+    }
+
+    @Then("'Item Classification List' page loads correctly")
+    public void ItemClassificationListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(itemClassificationList.isItemClassListPresent(), "Fail, Item Classification List is not loaded");
+    }
 
     // Manual List
 
@@ -111,7 +124,7 @@ public class SSIAStepDefinitions extends BasePage {
     private AuditList auditList;
 
     @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
-    public void clickAuditMenu() throws Throwable{
+    public void clickAuditMenu() throws Throwable {
         auditList = ssiaHome.clickAuditMenu();
     }
 
