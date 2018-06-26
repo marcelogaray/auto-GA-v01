@@ -5,8 +5,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
@@ -71,6 +73,24 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Safety List
 
+    private SafetyMenu safetyMenu;
+    private AccidentList accidentList;
+
+    @Given("click Safety 'menu' on 'Header' page")
+    public void clickSafetyMenu() throws  Throwable{
+        safetyMenu = ssiaHome.clickSafetyMenu();
+    }
+
+    @And("click 'Accident' sub menu on 'Safety' menu")
+    public void clickAccidentMenu() throws  Throwable{
+        accidentList = safetyMenu.clickAccidentMenu();
+    }
+
+    @Then("'Accident list' page loads correctly")
+    public void isAccidentListPresent() throws  Throwable{
+        Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
+
     // PPE Classification List
     private PPEClassificationList ppeClassificationList;
 
@@ -83,8 +103,6 @@ public class SSIAStepDefinitions extends BasePage {
     public void PPEClassificationListIsShowedInPage() throws Throwable {
         Assert.assertTrue(ppeClassificationList.isPPEClassificationListPresent(), "Fail, PPE Classification list is not loaded");
     }
-
-    // PPE List
 
     // Existing PPE List
 
