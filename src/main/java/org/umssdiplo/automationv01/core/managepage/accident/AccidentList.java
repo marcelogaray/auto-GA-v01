@@ -18,4 +18,9 @@ public class AccidentList extends BasePage {
         return CommonEvents.isPresent(btnCreateAccident);
     }
 
+    public AccidentForm clickCreateAccidentButton() {
+        CommonEvents.clickButton(btnCreateAccident);
+        return new AccidentForm();
+    }
+
 }

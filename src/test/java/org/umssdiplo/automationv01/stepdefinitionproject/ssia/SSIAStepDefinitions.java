@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
@@ -90,6 +91,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     private SafetyMenu safetyMenu;
     private AccidentList accidentList;
+    private AccidentForm accidentForm;
 
     @Given("click Safety 'menu' on 'Header' page")
     public void clickSafetyMenu() throws Throwable {
@@ -104,6 +106,21 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Accident list' page loads correctly")
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
+
+    @And("click 'New accident for Employee' button on 'Accident' list page")
+    public void clickCreateAccidentButton() {
+        accidentForm = accidentList.clickCreateAccidentButton();
+    }
+
+    @And("fill all information required for 'Accident' form")
+    public void fillAccidentForm() {
+        accidentForm.fillAccidentForm();
+    }
+
+    @Then("click 'save' button on 'Accident' form")
+    public void saveAccidentForm() {
+        System.out.println("HENRY SAVING BUTTON");
     }
     // PPE List
 
