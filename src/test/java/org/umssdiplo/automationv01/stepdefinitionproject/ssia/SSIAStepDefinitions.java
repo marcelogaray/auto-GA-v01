@@ -10,7 +10,7 @@ import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
@@ -112,17 +112,17 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
 
-    // PPE Classification List
-    private PPEClassificationList ppeClassificationList;
+    // PPE List
+    private PPEList ppeList;
 
-    @And("^Click 'PPE Classification' sub menu of 'PPE' menu$")
-    public void clickSubMenuPPEClassification() throws Throwable {
-        ppeClassificationList = ssiaHome.clickPPEClassificationSubMenu();
+    @And("^Click 'PPE' sub menu of 'PPE' menu$")
+    public void clickSubMenuPPE() throws Throwable {
+        ppeList = ssiaHome.clickPPESubMenu();
     }
 
-    @Then("^'PPE Classification list' page loads correctly$")
-    public void PPEClassificationListIsShowedInPage() throws Throwable {
-        Assert.assertTrue(ppeClassificationList.isPPEClassificationListPresent(), "Fail, PPE Classification list is not loaded");
+    @Then("^'PPE list' page loads correctly$")
+    public void PPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
     }
 
     // Existing PPE List

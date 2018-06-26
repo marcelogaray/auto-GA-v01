@@ -6,7 +6,7 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
@@ -45,8 +45,8 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
-    @FindBy(id = "ppeClassificationSubMenu")
-    private WebElement ppeClassificationSubMenu;
+    @FindBy(id = "ppeSubMenu")
+    private WebElement ppeSubMenu;
 
     public void clickPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
@@ -82,8 +82,8 @@ public class SSIAHome extends BasePage {
         return new WorkItemsMenu();
     }
 
-    public PPEClassificationList clickPPEClassificationSubMenu() {
-        CommonEvents.clickButton(ppeClassificationSubMenu);
-        return new PPEClassificationList();
+    public PPEList clickPPESubMenu() {
+        CommonEvents.clickButton(ppeSubMenu);
+        return new PPEList();
     }
 }
