@@ -116,7 +116,7 @@ public class SSIAStepDefinitions extends BasePage {
         functionManual = createFunctionManual.clickSaveManualButton();
     }
 
-    @Then("^'new function manual is showed in page$")
+    @Then("^new function manual is showed in page$")
     public void verifyNewManualInLIst() throws  Throwable{
         boolean result = functionManual.isFuntionalManualtableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");

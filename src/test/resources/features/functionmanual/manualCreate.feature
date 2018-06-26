@@ -9,4 +9,4 @@ Feature: Function Manual
     And click 'New Manual' button
     And fill the 'New Manual' form
     And click on the 'Save' button
-    Then the new function manual is showed in page
+    Then new function manual is showed in page
