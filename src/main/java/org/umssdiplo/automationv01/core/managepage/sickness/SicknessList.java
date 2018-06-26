@@ -13,6 +13,9 @@ public class SicknessList extends BasePage {
     @FindBy(id = "newSicknessBtn")
     private WebElement newSicknessButton;
 
+    @FindBy(xpath = "//table[@id='sicknessTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' editBtn ')]")
+    private WebElement editButton;
+
     @FindBy(xpath = "//table[@id='sicknessTable']/descendant::tr[last()]/td[count(//table[@id='sicknessTable']/descendant::th[text()='description']/preceding-sibling::th)+1]")
     private WebElement lastSicknessDescription;
 
@@ -23,6 +26,11 @@ public class SicknessList extends BasePage {
     public SicknessCreate clickNewSicknessButton() {
         CommonEvents.clickButton(newSicknessButton);
         return new SicknessCreate();
+    }
+
+    public SicknessUpdate clickEditButton() {
+        CommonEvents.clickButton(editButton);
+        return new SicknessUpdate();
     }
 
     public String getLastSicknessDescriptionInTable() {

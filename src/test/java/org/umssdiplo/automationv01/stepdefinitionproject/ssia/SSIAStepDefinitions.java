@@ -15,6 +15,7 @@ import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
@@ -114,6 +115,7 @@ public class SSIAStepDefinitions extends BasePage {
     //Sickness
     private SicknessList sicknessList;
     private SicknessCreate sicknessCreate;
+    private SicknessUpdate sicknessUpdate;
 
     @And("^click in sub menu 'Sickness' of menu 'Safety'$")
     public void clickInSubMenuSicknessOfMenuSafety() throws Throwable {
@@ -143,6 +145,26 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^created 'Sickness' is showed in 'Sickness list' page$")
     public void createdSicknessIsShowedInSicknessListPage() throws Throwable {
         Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.create.description"), "Fail, Sickness is not created");
+    }
+
+    @And("^click in button 'Edit' of 'Sickness list' page$")
+    public void clickInButtonEditOfSicknessListPage() throws Throwable {
+        sicknessUpdate = sicknessList.clickEditButton();
+    }
+
+    @And("^update 'Sickness' in form using Data Driver Test on update 'Sickness' page$")
+    public void updateSicknessInFormUsingDataDriverTestOnUpdateSicknessPage() throws Throwable {
+        sicknessUpdate.updateSicknessUsingDataDriverTest();
+    }
+
+    @And("^click in button 'Update' into update 'Sickness' form page$")
+    public void clickInButtonUpdateIntoUpdateSicknessFormPage() throws Throwable {
+        sicknessList = sicknessUpdate.clickUpdateButton();
+    }
+
+    @Then("^updated 'Sickness' is showed in 'Sickness list' page$")
+    public void updatedSicknessIsShowedInSicknessListPage() throws Throwable {
+        Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.update.description"), "Fail, Sickness is not updated");
     }
 
     // Work Item List
