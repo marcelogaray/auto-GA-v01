@@ -9,6 +9,7 @@ import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyM
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
+import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 
 /**
  * @Author: Lizeth Salazar
@@ -41,6 +42,9 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
+    @FindBy(id = "safetyRuleMenu")
+    private WebElement safetyRulesMenu;
+
     public void clickOnPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
@@ -69,5 +73,11 @@ public class SSIAHome extends BasePage {
     public WorkItemsMenu clickWorkItemsMenu() {
         CommonEvents.clickButton(workItemMenu);
         return new WorkItemsMenu();
+    }
+
+    public SafetyRulesList clickSafetyRulesMenu() {
+        CommonEvents.clickButton(auditsMenu);
+        CommonEvents.clickButton(safetyRulesMenu);
+        return new SafetyRulesList();
     }
 }
