@@ -3,11 +3,13 @@ package org.umssdiplo.automationv01.stepdefinitionproject.ssia;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import gherkin.lexer.Th;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.CreateFunctionManual;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
@@ -86,6 +88,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Manual List
     private FunctionManual functionManual;
+    private CreateFunctionManual createFunctionManual;
 
     @And("^click 'function manual' on 'Header' page$")
     public void selectFunctionManualLink() throws  Throwable{
@@ -97,6 +100,29 @@ public class SSIAStepDefinitions extends BasePage {
         boolean result = functionManual.isFuntionalManualtableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
+
+    @And("^click 'New Manual' button$")
+    public void clickNewManualButton() throws Throwable{
+       createFunctionManual = functionManual.clickNewManualButton();
+    }
+
+    @And("^fill the 'New Manual' form$")
+    public void fillNewManualForm() throws  Throwable{
+        createFunctionManual.fillNewManualForm();
+    }
+
+    @And("^click on the 'Save' button$")
+    public void clickSaveButton() throws Throwable{
+        functionManual = createFunctionManual.clickSaveManualButton();
+    }
+
+    @Then("^'new function manual is showed in page$")
+    public void verifyNewManualInLIst() throws  Throwable{
+        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    }
+
+
 
     // Safety List
 

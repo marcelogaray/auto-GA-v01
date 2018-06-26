@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 
 import java.util.List;
@@ -114,6 +115,22 @@ public class CommonEvents {
      */
     public static void pressEnterKey(WebElement webElement) {
         webElement.sendKeys(Keys.ENTER);
+    }
+
+    /**
+     * This method choose an option web element.
+     *
+     * @param webElement Is web element.
+     * @param content Ia the content that will be set to the web element.
+      */
+    public static void selectOptionFieldByValue(WebElement webElement, String content){
+        try{
+            Select selectWebElement = new Select(webElement);
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(selectWebElement.getOptions()));
+            selectWebElement.selectByValue(content);
+        } catch (NoSuchElementException e) {
+            System.out.println("content do not exits");
+        }
     }
 
 }
