@@ -14,6 +14,9 @@ public class WorkItemCreate extends BasePage {
     @FindBy(name = "description")
     private WebElement descriptionInput;
 
+    @FindBy(name = "workItemClassificationId")
+    private WebElement clasificationInput;
+
     @FindBy(id = "createItemBtn")
     private WebElement createItemBtn;
 
@@ -24,6 +27,7 @@ public class WorkItemCreate extends BasePage {
     public void fillWorkItemUsingDataDriverTest() {
         fillName(DataDriverTest.readValues.getValue("WorkItem.create.name"));
         fillDescription(DataDriverTest.readValues.getValue("WorkItem.create.description"));
+        fillClassification(DataDriverTest.readValues.getValue("WorkItem.create.classification"));
     }
 
     private void fillName(String name) {
@@ -32,6 +36,9 @@ public class WorkItemCreate extends BasePage {
 
     private void fillDescription(String description) {
         CommonEvents.setInputField(descriptionInput, description);
+    }
+    private void fillClassification(String workItemClassificationId) {
+        CommonEvents.setInputField(clasificationInput, workItemClassificationId);
     }
 
     public WorkItemList clickSaveButton() {
