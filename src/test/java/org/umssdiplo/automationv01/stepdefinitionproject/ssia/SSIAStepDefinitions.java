@@ -10,6 +10,7 @@ import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.ExistingPPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
@@ -31,12 +32,17 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("Clicking on Personnel menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
-        ssiaHome.clickOnPersonnelMenu();
+        ssiaHome.clickPersonnelMenu();
+    }
+
+    @And("Click 'PPE' menu on 'Header' page")
+    public void clickPPEMenu() throws Throwable {
+        ssiaHome.clickPPEMenu();
     }
 
     @And("Clicking on Employee submenu into 'Personnel' menu")
     public void clickEmployeeMenu() throws Throwable {
-        employeeList = ssiaHome.clickOnEmployeeMenu();
+        employeeList = ssiaHome.clickEmployeeMenu();
     }
 
     // Employees List
@@ -56,7 +62,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("^Click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
-        roleList = ssiaHome.clickOnRoleMenu();
+        roleList = ssiaHome.clickRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
@@ -105,13 +111,29 @@ public class SSIAStepDefinitions extends BasePage {
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
+
     // PPE List
+    private ExistingPPEList existingPPEList;
+
+    @And("^Click 'Existing PPE' sub menu of 'PPE' menu$")
+    public void clickExistingPpeSubMenu() throws Throwable {
+        existingPPEList = ssiaHome.clickExistingPpeSubMenu();
+    }
+
+    @Then("^'Existing PPE list' page loads correctly$")
+    public void ExitingPPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(existingPPEList.isExistingPPEListPresent(), "Fail, PPE list is not loaded");
+    }
+
+    // Existing PPE List
+
+    // Existing PPE Assigned List
 
     // Audit List
     private AuditList auditList;
 
     @And("Click 'Audit' submenu into 'Audits' menu on 'Header' page")
-    public void clickAuditMenu() throws Throwable{
+    public void clickAuditMenu() throws Throwable {
         auditList = ssiaHome.clickAuditMenu();
     }
 
