@@ -10,10 +10,12 @@ import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
@@ -123,6 +125,28 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^'PPE Classification list' page loads correctly$")
     public void PPEClassificationListIsShowedInPage() throws Throwable {
         Assert.assertTrue(ppeClassificationList.isPPEClassificationListPresent(), "Fail, PPE Classification list is not loaded");
+    }
+
+    private PPEClassificationCreate ppeClassificationCreate;
+
+    @And("^Click 'New PPE Classification' button of 'PPE Classification list' page$")
+    public void clickButtonNewPPEClassification() throws Throwable {
+        ppeClassificationCreate = ppeClassificationList.clickNewPPEClassification();
+    }
+
+    @And("^Fill 'PPE Classification' form using Data Driver Test on create 'PPE Classification' page$")
+    public void fillRoleFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        ppeClassificationCreate.fillPPEClassificatinUsingDataDriverTest();
+    }
+
+    @And("^Click 'Save' button into create 'PPE Classification' form page$")
+    public void clickSaveButtonInCreateNewPPEClassificationFormPage() throws Throwable {
+        ppeClassificationList = ppeClassificationCreate.clickSaveButton();
+    }
+
+    @Then("^Created 'PPE Classification' is showed in PPE Classification list page$")
+    public void createdPPEClassificationIsShowedInPPEClassificationListPage() throws Throwable {
+        Assert.assertEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
     }
 
     // Existing PPE List

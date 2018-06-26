@@ -16,11 +16,23 @@ public class PPEClassificationList extends BasePage {
     @FindBy(className = "container")
     private WebElement ppeClassificationContainer;
 
+    @FindBy(xpath = "//table[@id='tblPpeClassification']/descendant::tr[last()]/td[count(//table[@id='tblPpeClassification']/descendant::th[text()='Name'])]")
+    private WebElement lastPPEClassificationName;
+
     public PPEClassificationList() {
         CommonEvents.isPresent(ppeClassificationContainer);
     }
 
     public boolean isPPEClassificationListPresent() {
         return CommonEvents.isPresent(newPPEClassificationButton);
+    }
+
+    public PPEClassificationCreate clickNewPPEClassification(){
+        CommonEvents.clickButton(newPPEClassificationButton);
+        return new PPEClassificationCreate();
+    }
+
+    public String getLastPPEClassificationNameInTable() {
+        return lastPPEClassificationName.getText();
     }
 }
