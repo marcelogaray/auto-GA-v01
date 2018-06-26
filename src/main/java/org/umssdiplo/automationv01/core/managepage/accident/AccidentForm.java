@@ -47,8 +47,11 @@ public class AccidentForm extends BasePage {
         CommonEvents.setInputField(accidentDaysTransferredField, "2");
         CommonEvents.selectOptionFieldByValue(saCategoryListField, "2");
         CommonEvents.selectOptionFieldByValue(saTypeListField, "2");
-        CommonEvents.clickButton(saveButton);
 
+    }
+
+    public void clickSaveAccidentForm() {
+        CommonEvents.clickButton(saveButton);
     }
 
 }
