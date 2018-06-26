@@ -13,7 +13,19 @@ public class SicknessList extends BasePage {
     @FindBy(id = "newSicknessBtn")
     private WebElement newSicknessButton;
 
+    @FindBy(xpath = "//table[@id='sicknessTable']/descendant::tr[last()]/td[count(//table[@id='sicknessTable']/descendant::th[text()='description']/preceding-sibling::th)+1]")
+    private WebElement lastSicknessDescription;
+
     public boolean isSicknessListPresent() {
         return CommonEvents.isPresent(newSicknessButton);
+    }
+
+    public SicknessCreate clickNewSicknessButton() {
+        CommonEvents.clickButton(newSicknessButton);
+        return new SicknessCreate();
+    }
+
+    public String getLastSicknessDescriptionInTable() {
+        return CommonEvents.getTextContent(lastSicknessDescription);
     }
 }

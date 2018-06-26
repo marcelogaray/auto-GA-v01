@@ -13,6 +13,7 @@ import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
@@ -112,6 +113,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     //Sickness
     private SicknessList sicknessList;
+    private SicknessCreate sicknessCreate;
 
     @And("^click in sub menu 'Sickness' of menu 'Safety'$")
     public void clickInSubMenuSicknessOfMenuSafety() throws Throwable {
@@ -121,6 +123,26 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^'Sickness list' is showed in page$")
     public void sicknessListIsShowedInPage() throws Throwable {
         Assert.assertTrue(sicknessList.isSicknessListPresent(), "Fail, Sickness list is not loaded");
+    }
+
+    @And("^click in button 'New Sickness' of sickness list page$")
+    public void clickInButtonNewSicknessOfSicknessListPage() throws Throwable {
+        sicknessCreate = sicknessList.clickNewSicknessButton();
+    }
+
+    @And("^fill 'Sickness' form using Data Driver Test on create 'Sickness' page$")
+    public void fillSicknessFormUsingDataDriverTestOnCreateSicknessPage() throws Throwable {
+        sicknessCreate.fillSicknessUsingDataDriverTest();
+    }
+
+    @And("^click in button 'Save' into 'Sickness' create form page$")
+    public void clickInButtonSaveIntoSicknessCreateFormPage() throws Throwable {
+        sicknessList = sicknessCreate.clickSaveButton();
+    }
+
+    @Then("^created 'Sickness' is showed in 'Sickness list' page$")
+    public void createdSicknessIsShowedInSicknessListPage() throws Throwable {
+        Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.create.description"), "Fail, Sickness is not created");
     }
 
     // Work Item List
