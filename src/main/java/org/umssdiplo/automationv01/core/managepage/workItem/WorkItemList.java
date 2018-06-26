@@ -10,6 +10,10 @@ public class WorkItemList extends BasePage {
     @FindBy(id = "newWorkBtn")
     private WebElement newWorkButton;
 
+    @FindBy(xpath = "//table[@id='ppeTable']/descendant::tr[last()]/td[count(//table[@id='ppeTable']/descendant::th[text()='Name'])]")
+    ////*[@id="ppeTable"]/tbody/tr[14]/td[1]
+    private WebElement lastWorkItemName;
+
     public WorkItemList() {
         CommonEvents.isVisible(newWorkButton);
     }
@@ -17,4 +21,15 @@ public class WorkItemList extends BasePage {
     public boolean isWorkItemListPresent() {
         return CommonEvents.isPresent(newWorkButton);
     }
+
+    public WorkItemCreate clickNewCreateItemButton() {
+        CommonEvents.clickButton(newWorkButton);
+        return new WorkItemCreate();
+    }
+
+    public String getLastWorkItemNameInTable() {
+        return lastWorkItemName.getText();
+    }
+
+
 }
