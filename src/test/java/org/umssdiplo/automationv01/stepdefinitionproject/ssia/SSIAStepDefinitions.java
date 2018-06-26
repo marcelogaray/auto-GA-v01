@@ -11,6 +11,7 @@ import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
@@ -61,6 +62,7 @@ public class SSIAStepDefinitions extends BasePage {
     private RoleList roleList;
     private RoleCreate roleCreate;
     private RoleUpdate roleUpdate;
+    private RoleDeleteAlert roleDeleteAlert;
 
     @And("^click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
@@ -110,6 +112,21 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^updated 'Role' is showed in 'Role list' page$")
     public void updatedRoleIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.update.name"), "Fail, Role is not updated");
+    }
+
+    @And("^click in button 'Delete' of 'Role list' page$")
+    public void clickInButtonDeleteOfRoleListPage() throws Throwable {
+        roleDeleteAlert = roleList.clickDeleteButton();
+    }
+
+    @And("^click in button 'Accept' of delete 'Role' confirmation popup$")
+    public void clickInButtonAcceptOfDeleteRoleConfirmationPopup() throws Throwable {
+        roleList = roleDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("^deleted 'Role' is not showed in 'Role list' page$")
+    public void deletedRoleIsNotShowedInRoleListPage() throws Throwable {
+        Assert.assertNotEquals(roleList.getLastRoleNameInTable(), roleDeleteAlert.getRoleName(), "Fail, Role is not deleted");
     }
 
     //Sickness
