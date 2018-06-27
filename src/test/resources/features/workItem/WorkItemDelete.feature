@@ -6,4 +6,4 @@ Feature: WorkItemDelete
     And click 'Work Item' sub menu on 'Work Items' menu
     And click in button 'Delete' of 'Work Item list' page
     And click in button 'Accept' of delete 'WorkItem' confirmation popup
-    Then deleted 'WorkItem' is not showed in 'Work item list' page
+    Then 'Work Item List' page loads correctly

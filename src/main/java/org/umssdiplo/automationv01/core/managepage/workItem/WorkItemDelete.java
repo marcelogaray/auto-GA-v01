@@ -12,7 +12,7 @@ public class WorkItemDelete extends BasePage {
         CommonEvents.waitForAlertVisible();
     }
 
-    public String getRoleName() {
+    public String getWorkItemName() {
         return workItemName;
     }
 

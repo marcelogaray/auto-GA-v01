@@ -15,6 +15,7 @@ import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemDelete;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemCreate;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemUpdate;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
@@ -73,6 +74,7 @@ public class SSIAStepDefinitions extends BasePage {
     private WorkItemList workItemList;
     private WorkItemCreate workItemCreate;
     private WorkItemDelete workItemDelete;
+    private WorkItemUpdate workItemUpdate;
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -118,11 +120,29 @@ public class SSIAStepDefinitions extends BasePage {
         workItemList = workItemDelete.clickAcceptButton();
     }
 
-    @Then("deleted 'WorkItem' is not showed in 'Work item list' page")
+    @Then("'WorkItem' deleted is removed from 'Work item list' page")
     public void deletedWorkItemIsNotShowedInWorkItemListPage() throws Throwable {
-        Assert.assertNotEquals(workItemList.getLastWorkItemNameInTable(), workItemDelete.getRoleName(), "Fail, Work Item is not deleted");
+        Assert.assertNotEquals(workItemList.getLastWorkItemNameInTable(), workItemDelete.getWorkItemName(), "Fail, Work Item is not deleted");
     }
 
+    @And("click in button 'Edit' of 'Work Item list' page")
+    public void clickInButtonEditOfWorkItemListPage() throws Throwable {
+        workItemUpdate = workItemList.clickEditButton();
+    }
+
+    @And("update 'WorkItem' in form using on update 'WorkItem' page")
+    public void updateRoleInFormUsingDataDriverTestOnUpdateRolePage() throws Throwable {
+        workItemUpdate.updateWorkItemUsingDataDriverTest();
+    }
+
+    @And("click in button 'Update' into update 'WorkItem' form page")
+    public void clickInButtonUpdateIntoUpdateWorkItemFormPage() throws Throwable {
+        workItemList = workItemUpdate.clickUpdateButton();
+    }
+    @Then("updated 'WorkItem' is showed in 'Work Item list' page")
+    public void updatedWorkItemIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.update.name"), "Fail, WorkItem is not updated");
+    }
     // Manual List
 
     // Safety List
