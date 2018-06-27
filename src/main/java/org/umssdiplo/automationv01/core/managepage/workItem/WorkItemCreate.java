@@ -6,6 +6,8 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
+import javax.xml.crypto.Data;
+
 public class WorkItemCreate extends BasePage {
 
     @FindBy(name = "name")
@@ -29,7 +31,6 @@ public class WorkItemCreate extends BasePage {
         fillName(DataDriverTest.readValues.getValue("WorkItem.create.name"));
         fillDescription(DataDriverTest.readValues.getValue("WorkItem.create.description"));
         CommonEvents.selectOptionFieldByValue(saCategoryListField, "2");
-
     }
 
     private void fillName(String name) {
@@ -39,7 +40,6 @@ public class WorkItemCreate extends BasePage {
     private void fillDescription(String description) {
         CommonEvents.setInputField(descriptionInput, description);
     }
-
 
     public WorkItemList clickSaveButton() {
         CommonEvents.clickButton(createItemBtn);
