@@ -39,7 +39,7 @@ public class AccidentForm extends BasePage {
     private WebElement saveButton;
 
     public void fillAccidentForm(){
-        CommonEvents.selectOptionFieldByValue(employeeList, "1");
+        CommonEvents.selectOptionFieldByValue(employeeList, "6");
         CommonEvents.setInputField(accidentDescriptionField, "new accident");
         CommonEvents.setDateField(accidentDateField, "06152018");
         CommonEvents.setInputField(accidentWhereField, "it happened at home");

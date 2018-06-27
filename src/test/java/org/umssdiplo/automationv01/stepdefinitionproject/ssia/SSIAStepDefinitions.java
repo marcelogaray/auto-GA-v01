@@ -118,9 +118,14 @@ public class SSIAStepDefinitions extends BasePage {
         accidentForm.fillAccidentForm();
     }
 
-    @Then("click 'save' button on 'Accident' form")
+    @And("click 'save' button on 'Accident' form")
     public void saveAccidentForm() {
         accidentForm.clickSaveAccidentForm();
+    }
+
+    @Then("'Accident list' page loads with new records added")
+    public void isNewAccidentPresent() {
+        Assert.assertTrue(accidentList.isNewRecordPresent(), "Fail, Accident record is not loaded");
     }
     // PPE List
 

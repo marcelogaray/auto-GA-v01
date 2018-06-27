@@ -9,4 +9,5 @@ Feature: CreateAccident
     And click 'New accident for Employee' button on 'Accident' list page
     And fill all information required for 'Accident' form
     And click 'save' button on 'Accident' form
-    Then 'Accident list' page loads correctly
+    Then 'Accident list' page loads with new records added
+    #Then 'Accident list' page loads correctly
