@@ -49,8 +49,8 @@ public class PPECancelCreate extends BasePage {
     }
 
     private void selectOptionPPEClassification() {
-        Select selectPolicyName = new Select(ppeClassificationSelectOption);
-        selectPolicyName.selectByIndex(1);
+        Select selectPEEClassification = new Select(ppeClassificationSelectOption);
+        selectPEEClassification.selectByIndex(1);
     }
 
     public PPEList clickSaveButton() {
