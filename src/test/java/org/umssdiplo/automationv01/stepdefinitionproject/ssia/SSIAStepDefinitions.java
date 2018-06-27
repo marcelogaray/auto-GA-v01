@@ -10,6 +10,7 @@ import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.CreateFunctionManual;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.EditFunctionManual;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
@@ -89,6 +90,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Manual List
     private FunctionManual functionManual;
     private CreateFunctionManual createFunctionManual;
+    private EditFunctionManual editFunctionManual;
 
     @And("^click 'function manual' on 'Header' page$")
     public void selectFunctionManualLink() throws  Throwable{
@@ -122,7 +124,25 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
+    @And("^click 'edit' button of a selected function manual$")
+    public void clickeditManualbutton() throws  Throwable{
+        editFunctionManual = functionManual.clickEditManualButton();
+    }
+    @And("^fill the 'edit Manual' form$")
+    public  void fillEditManualForm() throws Throwable{
+        editFunctionManual.fillupdateManualForm();
+    }
 
+    @And("^click on the 'Update' button$")
+    public void clickUpdateButton() throws Throwable{
+        functionManual = editFunctionManual.clickSaveManualButton();
+    }
+
+    @Then("^edited changes of the function manual are displayed in page$")
+    public void verifyEditManualInLIst() throws  Throwable{
+        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    }
 
     // Safety List
 

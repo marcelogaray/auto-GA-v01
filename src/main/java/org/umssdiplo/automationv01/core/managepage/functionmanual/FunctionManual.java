@@ -14,6 +14,9 @@ public class FunctionManual extends BasePage {
     @FindBy(id = "NewManual")
     private WebElement newManualButtonn;
 
+    @FindBy(id="manualEditBtn")
+    private WebElement editManualButton;
+
 
     public boolean isFuntionalManualtableDisplayed() {
         return CommonEvents.isPresent(functionManual);
@@ -22,5 +25,10 @@ public class FunctionManual extends BasePage {
     public CreateFunctionManual clickNewManualButton(){
         CommonEvents.clickButton(newManualButtonn);
         return new CreateFunctionManual();
+    }
+
+    public EditFunctionManual clickEditManualButton(){
+        CommonEvents.clickButton(editManualButton);
+        return new EditFunctionManual();
     }
 }
