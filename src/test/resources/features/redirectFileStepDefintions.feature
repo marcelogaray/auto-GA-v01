@@ -1,5 +1,5 @@
-Feature: RedirectNewFile
+Feature: RedirectProfile
 
   @sanity
-  Scenario: Testing new path
-    Given Tesitng path to generate filed
+  Scenario: Testing Profile
+    Given Profile is loaded

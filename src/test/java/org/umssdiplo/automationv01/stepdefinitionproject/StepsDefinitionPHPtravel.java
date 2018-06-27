@@ -12,6 +12,7 @@ public class StepsDefinitionPHPtravel {
     @Given("^'PHP travel' page is loaded$")
     public void phpTravelPageIsLoaded() throws Throwable {
         login = LoadPage.loginPage();
+        System.out.println("el valor del login es::::::::::::::::::::::::::::::: "+login);
     }
 
     @And("^set my credentials on 'Login' page$")
