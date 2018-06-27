@@ -1,8 +1,8 @@
 # @Author: Walker Colina
 # feature to review behaviour of ppe list
-Feature: PPEist
+Feature: PPEList
 
-  Scenario: La insercion de registro para un de equipo de proteccion personal se muestra en la lista de de equipo de proteccion personal cuando presiono boton Save
+  Scenario: Todos los datos de equipos de protección personal son mostrados en una lista
     Given 'SSI-A' home page is loaded
     And Click 'PPE' menu on 'Header' page
     And Click 'PPE' sub menu of 'PPE' menu

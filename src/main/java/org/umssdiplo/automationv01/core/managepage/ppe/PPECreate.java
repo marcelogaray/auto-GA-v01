@@ -5,6 +5,7 @@ package org.umssdiplo.automationv01.core.managepage.ppe;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
@@ -20,6 +21,9 @@ public class PPECreate extends BasePage {
     @FindBy(id = "txtPpeDescription")
     private WebElement descriptionTextInput;
 
+    @FindBy(id = "cbxPpeClassification")
+    private WebElement ppeClassificationSelectOption;
+
     @FindBy(id = "btnPpeSave")
     private WebElement saveButton;
 
@@ -30,6 +34,7 @@ public class PPECreate extends BasePage {
     public void fillPPEUsingDataDriverTest() {
         fillName(DataDriverTest.readValues.getValue("PPE.create.name"));
         fillDescription(DataDriverTest.readValues.getValue("PPE.create.description"));
+        selectOptionPPEClassification();
     }
 
     private void fillName(String name) {
@@ -38,6 +43,11 @@ public class PPECreate extends BasePage {
 
     private void fillDescription(String description) {
         CommonEvents.setInputField(descriptionTextInput, description);
+    }
+
+    private void selectOptionPPEClassification() {
+        Select selectPolicyName = new Select(ppeClassificationSelectOption);
+        selectPolicyName.selectByIndex(1);
     }
 
     public PPEList clickSaveButton() {
