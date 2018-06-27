@@ -84,7 +84,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("'Work Item List' page loads correctly")
     public void workItemListIsShowedInPage() throws Throwable {
-        Assert.assertTrue(itemClassificationList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
+        Assert.assertTrue(itemClassificationList.isItemClasificationListPresent(), "Fail, Work Item List is not loaded");
     }
 
     @And("click in button 'New Work Item' of Work Item list page")
