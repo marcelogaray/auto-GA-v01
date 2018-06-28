@@ -16,6 +16,12 @@ public class WorkItemsMenu extends BasePage {
         CommonEvents.clickButton(workItemMenu);
         return new WorkItemList();
     }
+    @FindBy(id = "workItemClassificationMenu")
+    private WebElement workItemClassificationMenu;
 
+    public ItemClassificationList clickItemClassificationtMenu() {
+        CommonEvents.clickButton(workItemClassificationMenu);
+        return new ItemClassificationList();
+    }
 
 }
