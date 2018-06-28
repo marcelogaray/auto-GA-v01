@@ -26,6 +26,7 @@ public class SSIAStepDefinitions extends BasePage {
     private EmployeeList employeeList;
 
     //SSIA Home
+
     @Given("'SSI-A' home page is loaded")
     public void ssiAHomePageIsLoaded() throws Throwable {
         ssiaHome = LoadPage.SSIAHomePage();

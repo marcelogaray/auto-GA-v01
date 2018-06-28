@@ -1,8 +1,8 @@
 # @Author: Linet Torrico
-# Feature: Item Classification List
+# Feature: Listado de Clasificacion de Herramientas
 
-Feature: ItemClassificationList
-  Scenario: List of work items is displayed after selecting "WorkItems" option
+Feature: Listado de Clasificacion  de herramienta de trabajo
+  Scenario: Todos los datos  de la Clasificacion de herramientas de trabajo son mostrados en una lista
     Given 'SSI-A' home page is loaded
     And click Work Items 'menu' on 'Header' page
     And click 'Item Classification' sub menu on 'Work Items' menu
