@@ -9,11 +9,13 @@ import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
 /**
  * @Author: Lizeth Salazar
@@ -53,15 +55,36 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Role List
     private RoleList roleList;
+    private RoleCreate roleCreate;
 
-    @And("^Click in sub menu 'Roles' of menu 'personnel'$")
-    public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
+    @And("^click sub menu 'Roles' of menu 'personnel'$")
+    public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
         roleList = ssiaHome.clickOnRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
     public void roleListIsShowedInPage() throws Throwable {
         Assert.assertTrue(roleList.isRoleListPresent(), "Fail, Role list is not loaded");
+    }
+
+    @And("^click button 'New Role' of role list page$")
+    public void clickButtonNewRoleOfRoleListPage() throws Throwable {
+        roleCreate = roleList.clickNewRoleButton();
+    }
+
+    @And("^fill 'Role' form using Data Driver Test on create 'Role' page$")
+    public void fillRoleFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        roleCreate.fillRoleUsingDataDriverTest();
+    }
+
+    @And("^click button 'Create' into create form page$")
+    public void clickButtonCreateIntoCreateFormPage() throws Throwable {
+        roleList = roleCreate.clickSaveButton();
+    }
+
+    @Then("^created 'Role' is showed in role list page$")
+    public void createdRoleIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.create.name"), "Fail, Role is not created");
     }
 
     // Work Item List
