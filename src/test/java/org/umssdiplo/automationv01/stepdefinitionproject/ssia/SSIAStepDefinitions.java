@@ -89,7 +89,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("click 'Item Classification' sub menu on 'Work Items' menu")
     public void clickItemClassificationSubMenu() throws Throwable {
-        itemClassMenu = ssiaHome.clickItemClassMenu();
+        itemClassificationList = itemClassMenu.clickItemClassificationtMenu();
     }
 
     @Then("'Item Classification List' page loads correctly")
