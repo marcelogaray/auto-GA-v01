@@ -57,8 +57,8 @@ public class SSIAStepDefinitions extends BasePage {
     private RoleList roleList;
     private RoleCreate roleCreate;
 
-    @And("^click in sub menu 'Roles' of menu 'personnel'$")
-    public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
+    @And("^click sub menu 'Roles' of menu 'personnel'$")
+    public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
         roleList = ssiaHome.clickOnRoleMenu();
     }
 
@@ -67,8 +67,8 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(roleList.isRoleListPresent(), "Fail, Role list is not loaded");
     }
 
-    @And("^click in button 'New Role' of role list page$")
-    public void clickInButtonNewRoleOfRoleListPage() throws Throwable {
+    @And("^click button 'New Role' of role list page$")
+    public void clickButtonNewRoleOfRoleListPage() throws Throwable {
         roleCreate = roleList.clickNewRoleButton();
     }
 
@@ -77,8 +77,8 @@ public class SSIAStepDefinitions extends BasePage {
         roleCreate.fillRoleUsingDataDriverTest();
     }
 
-    @And("^click in button 'Create' into create form page$")
-    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+    @And("^click button 'Create' into create form page$")
+    public void clickButtonCreateIntoCreateFormPage() throws Throwable {
         roleList = roleCreate.clickSaveButton();
     }
 
