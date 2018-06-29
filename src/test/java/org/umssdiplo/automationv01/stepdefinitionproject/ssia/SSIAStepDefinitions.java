@@ -12,6 +12,7 @@ import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationCreate;
 import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
@@ -72,6 +73,7 @@ public class SSIAStepDefinitions extends BasePage {
     private WorkItemList workItemList;
     private ItemClassificationMenu itemClassMenu;
     private ItemClassificationList itemClassificationList;
+    private ItemClassificationCreate itemClassificationCreate;
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -98,6 +100,20 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(itemClassificationList.isItemClassListPresent(), "Fail, Item Classification List is not loaded");
     }
 
+    @And("click in button 'New Work Item Classification' of Item Classification list page")
+    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+        itemClassificationCreate = itemClassificationList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Item Classification' form in create 'Work Item' page")
+    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+        itemClassificationCreate.fillWorkItemUsingDataDriverTest();
+    }
+
+    @And("click in button 'Save' into create Item Classification form page")
+    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+        workItemList = itemClassificationCreate.clickSaveButton();
+    }
     // Manual List
 
     // Safety List
