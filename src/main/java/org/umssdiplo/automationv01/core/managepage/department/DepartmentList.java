@@ -14,7 +14,7 @@ public class DepartmentList extends BasePage {
     @FindBy(id = "NewDeparmentBtn")
     private WebElement newDepartmentButton;
 
-    @FindBy(id = "editDepartmentBtn")
+    @FindBy(xpath = "//table//tbody//tr[last()]//td//button[@id='editDepartmentBtn']")
     private WebElement editDepartmentButton;
 
     @FindBy(id = "deleteDeparmentBtn")
