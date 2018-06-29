@@ -1,6 +1,6 @@
 # feature to review behaviour of remove Work item
-Feature: WorkItemDelete
-  Scenario: WorkItem - Eliminar una herramienta de trabajo
+Feature: Eliminar una herramienta de trabajo
+  Scenario: Herramienta de trabajo - Eliminar una herramienta de trabajo
     Given 'SSI-A' home page is loaded
     And click Work Items 'menu' on 'Header' page
     And click 'Work Item' sub menu on 'Work Items' menu

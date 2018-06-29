@@ -1,5 +1,5 @@
 # feature to review behaviour of update work item
-Feature: Update Work Item
+Feature: Actualizar datos de una herramienta
   Scenario: Herramienta de trabajo - Actualizar datos de una herramienta de trabajo
     Given 'SSI-A' home page is loaded
     And click Work Items 'menu' on 'Header' page
