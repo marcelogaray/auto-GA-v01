@@ -19,7 +19,6 @@ public class ItemClassificationList extends BasePage {
     }
     public ItemClassificationCreate clickNewCreateItemButton() {
         CommonEvents.clickButton(newItemClass);
-        System.out.println("bones work::::::::::::::::::::>>>>>>>"+newItemClass);
         return new ItemClassificationCreate();
     }
 }
