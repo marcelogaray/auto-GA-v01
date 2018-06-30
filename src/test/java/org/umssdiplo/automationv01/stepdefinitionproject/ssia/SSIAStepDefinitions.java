@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
+import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
@@ -30,6 +31,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     private SSIAHome ssiaHome;
     private EmployeeList employeeList;
+    private EmployeeCreate employeeCreate;
 
     //SSIA Home
     @Given("'SSI-A' home page is loaded")
@@ -37,20 +39,20 @@ public class SSIAStepDefinitions extends BasePage {
         ssiaHome = LoadPage.SSIAHomePage();
     }
 
-    @And("Clicking on Personnel menu on 'Header' page")
-    public void clickPersonnelMenu() throws Throwable {
+    @And("click 'Personnel' menu on 'Header' page")
+    public void clickPersonnelMenu() throws Throwable{
         ssiaHome.clickOnPersonnelMenu();
     }
 
-    @And("Clicking on Employee submenu into 'Personnel' menu")
-    public void clickEmployeeMenu() throws Throwable {
+    @And("click 'Employee' submenu into 'Personnel' menu")
+    public void clickEmployeeMenu() throws Throwable{
         employeeList = ssiaHome.clickOnEmployeeMenu();
     }
 
     // Employees List
-    @And("Clicking on NewEmployee button")
-    public void clickNewEmployeeBtn() throws Throwable {
-        employeeList.clickNewEmployeeButton();
+    @And("click 'New Employee' button in 'Employees List' page")
+    public void clickNewEmployeeBtn() throws Throwable{
+        employeeCreate = employeeList.clickNewEmployeeButton();
     }
 
     @Then("'Employee List' page loads correctly")
@@ -59,14 +61,32 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(result, "Fail, Employe list is not loaded");
     }
 
+    // Employee Create
+    @And("click 'Save' button in 'New Employee' page")
+    public void clickSaveEmployee() throws Throwable{
+        employeeCreate.clickSaveEmployeeBtn();
+    }
+
+    @Then("'Please fill required fields' error pops up")
+    public void isRequiredErrorDisplayed() throws Throwable{
+        String actualResult = employeeCreate.isRequiredErrorDisplayed();
+        employeeCreate.clickOKInAlert();
+        Assert.assertEquals(actualResult, "Please fill required fields");
+    }
+
+    @And("click 'OK' button in 'Alert'")
+    public void clickOKBtnInAlert() throws Throwable{
+        employeeCreate.clickOKInAlert();
+    }
+
     // Role List
     private RoleList roleList;
     private RoleCreate roleCreate;
     private RoleUpdate roleUpdate;
     private RoleDeleteAlert roleDeleteAlert;
 
-    @And("^click in sub menu 'Roles' of menu 'personnel'$")
-    public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
+    @And("^click sub menu 'Roles' of menu 'personnel'$")
+    public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
         roleList = ssiaHome.clickOnRoleMenu();
     }
 
@@ -75,8 +95,8 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(roleList.isRoleListPresent(), "Fail, Role list is not loaded");
     }
 
-    @And("^click in button 'New Role' of role list page$")
-    public void clickInButtonNewRoleOfRoleListPage() throws Throwable {
+    @And("^click button 'New Role' of role list page$")
+    public void clickButtonNewRoleOfRoleListPage() throws Throwable {
         roleCreate = roleList.clickNewRoleButton();
     }
 
@@ -85,8 +105,8 @@ public class SSIAStepDefinitions extends BasePage {
         roleCreate.fillRoleUsingDataDriverTest();
     }
 
-    @And("^click in button 'Create' into create form page$")
-    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+    @And("^click button 'Create' into create form page$")
+    public void clickButtonCreateIntoCreateFormPage() throws Throwable {
         roleList = roleCreate.clickSaveButton();
     }
 

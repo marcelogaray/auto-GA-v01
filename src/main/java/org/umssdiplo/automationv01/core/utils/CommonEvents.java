@@ -156,4 +156,21 @@ public class CommonEvents {
         webElement.sendKeys(Keys.ENTER);
     }
 
+    /**
+     * This method return the text content of an alert.
+     *
+     * @return the text content of the Alert.
+     */
+    public static String getTextFromWindowsAlert(){
+        try {
+            return ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).getText();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public static void clickOKInWindowsAlert(){
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).accept();
+    }
+
 }
