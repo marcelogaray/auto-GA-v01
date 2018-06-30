@@ -10,4 +10,3 @@ Feature: CreateAccident
     And fill all information required for 'Accident' form
     And click 'save' button on 'Accident' form
     Then 'Accident list' page loads with new records added
-    #Then 'Accident list' page loads correctly

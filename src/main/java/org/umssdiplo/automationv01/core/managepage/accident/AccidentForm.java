@@ -38,16 +38,50 @@ public class AccidentForm extends BasePage {
     @FindBy(id = "saveButtonId")
     private WebElement saveButton;
 
-    public void fillAccidentForm(){
-        CommonEvents.selectOptionFieldByValue(employeeList, "6");
-        CommonEvents.setInputField(accidentDescriptionField, "new accident");
-        CommonEvents.setDateField(accidentDateField, "06152018");
-        CommonEvents.setInputField(accidentWhereField, "it happened at home");
-        CommonEvents.setInputField(accidentDaysOutWorkField, "3");
-        CommonEvents.setInputField(accidentDaysTransferredField, "2");
-        CommonEvents.selectOptionFieldByValue(saCategoryListField, "2");
-        CommonEvents.selectOptionFieldByValue(saTypeListField, "2");
+    public AccidentForm() {
+        CommonEvents.isVisible(saveButton);
+    }
 
+    public void fillAccidentForm() {
+        selectEmployeeToSave("6");
+        saveAccidentDescription("it was too hard");
+        saveDate("06202018");
+        saveWhereOccurredAccident("at home");
+        saveDaysOutOfWork("3");
+        saveDaysTransferred("4");
+        selectAccidentCategory("3");
+        selectAccidentType("2");
+    }
+
+    private void selectEmployeeToSave(String selectIndex) {
+        CommonEvents.selectOptionFieldByValue(employeeList, selectIndex);
+    }
+
+    private void saveAccidentDescription(String accidentDescription) {
+        CommonEvents.setInputField(accidentDescriptionField, accidentDescription);
+    }
+
+    private void saveDate(String dateValue) {
+        CommonEvents.setDateField(accidentDateField, dateValue);
+    }
+
+    private void saveWhereOccurredAccident(String whereOccurred) {
+        CommonEvents.setInputField(accidentWhereField, whereOccurred);
+    }
+
+    private void saveDaysOutOfWork(String totalDaysOutOfWork) {
+        CommonEvents.setInputField(accidentDaysOutWorkField, totalDaysOutOfWork);
+    }
+    private void saveDaysTransferred(String totalDaysTransferred) {
+        CommonEvents.setInputField(accidentDaysTransferredField, totalDaysTransferred);
+    }
+
+    private void selectAccidentCategory(String selectIndexCategory) {
+        CommonEvents.selectOptionFieldByValue(saCategoryListField, selectIndexCategory);
+    }
+
+    private void selectAccidentType(String selectIndexType) {
+        CommonEvents.selectOptionFieldByValue(saTypeListField, selectIndexType);
     }
 
     public void clickSaveAccidentForm() {
