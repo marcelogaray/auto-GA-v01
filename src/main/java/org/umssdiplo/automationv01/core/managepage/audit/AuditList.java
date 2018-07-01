@@ -17,4 +17,9 @@ public class AuditList extends BasePage {
     public boolean isAuditListPresent() {
         return CommonEvents.isPresent(newAuditButton);
     }
+
+    public AuditCreate clickNewAuditButton() {
+        CommonEvents.clickButton(newAuditButton);
+        return new AuditCreate();
+    }
 }

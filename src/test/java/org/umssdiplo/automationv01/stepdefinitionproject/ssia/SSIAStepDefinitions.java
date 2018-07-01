@@ -5,10 +5,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditCreate;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.audit.SafetyRuleCreate;
-import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
+import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
+import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
@@ -24,7 +27,6 @@ import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
-import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
 /**
@@ -286,6 +288,7 @@ public class SSIAStepDefinitions extends BasePage {
     public void isNewAccidentPresent() {
         Assert.assertTrue(accidentList.isNewRecordPresent(), "Fail, Accident record is not loaded");
     }
+
     // PPE List
 
     // Audit List
@@ -304,7 +307,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Safety Rules Audits List
     private SafetyRulesList safetyRulesList;
 
-    @And("Click 'Safety Rules' submenu into 'Audits' menu on 'Header' page")
+    @And("click 'Safety Rules' submenu into 'Audits' menu on 'Header' page")
     public void clickSafetyRulesMenu() throws Throwable {
         safetyRulesList = ssiaHome.clickSafetyRulesMenu();
     }
@@ -335,5 +338,41 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^'Assigned Safety Rule' is showed in Safety Rule List page$")
     public void createdSafetyRuleIsShowedIntoSafetyRuleListPage() throws Throwable {
         Assert.assertTrue(safetyRulesList.isSafetyRulesListPresent(), "Fail, Audit list is not loaded");
+    }
+
+    // Audit Create
+    private AuditCreate auditCreate;
+
+    @And("click 'New Audit' button on Audit List page")
+    public void clickButtonNewAuditOfAuditListPage() throws Throwable {
+        auditCreate = auditList.clickNewAuditButton();
+    }
+
+    @And("Fill 'Audit' form")
+    public void fillAuditFormUsingDataDriverTestOnCreateAuditPage() throws Throwable {
+        auditCreate.fillAuditFromResourceUsingDataDriverTest();
+    }
+
+    @And("click 'Create' button after create audit fill form")
+    public void clickButtonCreateOnCreateFormPage() throws Throwable {
+        auditList = auditCreate.clickSaveButton();
+    }
+
+    @Then("^'Created Audit' is showed in Audit List page$")
+    public void createdAuditIsShowedIntoAuditListPage() throws Throwable {
+        Assert.assertTrue(auditList.isAuditListPresent(), "Fail, Audit list is not loaded");
+    }
+
+    // Report Audit Periodicity
+    private ReportAuditPeriodicity reportAuditPeriodicity;
+
+    @And("click 'Report Audit Periodicity' submenu into 'Audits' menu on 'Header' page")
+    public void clickReportAuditPeriodicityMenu() throws Throwable {
+        reportAuditPeriodicity = ssiaHome.clickReportAuditPeriodicityMenu();
+    }
+
+    @Then("^'Report Audit Periodicity' page loads correctly$")
+    public void reportAuditPeriodicityIsShowedInPage() throws Throwable {
+        Assert.assertTrue(reportAuditPeriodicity.isReportAuditPeriodicityPresent(), "Fail, Audit list is not loaded");
     }
 }
