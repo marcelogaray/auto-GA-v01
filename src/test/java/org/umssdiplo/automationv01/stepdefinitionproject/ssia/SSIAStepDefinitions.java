@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
+import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
 import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
@@ -299,6 +300,18 @@ public class SSIAStepDefinitions extends BasePage {
     public void auditListIsShowedInPage() throws Throwable {
         Assert.assertTrue(auditList.isAuditListPresent(), "Fail, Audit list is not loaded");
     }
+
+    // Report Audit Periodicity
+    private ReportAuditPeriodicity reportAuditPeriodicity;
+
+    @And("click 'Report Audit Periodicity' submenu into 'Audits' menu on 'Header' page")
+    public void clickReportAuditPeriodicityMenu() throws Throwable {
+        reportAuditPeriodicity = ssiaHome.clickReportAuditPeriodicityMenu();
+    }
+
+    @Then("^'Report Audit Periodicity' page loads correctly$")
+    public void reportAuditPeriodicityIsShowedInPage() throws Throwable {
+        Assert.assertTrue(reportAuditPeriodicity.isReportAuditPeriodicityPresent(), "Fail, Audit list is not loaded");
 
     // Safety Rules Audits List
     private SafetyRulesList safetyRulesList;
