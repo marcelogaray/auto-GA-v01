@@ -1,10 +1,8 @@
 package org.umssdiplo.automationv01.core.utils;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 
 import java.util.List;
@@ -21,6 +19,22 @@ public class CommonEvents {
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.clear();
         webElement.sendKeys(content);
+    }
+
+    /**
+       * This method choose an option from web element.
+       *
+       * @param webElement Is web element.
+       * @param content    Is the content that will be set to the web element.
+    */
+    public static void selectOptionFieldByValue(WebElement webElement, String content) {
+        try {
+            Select selectWebElement = new Select(webElement);
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(selectWebElement.getOptions()));
+            selectWebElement.selectByValue(content);
+        } catch (NoSuchElementException e) {
+            System.out.println("content do not exits.");
+        }
     }
 
     /**
@@ -132,5 +146,23 @@ public class CommonEvents {
     public static void clickOKInWindowsAlert(){
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).accept();
     }
+
+    /**
+    * This method wait for alert is visible.
+    *
+    */
+    public static void waitForAlertVisible() {
+                ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+            }
+
+    /**
+    * This method perform a click action in alert accept button
+    *
+    */
+    public static void clickAlertAcceptButton() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+        Alert alert = ManageDriver.getInstance().getWebDriver().switchTo().alert();
+        alert.accept();
+     }
 
 }
