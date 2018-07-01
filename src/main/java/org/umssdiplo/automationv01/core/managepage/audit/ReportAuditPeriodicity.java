@@ -14,6 +14,6 @@ public class ReportAuditPeriodicity extends BasePage {
     private WebElement reportAuditSafetyTable;
 
     public boolean isReportAuditPeriodicityPresent() {
-        return CommonEvents.isPresent(reportAuditSafetyTable);
+        return CommonEvents.isVisible(reportAuditSafetyTable);
     }
 }

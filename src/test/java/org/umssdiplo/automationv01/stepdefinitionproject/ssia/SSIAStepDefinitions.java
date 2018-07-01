@@ -124,7 +124,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Report Audit Periodicity
     private ReportAuditPeriodicity reportAuditPeriodicity;
 
-    @And("Click 'Report Audit Periodicity' submenu into 'Audits' menu on 'Header' page")
+    @And("click 'Report Audit Periodicity' submenu into 'Audits' menu on 'Header' page")
     public void clickReportAuditPeriodicityMenu() throws Throwable {
         reportAuditPeriodicity = ssiaHome.clickReportAuditPeriodicityMenu();
     }
