@@ -124,7 +124,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Audit Create
     private AuditCreate auditCreate;
 
-    @And("Click 'New Audit' button on Audit List page")
+    @And("click 'New Audit' button on Audit List page")
     public void clickButtonNewAuditOfAuditListPage() throws Throwable {
         auditCreate = auditList.clickNewAuditButton();
     }
@@ -134,7 +134,7 @@ public class SSIAStepDefinitions extends BasePage {
         auditCreate.fillAuditFromResourceUsingDataDriverTest();
     }
 
-    @And("Click 'Create' button after fill form")
+    @And("click 'Create' button after fill form")
     public void clickButtonCreateOnCreateFormPage() throws Throwable {
         auditList = auditCreate.clickSaveButton();
     }
