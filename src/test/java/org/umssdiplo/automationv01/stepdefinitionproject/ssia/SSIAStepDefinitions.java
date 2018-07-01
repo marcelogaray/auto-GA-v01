@@ -124,7 +124,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Safety Rules Audits List
     private SafetyRulesList safetyRulesList;
 
-    @And("Click 'Safety Rules' submenu into 'Audits' menu on 'Header' page")
+    @And("click 'Safety Rules' submenu into 'Audits' menu on 'Header' page")
     public void clickSafetyRulesMenu() throws Throwable {
         safetyRulesList = ssiaHome.clickSafetyRulesMenu();
     }
