@@ -1,9 +1,6 @@
 package org.umssdiplo.automationv01.core.utils;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
@@ -26,10 +23,46 @@ public class CommonEvents {
 
     /**
      * This method set date content to web element.
+     * Format: DD/MM/YYYY
      *
      * @param webElement Is web element.
      * @param content    Is the content that will be set to the web element.
      */
+    public static void setInputDateField(WebElement webElement, String content) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        webElement.sendKeys(content);
+    }
+
+    /**
+     * This method set select value by text to web element.
+     *
+     * @param webElement  Is select web element.
+     * @param visibleText Is the visible select text that will be set to the web element.
+     */
+    public static void setSelectFieldByText(WebElement webElement, String visibleText) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        Select select = new Select(webElement);
+        select.selectByVisibleText(visibleText);
+    }
+
+    /**
+     * This method wait for alert is visible.
+     *
+     */
+    public static void waitForAlertVisible() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+    }
+
+    /**
+     * This method perform a click action in alert accept button
+     *
+     */
+    public static void clickAlertAcceptButton() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+        Alert alert = ManageDriver.getInstance().getWebDriver().switchTo().alert();
+        alert.accept();
+    }
+
     public static void setDateField(WebElement webElement, String content) {
         if (null != content && content.length() == 8) {
             ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));

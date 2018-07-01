@@ -13,8 +13,18 @@ public class RoleList extends BasePage {
     @FindBy(id = "newRoleBtn")
     private WebElement newRoleButton;
 
+    @FindBy(xpath = "//table[@id='roleTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' editBtn ')]")
+    private WebElement editButton;
+
+    @FindBy(xpath = "//table[@id='roleTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' deleteBtn ')]")
+    private WebElement deleteButton;
+
     @FindBy(xpath = "//table[@id='roleTable']/descendant::tr[last()]/td[count(//table[@id='roleTable']/descendant::th[text()='Name'])]")
     private WebElement lastRoleName;
+
+    public RoleList() {
+        CommonEvents.isVisible(newRoleButton);
+    }
 
     public boolean isRoleListPresent() {
         return CommonEvents.isPresent(newRoleButton);
@@ -23,6 +33,17 @@ public class RoleList extends BasePage {
     public RoleCreate clickNewRoleButton() {
         CommonEvents.clickButton(newRoleButton);
         return new RoleCreate();
+    }
+
+    public RoleUpdate clickEditButton() {
+        CommonEvents.clickButton(editButton);
+        return new RoleUpdate();
+    }
+
+    public RoleDeleteAlert clickDeleteButton() {
+        String roleName = getLastRoleNameInTable();
+        CommonEvents.clickButton(deleteButton);
+        return new RoleDeleteAlert(roleName);
     }
 
     public String getLastRoleNameInTable() {

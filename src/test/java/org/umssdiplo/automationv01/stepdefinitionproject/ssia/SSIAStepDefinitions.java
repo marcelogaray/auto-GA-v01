@@ -13,8 +13,14 @@ import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
+import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
@@ -77,6 +83,8 @@ public class SSIAStepDefinitions extends BasePage {
     // Role List
     private RoleList roleList;
     private RoleCreate roleCreate;
+    private RoleUpdate roleUpdate;
+    private RoleDeleteAlert roleDeleteAlert;
 
     @And("^click sub menu 'Roles' of menu 'personnel'$")
     public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
@@ -106,6 +114,112 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^created 'Role' is showed in role list page$")
     public void createdRoleIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.create.name"), "Fail, Role is not created");
+    }
+
+    @And("^click button 'Edit' of 'Role list' page$")
+    public void clickButtonEditOfRoleListPage() throws Throwable {
+        roleUpdate = roleList.clickEditButton();
+    }
+
+    @And("^update 'Role' in form using Data Driver Test on update 'Role' page$")
+    public void updateRoleInFormUsingDataDriverTestOnUpdateRolePage() throws Throwable {
+        roleUpdate.updateRoleUsingDataDriverTest();
+    }
+
+    @And("^click button 'Update' into update 'Role' form page$")
+    public void clickButtonUpdateIntoUpdateRoleFormPage() throws Throwable {
+        roleList = roleUpdate.clickUpdateButton();
+    }
+
+    @Then("^updated 'Role' is showed in 'Role list' page$")
+    public void updatedRoleIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.update.name"), "Fail, Role is not updated");
+    }
+
+    @And("^click button 'Delete' of 'Role list' page$")
+    public void clickButtonDeleteOfRoleListPage() throws Throwable {
+        roleDeleteAlert = roleList.clickDeleteButton();
+    }
+
+    @And("^click button 'Accept' of delete 'Role' confirmation popup$")
+    public void clickButtonAcceptOfDeleteRoleConfirmationPopup() throws Throwable {
+        roleList = roleDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("^deleted 'Role' is not showed in 'Role list' page$")
+    public void deletedRoleIsNotShowedInRoleListPage() throws Throwable {
+        Assert.assertNotEquals(roleList.getLastRoleNameInTable(), roleDeleteAlert.getRoleName(), "Fail, Role is not deleted");
+    }
+
+    //Sickness
+    private SicknessList sicknessList;
+    private SicknessCreate sicknessCreate;
+    private SicknessUpdate sicknessUpdate;
+    private SicknessDeleteAlert sicknessDeleteAlert;
+
+    @And("^click sub menu 'Sickness' of menu 'Safety'$")
+    public void clickSubMenuSicknessOfMenuSafety() throws Throwable {
+        sicknessList = safetyMenu.clickSicknessMenu();
+    }
+
+    @Then("^'Sickness list' is showed in page$")
+    public void sicknessListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(sicknessList.isSicknessListPresent(), "Fail, Sickness list is not loaded");
+    }
+
+    @And("^click button 'New Sickness' of sickness list page$")
+    public void clickButtonNewSicknessOfSicknessListPage() throws Throwable {
+        sicknessCreate = sicknessList.clickNewSicknessButton();
+    }
+
+    @And("^fill 'Sickness' form using Data Driver Test on create 'Sickness' page$")
+    public void fillSicknessFormUsingDataDriverTestOnCreateSicknessPage() throws Throwable {
+        sicknessCreate.fillSicknessUsingDataDriverTest();
+    }
+
+    @And("^click button 'Save' into 'Sickness' create form page$")
+    public void clickButtonSaveIntoSicknessCreateFormPage() throws Throwable {
+        sicknessList = sicknessCreate.clickSaveButton();
+    }
+
+    @Then("^created 'Sickness' is showed in 'Sickness list' page$")
+    public void createdSicknessIsShowedInSicknessListPage() throws Throwable {
+        Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.create.description"), "Fail, Sickness is not created");
+    }
+
+    @And("^click button 'Edit' of 'Sickness list' page$")
+    public void clickButtonEditOfSicknessListPage() throws Throwable {
+        sicknessUpdate = sicknessList.clickEditButton();
+    }
+
+    @And("^update 'Sickness' in form using Data Driver Test on update 'Sickness' page$")
+    public void updateSicknessInFormUsingDataDriverTestOnUpdateSicknessPage() throws Throwable {
+        sicknessUpdate.updateSicknessUsingDataDriverTest();
+    }
+
+    @And("^click button 'Update' into update 'Sickness' form page$")
+    public void clickButtonUpdateIntoUpdateSicknessFormPage() throws Throwable {
+        sicknessList = sicknessUpdate.clickUpdateButton();
+    }
+
+    @Then("^updated 'Sickness' is showed in 'Sickness list' page$")
+    public void updatedSicknessIsShowedInSicknessListPage() throws Throwable {
+        Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.update.description"), "Fail, Sickness is not updated");
+    }
+
+    @And("^click button 'Delete' of 'Sickness list' page$")
+    public void clickButtonDeleteOfSicknessListPage() throws Throwable {
+        sicknessDeleteAlert = sicknessList.clickDeleteButton();
+    }
+
+    @And("^click button 'Accept' of delete 'Sickness' confirmation popup$")
+    public void clickButtonAcceptOfDeleteSicknessConfirmationPopup() throws Throwable {
+        sicknessList = sicknessDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("^deleted 'Sickness' is not showed in 'Sickness list' page$")
+    public void deletedSicknessIsNotShowedInSicknessListPage() throws Throwable {
+        Assert.assertNotEquals(sicknessList.getLastSicknessDescriptionInTable(), sicknessDeleteAlert.getSicknessDescription(), "Fail, Sickness is not deleted");
     }
 
     // Work Item List
