@@ -115,8 +115,8 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.create.name"), "Fail, Role is not created");
     }
 
-    @And("^click in button 'Edit' of 'Role list' page$")
-    public void clickInButtonEditOfRoleListPage() throws Throwable {
+    @And("^click button 'Edit' of 'Role list' page$")
+    public void clickButtonEditOfRoleListPage() throws Throwable {
         roleUpdate = roleList.clickEditButton();
     }
 
@@ -125,8 +125,8 @@ public class SSIAStepDefinitions extends BasePage {
         roleUpdate.updateRoleUsingDataDriverTest();
     }
 
-    @And("^click in button 'Update' into update 'Role' form page$")
-    public void clickInButtonUpdateIntoUpdateRoleFormPage() throws Throwable {
+    @And("^click button 'Update' into update 'Role' form page$")
+    public void clickButtonUpdateIntoUpdateRoleFormPage() throws Throwable {
         roleList = roleUpdate.clickUpdateButton();
     }
 
@@ -135,13 +135,13 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.update.name"), "Fail, Role is not updated");
     }
 
-    @And("^click in button 'Delete' of 'Role list' page$")
-    public void clickInButtonDeleteOfRoleListPage() throws Throwable {
+    @And("^click button 'Delete' of 'Role list' page$")
+    public void clickButtonDeleteOfRoleListPage() throws Throwable {
         roleDeleteAlert = roleList.clickDeleteButton();
     }
 
-    @And("^click in button 'Accept' of delete 'Role' confirmation popup$")
-    public void clickInButtonAcceptOfDeleteRoleConfirmationPopup() throws Throwable {
+    @And("^click button 'Accept' of delete 'Role' confirmation popup$")
+    public void clickButtonAcceptOfDeleteRoleConfirmationPopup() throws Throwable {
         roleList = roleDeleteAlert.clickAcceptButton();
     }
 
@@ -156,8 +156,8 @@ public class SSIAStepDefinitions extends BasePage {
     private SicknessUpdate sicknessUpdate;
     private SicknessDeleteAlert sicknessDeleteAlert;
 
-    @And("^click in sub menu 'Sickness' of menu 'Safety'$")
-    public void clickInSubMenuSicknessOfMenuSafety() throws Throwable {
+    @And("^click sub menu 'Sickness' of menu 'Safety'$")
+    public void clickSubMenuSicknessOfMenuSafety() throws Throwable {
         sicknessList = safetyMenu.clickSicknessMenu();
     }
 
@@ -166,8 +166,8 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(sicknessList.isSicknessListPresent(), "Fail, Sickness list is not loaded");
     }
 
-    @And("^click in button 'New Sickness' of sickness list page$")
-    public void clickInButtonNewSicknessOfSicknessListPage() throws Throwable {
+    @And("^click button 'New Sickness' of sickness list page$")
+    public void clickButtonNewSicknessOfSicknessListPage() throws Throwable {
         sicknessCreate = sicknessList.clickNewSicknessButton();
     }
 
@@ -176,8 +176,8 @@ public class SSIAStepDefinitions extends BasePage {
         sicknessCreate.fillSicknessUsingDataDriverTest();
     }
 
-    @And("^click in button 'Save' into 'Sickness' create form page$")
-    public void clickInButtonSaveIntoSicknessCreateFormPage() throws Throwable {
+    @And("^click button 'Save' into 'Sickness' create form page$")
+    public void clickButtonSaveIntoSicknessCreateFormPage() throws Throwable {
         sicknessList = sicknessCreate.clickSaveButton();
     }
 
@@ -186,8 +186,8 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.create.description"), "Fail, Sickness is not created");
     }
 
-    @And("^click in button 'Edit' of 'Sickness list' page$")
-    public void clickInButtonEditOfSicknessListPage() throws Throwable {
+    @And("^click button 'Edit' of 'Sickness list' page$")
+    public void clickButtonEditOfSicknessListPage() throws Throwable {
         sicknessUpdate = sicknessList.clickEditButton();
     }
 
@@ -196,8 +196,8 @@ public class SSIAStepDefinitions extends BasePage {
         sicknessUpdate.updateSicknessUsingDataDriverTest();
     }
 
-    @And("^click in button 'Update' into update 'Sickness' form page$")
-    public void clickInButtonUpdateIntoUpdateSicknessFormPage() throws Throwable {
+    @And("^click button 'Update' into update 'Sickness' form page$")
+    public void clickButtonUpdateIntoUpdateSicknessFormPage() throws Throwable {
         sicknessList = sicknessUpdate.clickUpdateButton();
     }
 
@@ -206,13 +206,13 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertEquals(sicknessList.getLastSicknessDescriptionInTable(), DataDriverTest.readValues.getValue("Sickness.update.description"), "Fail, Sickness is not updated");
     }
 
-    @And("^click in button 'Delete' of 'Sickness list' page$")
-    public void clickInButtonDeleteOfSicknessListPage() throws Throwable {
+    @And("^click button 'Delete' of 'Sickness list' page$")
+    public void clickButtonDeleteOfSicknessListPage() throws Throwable {
         sicknessDeleteAlert = sicknessList.clickDeleteButton();
     }
 
-    @And("^click in button 'Accept' of delete 'Sickness' confirmation popup$")
-    public void clickInButtonAcceptOfDeleteSicknessConfirmationPopup() throws Throwable {
+    @And("^click button 'Accept' of delete 'Sickness' confirmation popup$")
+    public void clickButtonAcceptOfDeleteSicknessConfirmationPopup() throws Throwable {
         sicknessList = sicknessDeleteAlert.clickAcceptButton();
     }
 
