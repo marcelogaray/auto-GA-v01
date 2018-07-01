@@ -1,10 +1,8 @@
 package org.umssdiplo.automationv01.core.utils;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 
 import java.util.List;
@@ -21,6 +19,73 @@ public class CommonEvents {
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.clear();
         webElement.sendKeys(content);
+    }
+
+    /**
+     * This method set date content to web element.
+     * Format: DD/MM/YYYY
+     *
+     * @param webElement Is web element.
+     * @param content    Is the content that will be set to the web element.
+     */
+    public static void setInputDateField(WebElement webElement, String content) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        webElement.sendKeys(content);
+    }
+
+    /**
+     * This method set select value by text to web element.
+     *
+     * @param webElement  Is select web element.
+     * @param visibleText Is the visible select text that will be set to the web element.
+     */
+    public static void setSelectFieldByText(WebElement webElement, String visibleText) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        Select select = new Select(webElement);
+        select.selectByVisibleText(visibleText);
+    }
+
+    /**
+     * This method wait for alert is visible.
+     *
+     */
+    public static void waitForAlertVisible() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+    }
+
+    /**
+     * This method perform a click action in alert accept button
+     *
+     */
+    public static void clickAlertAcceptButton() {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
+        Alert alert = ManageDriver.getInstance().getWebDriver().switchTo().alert();
+        alert.accept();
+    }
+
+    public static void setDateField(WebElement webElement, String content) {
+        if (null != content && content.length() == 8) {
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+            webElement.sendKeys(content);
+        } else {
+            setInputField(webElement, content);
+        }
+    }
+
+    /**
+     * This method choose an option from web element.
+     *
+     * @param webElement Is web element.
+     * @param content    Is the content that will be set to the web element.
+     */
+    public static void selectOptionFieldByValue(WebElement webElement, String content) {
+        try {
+            Select selectWebElement = new Select(webElement);
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(selectWebElement.getOptions()));
+            selectWebElement.selectByValue(content);
+        } catch (NoSuchElementException e) {
+            System.out.println("content do not exits.");
+        }
     }
 
     /**
@@ -114,6 +179,23 @@ public class CommonEvents {
      */
     public static void pressEnterKey(WebElement webElement) {
         webElement.sendKeys(Keys.ENTER);
+    }
+
+    /**
+     * This method return the text content of an alert.
+     *
+     * @return the text content of the Alert.
+     */
+    public static String getTextFromWindowsAlert(){
+        try {
+            return ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).getText();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public static void clickOKInWindowsAlert(){
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).accept();
     }
 
 }
