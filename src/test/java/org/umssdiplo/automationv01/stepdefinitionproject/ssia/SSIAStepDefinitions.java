@@ -5,14 +5,16 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
-import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
@@ -20,7 +22,6 @@ import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
-import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
@@ -247,8 +248,9 @@ public class SSIAStepDefinitions extends BasePage {
 
     private SafetyMenu safetyMenu;
     private AccidentList accidentList;
+    private AccidentForm accidentForm;
 
-    @Given("click Safety 'menu' on 'Header' page")
+    @Given("click 'Safety' menu on 'Header' page")
     public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
     }
@@ -261,6 +263,26 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Accident list' page loads correctly")
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
+
+    @And("click 'New accident for Employee' button on 'Accident' list page")
+    public void clickCreateAccidentButton() {
+        accidentForm = accidentList.clickCreateAccidentButton();
+    }
+
+    @And("fill all information required for 'Accident' form")
+    public void fillAccidentForm() {
+        accidentForm.fillAccidentForm();
+    }
+
+    @And("click 'save' button on 'Accident' form")
+    public void saveAccidentForm() {
+        accidentForm.clickSaveAccidentForm();
+    }
+
+    @Then("'Accident list' page loads with new records added")
+    public void isNewAccidentPresent() {
+        Assert.assertTrue(accidentList.isNewRecordPresent(), "Fail, Accident record is not loaded");
     }
     // PPE List
 

@@ -63,6 +63,31 @@ public class CommonEvents {
         alert.accept();
     }
 
+    public static void setDateField(WebElement webElement, String content) {
+        if (null != content && content.length() == 8) {
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+            webElement.sendKeys(content);
+        } else {
+            setInputField(webElement, content);
+        }
+    }
+
+    /**
+     * This method choose an option from web element.
+     *
+     * @param webElement Is web element.
+     * @param content    Is the content that will be set to the web element.
+     */
+    public static void selectOptionFieldByValue(WebElement webElement, String content) {
+        try {
+            Select selectWebElement = new Select(webElement);
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(selectWebElement.getOptions()));
+            selectWebElement.selectByValue(content);
+        } catch (NoSuchElementException e) {
+            System.out.println("content do not exits.");
+        }
+    }
+
     /**
      * This method perform a click action in a web element.
      *
