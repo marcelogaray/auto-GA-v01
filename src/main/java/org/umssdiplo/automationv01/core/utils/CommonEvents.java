@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 
 import java.util.List;
@@ -21,6 +22,37 @@ public class CommonEvents {
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.clear();
         webElement.sendKeys(content);
+    }
+
+    /**
+     * This method set date content to web element.
+     *
+     * @param webElement Is web element.
+     * @param content    Is the content that will be set to the web element.
+     */
+    public static void setDateField(WebElement webElement, String content) {
+        if (null != content && content.length() == 8) {
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+            webElement.sendKeys(content);
+        } else {
+            setInputField(webElement, content);
+        }
+    }
+
+    /**
+     * This method choose an option from web element.
+     *
+     * @param webElement Is web element.
+     * @param content    Is the content that will be set to the web element.
+     */
+    public static void selectOptionFieldByValue(WebElement webElement, String content) {
+        try {
+            Select selectWebElement = new Select(webElement);
+            ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(selectWebElement.getOptions()));
+            selectWebElement.selectByValue(content);
+        } catch (NoSuchElementException e) {
+            System.out.println("content do not exits.");
+        }
     }
 
     /**
