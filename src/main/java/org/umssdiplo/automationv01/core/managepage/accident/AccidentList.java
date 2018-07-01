@@ -14,8 +14,20 @@ public class AccidentList extends BasePage {
     @FindBy(id = "btn_createAccidentId")
     private WebElement btnCreateAccident;
 
+    @FindBy(xpath = "//*[@id=\"accidentTable\"]/descendant::td[contains(text(), 'Fred Mour')]")
+    private WebElement newAccidentAdded;
+
     public boolean isAccidentListPresent() {
         return CommonEvents.isPresent(btnCreateAccident);
+    }
+
+    public AccidentForm clickCreateAccidentButton() {
+        CommonEvents.clickButton(btnCreateAccident);
+        return new AccidentForm();
+    }
+
+    public boolean isNewRecordPresent(){
+        return CommonEvents.isPresent(newAccidentAdded);
     }
 
 }
