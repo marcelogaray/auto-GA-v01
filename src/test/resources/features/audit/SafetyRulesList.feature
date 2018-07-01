@@ -6,4 +6,3 @@ Feature: SafetyRulesList
     Given 'SSI-A' home page is loaded
     And click 'Safety Rules' submenu into 'Audits' menu on 'Header' page
     Then 'Safety Rules List' page loads correctly
-

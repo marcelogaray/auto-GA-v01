@@ -7,6 +7,6 @@ Feature: AuditCreate
     And Click 'Audit' submenu into 'Audits' menu on 'Header' page
     And click 'New Audit' button on Audit List page
     And Fill 'Audit' form
-    And click 'Create' button after fill form
+    And click 'Create' button after create audit fill form
     Then 'Created Audit' is showed in Audit List page
 

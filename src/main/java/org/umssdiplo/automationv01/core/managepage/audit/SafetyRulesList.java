@@ -16,4 +16,9 @@ public class SafetyRulesList extends BasePage {
     public boolean isSafetyRulesListPresent() {
         return CommonEvents.isVisible(assignSafetyRuleBtn);
     }
+
+    public SafetyRuleCreate clickAssignSafetyRuleButton() {
+        CommonEvents.clickButton(assignSafetyRuleBtn);
+        return new SafetyRuleCreate();
+    }
 }
