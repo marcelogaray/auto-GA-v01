@@ -15,8 +15,9 @@ public class EmployeeList extends BasePage {
     @FindBy(id = "NewEmployeeBtn")
     private WebElement newEmployeeButton;
 
-    public void clickNewEmployeeButton(){
+    public EmployeeCreate clickNewEmployeeButton(){
         CommonEvents.clickButton(newEmployeeButton);
+        return new EmployeeCreate();
     }
 
     public boolean isEmployeeListPresent(){
