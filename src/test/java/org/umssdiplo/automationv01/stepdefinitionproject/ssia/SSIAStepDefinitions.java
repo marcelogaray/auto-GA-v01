@@ -138,7 +138,7 @@ public class SSIAStepDefinitions extends BasePage {
     // Safety Rules Audits Create
     private SafetyRuleCreate safetyRuleCreate;
 
-    @And("Click 'Assing Safety Rule to Audit' button on Safety Rule List page")
+    @And("click 'Assing Safety Rule to Audit' button on Safety Rule List page")
     public void clickButtonAssignSafetyRuleToAuditOfSafetyRulePage() throws Throwable {
         safetyRuleCreate = safetyRulesList.clickAssignSafetyRuleButton();
     }
@@ -148,7 +148,7 @@ public class SSIAStepDefinitions extends BasePage {
         safetyRuleCreate.fillSafetyRuleFromResourceUsingDataDriverTest();
     }
 
-    @And("Click 'Create' button after fill form")
+    @And("click 'Create' button after fill form")
     public void clickButtonCreateOnCreateSafetyRuleFormPage() throws Throwable {
         safetyRulesList = safetyRuleCreate.clickSaveButton();
     }
