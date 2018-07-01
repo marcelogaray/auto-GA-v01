@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
 /*
 Created on 25/6/18
@@ -43,14 +44,14 @@ public class AccidentForm extends BasePage {
     }
 
     public void fillAccidentForm() {
-        selectEmployeeToSave("6");
-        saveAccidentDescription("it was too hard");
-        saveDate("06202018");
-        saveWhereOccurredAccident("at home");
-        saveDaysOutOfWork("3");
-        saveDaysTransferred("4");
-        selectAccidentCategory("3");
-        selectAccidentType("2");
+        selectEmployeeToSave(DataDriverTest.readValues.getValue("Accident.create.choose.Employee"));
+        saveAccidentDescription(DataDriverTest.readValues.getValue("Accident.create.description"));
+        saveDate(DataDriverTest.readValues.getValue("Accident.create.Date"));
+        saveWhereOccurredAccident(DataDriverTest.readValues.getValue("Accident.create.whereOccurrred"));
+        saveDaysOutOfWork(DataDriverTest.readValues.getValue("Accident.create.daysOutOfWork"));
+        saveDaysTransferred(DataDriverTest.readValues.getValue("Accident.create.daysTransferred"));
+        selectAccidentCategory(DataDriverTest.readValues.getValue("Accident.create.choose.category"));
+        selectAccidentType(DataDriverTest.readValues.getValue("Accident.create.choose.type"));
     }
 
     private void selectEmployeeToSave(String selectIndex) {

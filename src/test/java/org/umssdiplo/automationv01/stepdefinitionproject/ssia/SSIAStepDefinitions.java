@@ -8,13 +8,16 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
+import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
+import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
 /**
  * @Author: Lizeth Salazar
@@ -23,6 +26,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     private SSIAHome ssiaHome;
     private EmployeeList employeeList;
+    private EmployeeCreate employeeCreate;
 
     //SSIA Home
     @Given("'SSI-A' home page is loaded")
@@ -30,20 +34,20 @@ public class SSIAStepDefinitions extends BasePage {
         ssiaHome = LoadPage.SSIAHomePage();
     }
 
-    @And("Clicking on Personnel menu on 'Header' page")
-    public void clickPersonnelMenu() throws Throwable {
+    @And("click 'Personnel' menu on 'Header' page")
+    public void clickPersonnelMenu() throws Throwable{
         ssiaHome.clickOnPersonnelMenu();
     }
 
-    @And("Clicking on Employee submenu into 'Personnel' menu")
-    public void clickEmployeeMenu() throws Throwable {
+    @And("click 'Employee' submenu into 'Personnel' menu")
+    public void clickEmployeeMenu() throws Throwable{
         employeeList = ssiaHome.clickOnEmployeeMenu();
     }
 
     // Employees List
-    @And("Clicking on NewEmployee button")
-    public void clickNewEmployeeBtn() throws Throwable {
-        employeeList.clickNewEmployeeButton();
+    @And("click 'New Employee' button in 'Employees List' page")
+    public void clickNewEmployeeBtn() throws Throwable{
+        employeeCreate = employeeList.clickNewEmployeeButton();
     }
 
     @Then("'Employee List' page loads correctly")
@@ -52,17 +56,56 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(result, "Fail, Employe list is not loaded");
     }
 
+    // Employee Create
+    @And("click 'Save' button in 'New Employee' page")
+    public void clickSaveEmployee() throws Throwable{
+        employeeCreate.clickSaveEmployeeBtn();
+    }
+
+    @Then("'Please fill required fields' error pops up")
+    public void isRequiredErrorDisplayed() throws Throwable{
+        String actualResult = employeeCreate.isRequiredErrorDisplayed();
+        employeeCreate.clickOKInAlert();
+        Assert.assertEquals(actualResult, "Please fill required fields");
+    }
+
+    @And("click 'OK' button in 'Alert'")
+    public void clickOKBtnInAlert() throws Throwable{
+        employeeCreate.clickOKInAlert();
+    }
+
     // Role List
     private RoleList roleList;
+    private RoleCreate roleCreate;
 
-    @And("^Click in sub menu 'Roles' of menu 'personnel'$")
-    public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
+    @And("^click sub menu 'Roles' of menu 'personnel'$")
+    public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
         roleList = ssiaHome.clickOnRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
     public void roleListIsShowedInPage() throws Throwable {
         Assert.assertTrue(roleList.isRoleListPresent(), "Fail, Role list is not loaded");
+    }
+
+    @And("^click button 'New Role' of role list page$")
+    public void clickButtonNewRoleOfRoleListPage() throws Throwable {
+        roleCreate = roleList.clickNewRoleButton();
+    }
+
+    @And("^fill 'Role' form using Data Driver Test on create 'Role' page$")
+    public void fillRoleFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        roleCreate.fillRoleUsingDataDriverTest();
+    }
+
+    @And("^click button 'Create' into create form page$")
+    public void clickButtonCreateIntoCreateFormPage() throws Throwable {
+        roleList = roleCreate.clickSaveButton();
+    }
+
+    @Then("^created 'Role' is showed in role list page$")
+    public void createdRoleIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(roleList.getLastRoleNameInTable(), DataDriverTest.readValues.getValue("Role.create.name"), "Fail, Role is not created");
     }
 
     // Work Item List
@@ -93,7 +136,7 @@ public class SSIAStepDefinitions extends BasePage {
     private AccidentList accidentList;
     private AccidentForm accidentForm;
 
-    @Given("click Safety 'menu' on 'Header' page")
+    @Given("click 'Safety' menu on 'Header' page")
     public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
     }
