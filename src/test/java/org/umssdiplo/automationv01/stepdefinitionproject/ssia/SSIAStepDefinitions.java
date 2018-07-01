@@ -5,11 +5,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditCreate;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
 import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
-import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
@@ -301,6 +302,29 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(auditList.isAuditListPresent(), "Fail, Audit list is not loaded");
     }
 
+    // Audit Create
+    private AuditCreate auditCreate;
+
+    @And("click 'New Audit' button on Audit List page")
+    public void clickButtonNewAuditOfAuditListPage() throws Throwable {
+        auditCreate = auditList.clickNewAuditButton();
+    }
+
+    @And("Fill 'Audit' form")
+    public void fillAuditFormUsingDataDriverTestOnCreateAuditPage() throws Throwable {
+        auditCreate.fillAuditFromResourceUsingDataDriverTest();
+    }
+
+    @And("click 'Create' button after fill form")
+    public void clickButtonCreateOnCreateFormPage() throws Throwable {
+        auditList = auditCreate.clickSaveButton();
+    }
+
+    @Then("^'Created Audit' is showed in Audit List page$")
+    public void createdAuditIsShowedIntoAuditListPage() throws Throwable {
+        Assert.assertTrue(auditList.isAuditListPresent(), "Fail, Audit list is not loaded");
+    }
+
     // Report Audit Periodicity
     private ReportAuditPeriodicity reportAuditPeriodicity;
 
@@ -312,6 +336,7 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^'Report Audit Periodicity' page loads correctly$")
     public void reportAuditPeriodicityIsShowedInPage() throws Throwable {
         Assert.assertTrue(reportAuditPeriodicity.isReportAuditPeriodicityPresent(), "Fail, Audit list is not loaded");
+    }
 
     // Safety Rules Audits List
     private SafetyRulesList safetyRulesList;
