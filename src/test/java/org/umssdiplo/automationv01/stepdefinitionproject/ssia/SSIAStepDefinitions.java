@@ -17,6 +17,7 @@ import org.umssdiplo.automationv01.core.managepage.department.DepartmentEdit;
 import org.umssdiplo.automationv01.core.managepage.department.DepartmentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
@@ -422,7 +423,20 @@ public class SSIAStepDefinitions extends BasePage {
         workItemList = itemClassificationCreate.clickSaveButton();
 
     }
+
     // Manual List
+    private FunctionManual functionManual;
+
+    @And("^click 'function manual' on 'Header' page$")
+    public void selectFunctionManualLink() throws  Throwable{
+        functionManual = ssiaHome.clickManualMenu();
+    }
+
+    @Then("^'function manual' page loads correctly$")
+    public void verifyFunctionManualList() throws Throwable{
+        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    }
 
     // Safety List
 
