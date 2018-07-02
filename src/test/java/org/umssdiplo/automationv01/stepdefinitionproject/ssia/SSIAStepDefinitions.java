@@ -85,6 +85,9 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Role List
     private RoleList roleList;
+    private RoleCreate roleCreate;
+    private RoleUpdate roleUpdate;
+    private RoleDeleteAlert roleDeleteAlert;
 
     @And("^Click in sub menu 'Roles' of menu 'personnel'$")
     public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
@@ -330,7 +333,7 @@ public class SSIAStepDefinitions extends BasePage {
     // PPE List
     private PPEList ppeList;
 
-    @And("^Click 'PPE' sub menu of 'PPE' menu$")
+    @And("^click 'PPE' sub menu of 'PPE' menu$")
     public void clickSubMenuPPE() throws Throwable {
         ppeList = ssiaHome.clickPPESubMenu();
     }
