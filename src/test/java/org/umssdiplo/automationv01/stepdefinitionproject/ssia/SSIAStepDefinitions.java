@@ -19,6 +19,12 @@ import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
+import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationCreate;
+import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
+import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
@@ -55,6 +61,7 @@ public class SSIAStepDefinitions extends BasePage {
     private EmployeeCreate employeeCreate;
 
     //SSIA Home
+
     @Given("'SSI-A' home page is loaded")
     public void ssiAHomePageIsLoaded() throws Throwable {
         ssiaHome = LoadPage.SSIAHomePage();
@@ -322,6 +329,11 @@ public class SSIAStepDefinitions extends BasePage {
     private WorkItemDelete workItemDelete;
     private WorkItemUpdate workItemUpdate;
 
+    private ItemClassificationMenu itemClassMenu;
+    private ItemClassificationList itemClassificationList;
+    private ItemClassificationCreate itemClassificationCreate;
+
+
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
         workItemsMenu = ssiaHome.clickWorkItemsMenu();
@@ -329,13 +341,14 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("click 'Work Item' sub menu on 'Work Items' menu")
     public void clickWorkItemSubMenu() throws Throwable {
-        workItemList = workItemsMenu.clickAccidentMenu();
+        workItemList = workItemsMenu.clickWorkItemtMenu();
     }
 
     @Then("'Work Item List' page loads correctly")
     public void workItemListIsShowedInPage() throws Throwable {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
+
 
     @And("click in button 'New Work Item' of Work Item list page")
     public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
@@ -383,6 +396,31 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("updated 'WorkItem' is showed in 'Work Item list' page")
     public void updatedWorkItemIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.update.name"), "Fail, WorkItem is not updated");
+
+    @And("click 'Item Classification' sub menu on 'Work Items' menu")
+    public void clickItemClassificationSubMenu() throws Throwable {
+        itemClassificationList = workItemsMenu.clickItemClassificationtMenu();
+    }
+
+    @Then("'Item Classification List' page loads correctly")
+    public void ItemClassIsShowedInPage() throws Throwable {
+        Assert.assertTrue(itemClassificationList.isItemClassListPresent(), "Fail, Item Classification List is not loaded");
+    }
+
+    @And("click in button 'New Work Item Classification' of Item Classification list page")
+    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+        itemClassificationCreate = itemClassificationList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Item Classification' in Classification form page")
+    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+        itemClassificationCreate.fillItemClassification();
+    }
+
+    @And("click in button 'Save' into create Item Classification form page")
+    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+        workItemList = itemClassificationCreate.clickSaveButton();
+
     }
     // Manual List
 
