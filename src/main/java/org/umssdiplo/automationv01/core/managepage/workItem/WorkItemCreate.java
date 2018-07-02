@@ -14,7 +14,7 @@ public class WorkItemCreate extends BasePage {
     @FindBy(name = "description")
     private WebElement descriptionInput;
 
-    @FindBy(id = "saCategoryListFieldId")
+    @FindBy(id = "wiClassificationFieldId")
     private WebElement saCategoryListField;
 
 
