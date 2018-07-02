@@ -4,13 +4,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentList;
 import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
 import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
+
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
+
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
@@ -30,6 +34,9 @@ public class SSIAHome extends BasePage {
 
     @FindBy(id = "employeeMenu")
     private WebElement employeeMenu;
+
+    @FindBy(id = "departmentMenu")
+    private WebElement departmentMenu;
 
     @FindBy(id = "roleMenu")
     private WebElement roleMenu;
@@ -55,6 +62,9 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "contenedor")
     private WebElement ssiaHomeContainer;
 
+    @FindBy(id = "newItemClass")
+    private WebElement newItemClass;
+
     @FindBy(id = "reportAuditMenu")
     private WebElement reportAuditMenu;
 
@@ -78,6 +88,11 @@ public class SSIAHome extends BasePage {
     public EmployeeList clickEmployeeMenu() {
         CommonEvents.clickButton(employeeMenu);
         return new EmployeeList();
+    }
+
+    public DepartmentList clickDepartmentMenu() {
+        CommonEvents.clickButton(departmentMenu);
+        return new DepartmentList();
     }
 
     public RoleList clickRoleMenu() {
@@ -109,6 +124,13 @@ public class SSIAHome extends BasePage {
         CommonEvents.clickButton(manualMenu);
         return new FunctionManual();
     }
+
+    public ItemClassificationMenu clickItemClassMenu() {
+        CommonEvents.clickButton(workItemMenu);
+        CommonEvents.clickButton(newItemClass);
+        return new ItemClassificationMenu();
+    }
+    
     public ReportAuditPeriodicity clickReportAuditPeriodicityMenu() {
         CommonEvents.clickButton(auditsMenu);
         CommonEvents.clickButton(reportAuditMenu);
@@ -119,6 +141,7 @@ public class SSIAHome extends BasePage {
         CommonEvents.clickButton(auditsMenu);
         CommonEvents.clickButton(safetyRulesMenu);
         return new SafetyRulesList();
+
     }
 
     public PPEClassificationList clickPPEClassificationSubMenu() {
