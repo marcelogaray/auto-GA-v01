@@ -8,6 +8,7 @@ import org.umssdiplo.automationv01.core.managepage.department.DepartmentList;
 import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
 import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 
@@ -55,6 +56,11 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "workItemSubMenu")
     private WebElement workItemSubMenu;
 
+    @FindBy(id = "manualMenu")
+    private WebElement manualMenu;
+
+    @FindBy(id = "contenedor")
+    private WebElement ssiaHomeContainer;
 
     @FindBy(id = "newItemClass")
     private WebElement newItemClass;
@@ -110,12 +116,21 @@ public class SSIAHome extends BasePage {
         return new WorkItemsMenu();
     }
 
+    public SSIAHome(){
+        CommonEvents.isVisible(ssiaHomeContainer);
+    }
+
+    public FunctionManual clickManualMenu() {
+        CommonEvents.clickButton(manualMenu);
+        return new FunctionManual();
+    }
 
     public ItemClassificationMenu clickItemClassMenu() {
         CommonEvents.clickButton(workItemMenu);
         CommonEvents.clickButton(newItemClass);
         return new ItemClassificationMenu();
     }
+    
     public ReportAuditPeriodicity clickReportAuditPeriodicityMenu() {
         CommonEvents.clickButton(auditsMenu);
         CommonEvents.clickButton(reportAuditMenu);
