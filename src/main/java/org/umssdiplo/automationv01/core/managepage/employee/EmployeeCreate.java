@@ -13,6 +13,10 @@ public class EmployeeCreate extends BasePage {
     @FindBy(id = "SaveEmployeeBtn")
     private WebElement saveBtn;
 
+    public EmployeeCreate(){
+        CommonEvents.isVisible(saveBtn);
+    }
+
     public void clickSaveEmployeeBtn(){
         CommonEvents.clickButton(saveBtn);
     }
