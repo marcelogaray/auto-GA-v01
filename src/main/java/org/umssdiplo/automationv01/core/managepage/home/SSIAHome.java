@@ -83,7 +83,7 @@ public class SSIAHome extends BasePage {
     }
 
     public SSIAHome(){
-        CommonEvents.isPresent(ssiaHomeContainer);
+        CommonEvents.isVisible(ssiaHomeContainer);
     }
 
     public FunctionManual clickManualMenu() {
