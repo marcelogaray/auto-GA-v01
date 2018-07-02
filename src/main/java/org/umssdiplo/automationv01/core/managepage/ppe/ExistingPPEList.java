@@ -17,7 +17,7 @@ public class ExistingPPEList extends BasePage {
     private WebElement ppeContainer;
 
     public ExistingPPEList() {
-        CommonEvents.isPresent(ppeContainer);
+        CommonEvents.isVisible(ppeContainer);
     }
 
     public boolean isExistingPPEListPresent() {

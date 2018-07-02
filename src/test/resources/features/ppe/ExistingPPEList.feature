@@ -2,8 +2,8 @@
 # feature to review behaviour of existing ppe list
 Feature: ExistingPPEList
 
-  Scenario: Una vez seleccionado el menu Existing PPE todos los Equipos existentes deben ser mostrados en una lista.
+  Scenario: Inventario EPP - Lista - Todos los datos de inventario clasificación de equipo de protección personal son mostrados en una lista después de seleccionar la opción "Inventory" del menú "PPE"
     Given 'SSI-A' home page is loaded
-    And Click 'PPE' menu on 'Header' page
-    And Click 'Existing PPE' sub menu of 'PPE' menu
+    And click 'PPE' menu on 'Header' page
+    And click 'Existing PPE' sub menu of 'PPE' menu
     Then 'Existing PPE list' page loads correctly

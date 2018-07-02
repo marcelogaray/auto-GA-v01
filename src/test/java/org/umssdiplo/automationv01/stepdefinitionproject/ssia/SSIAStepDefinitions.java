@@ -3,14 +3,12 @@ package org.umssdiplo.automationv01.stepdefinitionproject.ssia;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentDeleteAlert;
-import org.umssdiplo.automationv01.core.managepage.accident.UpdateAccidentForm;
-import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
+import org.umssdiplo.automationv01.core.managepage.accident.UpdateAccidentForm;
 import org.umssdiplo.automationv01.core.managepage.audit.*;
 import org.umssdiplo.automationv01.core.managepage.department.DepartmentCreate;
 import org.umssdiplo.automationv01.core.managepage.department.DepartmentEdit;
@@ -21,25 +19,20 @@ import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
-import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationCreate;
-import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
-import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.ExistingPPEList;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
-import org.umssdiplo.automationv01.core.managepage.ppe.ExistingPPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemDelete;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemCreate;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemUpdate;
+import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
+import org.umssdiplo.automationv01.core.managepage.workItem.*;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
@@ -65,12 +58,6 @@ public class SSIAStepDefinitions extends BasePage {
     @And("click 'Personnel' menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
         ssiaHome.clickPersonnelMenu();
-        ssiaHome.clickPersonnelMenu();
-    }
-
-    @And("Click 'PPE' menu on 'Header' page")
-    public void clickPPEMenu() throws Throwable {
-        ssiaHome.clickPPEMenu();
     }
 
     @And("click 'Employee' submenu into 'Personnel' menu")
@@ -114,17 +101,17 @@ public class SSIAStepDefinitions extends BasePage {
     private DepartmentEdit departmentEdit;
 
     @And("click 'Department' submenu into 'Personnel' menu")
-    public void clickDepartmentMenu() throws Throwable{
+    public void clickDepartmentMenu() throws Throwable {
         departmentList = ssiaHome.clickDepartmentMenu();
     }
 
     @And("click 'New Department' button in 'Departments List' page")
-    public void clickNewDepartmentBtn() throws Throwable{
+    public void clickNewDepartmentBtn() throws Throwable {
         departmentCreate = departmentList.clickNewDepartmentButton();
     }
 
     @And("click 'Edit Department' button in 'Departments List' page")
-    public void clickEditDepartmentBtn() throws Throwable{
+    public void clickEditDepartmentBtn() throws Throwable {
         departmentEdit = departmentList.clickEditDepartmentButton();
     }
 
@@ -143,41 +130,43 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Department Create
     @And("fill \"(.*)\" in 'Name' text box in 'New Department' page")
-    public void fillNameInput(String departmentName) throws Throwable{
+    public void fillNameInput(String departmentName) throws Throwable {
         departmentCreate.fillNameInput(departmentName + new Timestamp(new Date().getTime()));
     }
+
     @And("fill \"(.*)\" in 'Description' text box in 'New Department' page")
-    public void fillDescriptionInput(String departmentDescription) throws Throwable{
+    public void fillDescriptionInput(String departmentDescription) throws Throwable {
         departmentCreate.fillDescriptionInput(departmentDescription + new Timestamp(new Date().getTime()));
     }
 
     @And("click 'Save' button in 'New Department' page")
-    public void clickSaveDepartment() throws Throwable{
+    public void clickSaveDepartment() throws Throwable {
         departmentList = departmentCreate.clickSaveDepartmentBtn();
     }
 
     @And("click 'Cancel' button in 'New Department' page")
-    public void clickCancelDepartment() throws Throwable{
+    public void clickCancelDepartment() throws Throwable {
         departmentList = departmentCreate.clickCancelDepartmentBtn();
     }
 
     // Department Edit
     @And("fill \"(.*)\" in 'Name' text box in 'Edit Department' page")
-    public void editNameInput(String departmentName) throws Throwable{
+    public void editNameInput(String departmentName) throws Throwable {
         departmentEdit.fillNameInput(departmentName + new Timestamp(new Date().getTime()));
     }
+
     @And("fill \"(.*)\" in 'Description' text box in 'Edit Department' page")
-    public void editDescriptionInput(String departmentDescription) throws Throwable{
+    public void editDescriptionInput(String departmentDescription) throws Throwable {
         departmentEdit.fillDescriptionInput(departmentDescription + new Timestamp(new Date().getTime()));
     }
 
     @And("click 'Update' button in 'Edit Department' page")
-    public void clickUpdateDepartment() throws Throwable{
+    public void clickUpdateDepartment() throws Throwable {
         departmentList = departmentEdit.clickUpdateDepartmentBtn();
     }
 
     @And("click 'Cancel' button in 'Edit Department' page")
-    public void clickCancelEditionDepartment() throws Throwable{
+    public void clickCancelEditionDepartment() throws Throwable {
         departmentList = departmentEdit.clickCancelDepartmentBtn();
     }
 
@@ -335,8 +324,6 @@ public class SSIAStepDefinitions extends BasePage {
     private ItemClassificationCreate itemClassificationCreate;
 
 
-
-
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
         workItemsMenu = ssiaHome.clickWorkItemsMenu();
@@ -377,6 +364,7 @@ public class SSIAStepDefinitions extends BasePage {
     public void clickInButtonDeleteOfWorkItemListPage() throws Throwable {
         workItemDelete = workItemList.clickDeleteButton();
     }
+
     @And("click in button 'Accept' of delete 'WorkItem' confirmation popup")
     public void clickInButtonAcceptOfDeleteWorkItemConfirmationPopup() throws Throwable {
         workItemList = workItemDelete.clickAcceptButton();
@@ -396,6 +384,7 @@ public class SSIAStepDefinitions extends BasePage {
     public void clickInButtonUpdateIntoUpdateWorkItemFormPage() throws Throwable {
         workItemList = workItemUpdate.clickUpdateButton();
     }
+
     @Then("updated 'WorkItem' is showed in 'Work Item list' page")
     public void updatedWorkItemIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.update.name"), "Fail, WorkItem is not updated");
@@ -433,12 +422,12 @@ public class SSIAStepDefinitions extends BasePage {
     private FunctionManual functionManual;
 
     @And("^click 'function manual' on 'Header' page$")
-    public void selectFunctionManualLink() throws  Throwable{
+    public void selectFunctionManualLink() throws Throwable {
         functionManual = ssiaHome.clickManualMenu();
     }
 
     @Then("^'function manual' page loads correctly$")
-    public void verifyFunctionManualList() throws Throwable{
+    public void verifyFunctionManualList() throws Throwable {
         boolean result = functionManual.isFuntionalManualtableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
@@ -577,10 +566,11 @@ public class SSIAStepDefinitions extends BasePage {
     public void PPEListIsShowedInPage() throws Throwable {
         Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
     }
+
     // Existing PPE List
     private ExistingPPEList existingPPEList;
 
-    @And("^Click 'Existing PPE' sub menu of 'PPE' menu$")
+    @And("^click 'Existing PPE' sub menu of 'PPE' menu$")
     public void clickExistingPpeSubMenu() throws Throwable {
         existingPPEList = ssiaHome.clickExistingPpeSubMenu();
     }
