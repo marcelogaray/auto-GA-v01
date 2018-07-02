@@ -24,10 +24,10 @@ public class PPEClassificationCreate extends BasePage {
     private WebElement saveButton;
 
     public PPEClassificationCreate() {
-        CommonEvents.isPresent(saveButton);
+        CommonEvents.isVisible(saveButton);
     }
 
-    public void fillPPEClassificatinUsingDataDriverTest() {
+    public void fillPPEClassificationUsingDataDriverTest() {
         fillName(DataDriverTest.readValues.getValue("PPEClassification.create.name"));
         fillDescription(DataDriverTest.readValues.getValue("PPEClassification.create.description"));
     }

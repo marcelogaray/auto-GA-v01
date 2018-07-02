@@ -20,19 +20,19 @@ public class PPEClassificationList extends BasePage {
     private WebElement lastPPEClassificationName;
 
     public PPEClassificationList() {
-        CommonEvents.isPresent(ppeClassificationContainer);
+        CommonEvents.isVisible(ppeClassificationContainer);
     }
 
     public boolean isPPEClassificationListPresent() {
         return CommonEvents.isPresent(newPPEClassificationButton);
     }
 
-    public PPEClassificationCreate clickNewPPEClassification(){
+    public PPEClassificationCreate clickNewPPEClassification() {
         CommonEvents.clickButton(newPPEClassificationButton);
         return new PPEClassificationCreate();
     }
 
     public String getLastPPEClassificationNameInTable() {
-        return lastPPEClassificationName.getText();
+        return CommonEvents.getTextContent(lastPPEClassificationName);
     }
 }
