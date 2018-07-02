@@ -5,17 +5,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
-import org.umssdiplo.automationv01.core.managepage.audit.AuditCreate;
-import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
-import org.umssdiplo.automationv01.core.managepage.audit.SafetyRuleCreate;
-import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
-import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
+import org.umssdiplo.automationv01.core.managepage.audit.*;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
-import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -23,14 +18,21 @@ import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationCr
 import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
+import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
+import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
-import org.umssdiplo.automationv01.core.utils.LoadPage;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
+import org.umssdiplo.automationv01.core.utils.LoadPage;
 
 /**
  * @Author: Lizeth Salazar
@@ -49,18 +51,18 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @And("click 'Personnel' menu on 'Header' page")
-    public void clickPersonnelMenu() throws Throwable{
-        ssiaHome.clickOnPersonnelMenu();
+    public void clickPersonnelMenu() throws Throwable {
+        ssiaHome.clickPersonnelMenu();
     }
 
     @And("click 'Employee' submenu into 'Personnel' menu")
-    public void clickEmployeeMenu() throws Throwable{
-        employeeList = ssiaHome.clickOnEmployeeMenu();
+    public void clickEmployeeMenu() throws Throwable {
+        employeeList = ssiaHome.clickEmployeeMenu();
     }
 
     // Employees List
     @And("click 'New Employee' button in 'Employees List' page")
-    public void clickNewEmployeeBtn() throws Throwable{
+    public void clickNewEmployeeBtn() throws Throwable {
         employeeCreate = employeeList.clickNewEmployeeButton();
     }
 
@@ -72,19 +74,19 @@ public class SSIAStepDefinitions extends BasePage {
 
     // Employee Create
     @And("click 'Save' button in 'New Employee' page")
-    public void clickSaveEmployee() throws Throwable{
+    public void clickSaveEmployee() throws Throwable {
         employeeCreate.clickSaveEmployeeBtn();
     }
 
     @Then("'Please fill required fields' error pops up")
-    public void isRequiredErrorDisplayed() throws Throwable{
+    public void isRequiredErrorDisplayed() throws Throwable {
         String actualResult = employeeCreate.isRequiredErrorDisplayed();
         employeeCreate.clickOKInAlert();
         Assert.assertEquals(actualResult, "Please fill required fields");
     }
 
     @And("click 'OK' button in 'Alert'")
-    public void clickOKBtnInAlert() throws Throwable{
+    public void clickOKBtnInAlert() throws Throwable {
         employeeCreate.clickOKInAlert();
     }
 
@@ -96,7 +98,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("^click sub menu 'Roles' of menu 'personnel'$")
     public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
-        roleList = ssiaHome.clickOnRoleMenu();
+        roleList = ssiaHome.clickRoleMenu();
     }
 
     @Then("^'Role list' is showed in page$")
@@ -319,7 +321,60 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(accidentList.isNewRecordPresent(), "Fail, Accident record is not loaded");
     }
 
+    // PPE Menu
+    @And("click 'PPE' menu on 'Header' page")
+    public void clickPPEMenu() throws Throwable {
+        ssiaHome.clickPPEMenu();
+    }
+
+    // PPE Classification List
+    private PPEClassificationList ppeClassificationList;
+
+    @And("^click 'PPE Classification' sub menu of 'PPE' menu$")
+    public void clickSubMenuPPEClassification() throws Throwable {
+        ppeClassificationList = ssiaHome.clickPPEClassificationSubMenu();
+    }
+
+    @Then("^'PPE Classification list' page loads correctly$")
+    public void PPEClassificationListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeClassificationList.isPPEClassificationListPresent(), "Fail, PPE Classification list is not loaded");
+    }
+
+    // PPE Classification Create
+    private PPEClassificationCreate ppeClassificationCreate;
+
+    @And("^click 'New PPE Classification' button of 'PPE Classification list' page$")
+    public void clickButtonNewPPEClassification() throws Throwable {
+        ppeClassificationCreate = ppeClassificationList.clickNewPPEClassification();
+    }
+
+    @And("^fill 'PPE Classification' form using Data Driver Test on create 'PPE Classification' page$")
+    public void fillPPEClassificationFormUsingDataDriverTestOnCreatePPEClassificationPage() throws Throwable {
+        ppeClassificationCreate.fillPPEClassificationUsingDataDriverTest();
+    }
+
+    @And("^click 'Save' button into create 'PPE Classification' form page$")
+    public void clickSaveButtonInCreateNewPPEClassificationFormPage() throws Throwable {
+        ppeClassificationList = ppeClassificationCreate.clickSaveButton();
+    }
+
+    @Then("^created 'PPE Classification' is showed in 'PPE Classification list' page$")
+    public void createdPPEClassificationIsShowedInPPEClassificationListPage() throws Throwable {
+        Assert.assertEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
+    }
+
     // PPE List
+    private PPEList ppeList;
+
+    @And("^click 'PPE' sub menu of 'PPE' menu$")
+    public void clickSubMenuPPE() throws Throwable {
+        ppeList = ssiaHome.clickPPESubMenu();
+    }
+
+    @Then("^'PPE list' page loads correctly$")
+    public void PPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
+    }
 
     // Audit List
     private AuditList auditList;
