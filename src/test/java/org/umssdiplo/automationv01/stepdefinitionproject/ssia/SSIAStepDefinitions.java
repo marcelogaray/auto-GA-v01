@@ -5,6 +5,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.accident.UpdateAccidentForm;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.audit.*;
@@ -253,6 +256,9 @@ public class SSIAStepDefinitions extends BasePage {
     private AccidentList accidentList;
     private AccidentForm accidentForm;
 
+    private UpdateAccidentForm updateAccidentForm;
+    private AccidentDeleteAlert accidentDeleteAlert;
+
     @Given("click 'Safety' menu on 'Header' page")
     public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
@@ -266,6 +272,41 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Accident list' page loads correctly")
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
+
+    @And("click 'pencil' button on 'Accident' list page")
+    public void clickEditButton() {
+        updateAccidentForm = accidentList.clickEditAccidentButton();
+    }
+
+    @And("set all information required on 'Accident' form")
+    public void updateAccidentForm() {
+        updateAccidentForm.updateAccidentInformationForm();
+    }
+
+    @And("click 'update' button on 'Accident' form")
+    public void saveUpdatedAccidentForm() {
+        accidentList = updateAccidentForm.clickUpdateButton();
+    }
+
+    @Then("'Accident list' page loads with records edited")
+    public void isEditedAccidentPresent() throws Throwable {
+        Assert.assertEquals(accidentList.getLastDescriptionInTable(), DataDriverTest.readValues.getValue("Accident.update.accidentDescription"), "Fail, edited Accident record is not changed");
+    }
+
+    @And("click 'trash' button on 'Accident' list page")
+    public void clickDeleteAccidentButton() throws Throwable {
+        accidentDeleteAlert = accidentList.clickDeleteAccidentButton();
+    }
+
+    @And("click Accept button on popup to confirm delete 'Accident'")
+    public void clickAcceptButtonAccidentAlert() throws Throwable {
+        accidentList = accidentDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("'Accident list' page loads without record deleted")
+    public void deletedAccidentIsNotLoaded() {
+        Assert.assertNotEquals(accidentList.getLastDescriptionInTable(), accidentDeleteAlert.getAccidentDescription(), "Fail, Accident is not deleted");
     }
 
     @And("click 'New accident for Employee' button on 'Accident' list page")
