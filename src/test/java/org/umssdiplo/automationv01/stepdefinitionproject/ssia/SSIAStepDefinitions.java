@@ -15,6 +15,7 @@ import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyM
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -327,6 +328,19 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^created 'PPE Classification' is showed in 'PPE Classification list' page$")
     public void createdPPEClassificationIsShowedInPPEClassificationListPage() throws Throwable {
         Assert.assertEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
+    }
+
+    // PPE List
+    private PPEList ppeList;
+
+    @And("^click 'PPE' sub menu of 'PPE' menu$")
+    public void clickSubMenuPPE() throws Throwable {
+        ppeList = ssiaHome.clickPPESubMenu();
+    }
+
+    @Then("^'PPE list' page loads correctly$")
+    public void PPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
     }
 
     // Audit List
