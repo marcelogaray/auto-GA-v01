@@ -260,7 +260,7 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @Then("'Item Classification List' page loads correctly")
-    public void ItemClassificationListIsShowedInPage() throws Throwable {
+    public void ItemClassIsShowedInPage() throws Throwable {
         Assert.assertTrue(itemClassificationList.isItemClassListPresent(), "Fail, Item Classification List is not loaded");
     }
 
@@ -269,9 +269,9 @@ public class SSIAStepDefinitions extends BasePage {
         itemClassificationCreate = itemClassificationList.clickNewCreateItemButton();
     }
 
-    @And("fill 'Item Classification' form in create 'Work Item' page")
+    @And("fill 'Item Classification' in Classification form page")
     public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
-        itemClassificationCreate.fillWorkItemUsingDataDriverTest();
+        itemClassificationCreate.fillItemClassification();
     }
 
     @And("click in button 'Save' into create Item Classification form page")

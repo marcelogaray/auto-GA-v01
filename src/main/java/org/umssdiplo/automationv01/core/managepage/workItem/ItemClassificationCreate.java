@@ -6,6 +6,13 @@ import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
+/*
+ * @autor: Linet Torrico
+ * Description: La creacion de un item para la clasificacion de herramientas es posible con el uso de
+ * Data-driven testing (DDT) es una metodología en la que podemos leer los valores predefinidos para nombre y descripción desde SSIAResources.properties
+ *
+ */
+
 public class ItemClassificationCreate extends BasePage {
 
     @FindBy(name = "name")
@@ -21,10 +28,9 @@ public class ItemClassificationCreate extends BasePage {
         CommonEvents.isVisible(nameInput);
     }
 
-    public void fillWorkItemUsingDataDriverTest() {
+    public void fillItemClassification() {
         fillName(DataDriverTest.readValues.getValue("Item.create.name"));
         fillDescription(DataDriverTest.readValues.getValue("Item.create.description"));
-
     }
 
     private void fillName(String name) {

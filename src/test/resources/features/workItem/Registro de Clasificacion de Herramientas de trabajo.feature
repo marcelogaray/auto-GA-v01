@@ -7,6 +7,6 @@ Feature: Registro de Clasificacion de Herramientas de trabajo
     And click Work Items 'menu' on 'Header' page
     And click 'Item Classification' sub menu on 'Work Items' menu
     And click in button 'New Work Item Classification' of Item Classification list page
-    And fill 'Item Classification' form in create 'Work Item' page
+    And fill 'Item Classification' in Classification form page
     And click in button 'Save' into create Item Classification form page
     Then 'Item Classification List' page loads correctly
