@@ -3,7 +3,7 @@
 
 Feature: Function Manual
 
-  Scenario: Function manual is displayed ones you select the tab function manual
+  Scenario: new function manual created is displayed in the page
     Given 'SSI-A' home page is loaded
     And click 'function manual' on 'Header' page
     And click 'New Manual' button

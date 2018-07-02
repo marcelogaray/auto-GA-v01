@@ -99,7 +99,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("^'function manual' page loads correctly$")
     public void verifyFunctionManualList() throws Throwable{
-        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        boolean result = functionManual.isFuntionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
@@ -120,7 +120,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("^new function manual is showed in page$")
     public void verifyNewManualInLIst() throws  Throwable{
-        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        boolean result = functionManual.isFuntionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
@@ -140,7 +140,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("^edited changes of the function manual are displayed in page$")
     public void verifyEditManualInLIst() throws  Throwable{
-        boolean result = functionManual.isFuntionalManualtableDisplayed();
+        boolean result = functionManual.isFuntionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 

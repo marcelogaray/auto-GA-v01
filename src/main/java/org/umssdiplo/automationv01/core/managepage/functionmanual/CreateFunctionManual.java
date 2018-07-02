@@ -7,7 +7,7 @@ import org.umssdiplo.automationv01.core.utils.CommonEvents;
 
 public class CreateFunctionManual extends BasePage {
 
-    @FindBy(id="form-functionManual")
+    @FindBy(id = "form-functionManual")
     private WebElement formTableFunctionManual;
 
     @FindBy(name = "name")
@@ -44,14 +44,14 @@ public class CreateFunctionManual extends BasePage {
     @FindBy(id = "SaveManual")
     private WebElement saveFunctionManualButton;
 
-    public CreateFunctionManual(){
+    public CreateFunctionManual() {
         CommonEvents.isPresent(formTableFunctionManual);
     }
 
     public void fillNewManualForm() {
         fillName("test function manual");
         fillPosition("test position");
-        fillHirarchicalLevel("new level");
+        fillHierarchicalLevel("new level");
         fillSuperiorBoss("administrator boss");
         fillDependentPersonal("test dependent personal");
         fillInternalRelation("all the administrators and HHRR");
@@ -64,18 +64,23 @@ public class CreateFunctionManual extends BasePage {
     private void fillName(String name) {
         CommonEvents.setInputField(nameFunctionManual, name);
     }
+
     private void fillPosition(String position) {
         CommonEvents.setInputField(positionFunctionManual, position);
     }
-    private void fillHirarchicalLevel(String hierarchicalLevel) {
+
+    private void fillHierarchicalLevel(String hierarchicalLevel) {
         CommonEvents.setInputField(hierarchicalLevelFunctionManual, hierarchicalLevel);
     }
+
     private void fillSuperiorBoss(String superiorBoss) {
         CommonEvents.setInputField(superiorBossFunctionManual, superiorBoss);
     }
+
     private void fillDependentPersonal(String dependentPersonal) {
         CommonEvents.setInputField(dependentPersonalFunctionManual, dependentPersonal);
     }
+
     private void fillInternalRelation(String internalRelation) {
         CommonEvents.setInputField(internalRelationFunctionManual, internalRelation);
     }
@@ -88,15 +93,15 @@ public class CreateFunctionManual extends BasePage {
         CommonEvents.setInputField(generalActivityFunctionManual, generalActivity);
     }
 
-    private void fillPrincipalFunction(String principalFunction){
+    private void fillPrincipalFunction(String principalFunction) {
         CommonEvents.setInputField(principalFunctionFunctionManual, principalFunction);
     }
 
-    private  void  fillRoleFunctionManual(String roleId){
+    private void fillRoleFunctionManual(String roleId) {
         CommonEvents.selectOptionFieldByValue(roleFunctionManual, roleId);
     }
 
-    public FunctionManual clickSaveManualButton () {
+    public FunctionManual clickSaveManualButton() {
         CommonEvents.clickButton(saveFunctionManualButton);
         return new FunctionManual();
     }
