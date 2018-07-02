@@ -580,8 +580,6 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(existingPPEList.isExistingPPEListPresent(), "Fail, PPE list is not loaded");
     }
 
-    // Existing PPE List
-
     // Existing PPE Assigned List
 
     // Audit List
