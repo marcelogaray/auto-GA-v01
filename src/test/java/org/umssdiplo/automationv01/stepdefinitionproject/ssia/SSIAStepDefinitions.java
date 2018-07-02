@@ -26,19 +26,19 @@ import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationCr
 import org.umssdiplo.automationv01.core.managepage.workItem.ItemClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
-import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
-import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
-import org.umssdiplo.automationv01.core.managepage.role.RoleList;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemDelete;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemCreate;
+import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemUpdate;
 import org.umssdiplo.automationv01.core.managepage.role.RoleUpdate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 
@@ -319,9 +319,16 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemsMenu workItemsMenu;
     private WorkItemList workItemList;
+    private WorkItemCreate workItemCreate;
+    private WorkItemDelete workItemDelete;
+    private WorkItemUpdate workItemUpdate;
+
     private ItemClassificationMenu itemClassMenu;
     private ItemClassificationList itemClassificationList;
     private ItemClassificationCreate itemClassificationCreate;
+
+
+
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -338,6 +345,57 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
     }
 
+
+    @And("click in button 'New Work Item' of Work Item list page")
+    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+        workItemCreate = workItemList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Work Item' form using Data Driver Test on create 'Work Item' page")
+    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+        workItemCreate.fillWorkItemUsingDataDriverTest();
+    }
+
+    @And("click in button 'Create' into create form page")
+    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+        workItemList = workItemCreate.clickSaveButton();
+    }
+
+    @Then("created 'WorkItem' is showed in Work Item List page")
+    public void createdItemIsShowedInWorkItemListPage() throws Throwable {
+        Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.create.name"), "Fail, Work Item is not created");
+    }
+
+    @And("click in button 'Delete' of 'Work Item list' page")
+    public void clickInButtonDeleteOfWorkItemListPage() throws Throwable {
+        workItemDelete = workItemList.clickDeleteButton();
+    }
+    @And("click in button 'Accept' of delete 'WorkItem' confirmation popup")
+    public void clickInButtonAcceptOfDeleteWorkItemConfirmationPopup() throws Throwable {
+        workItemList = workItemDelete.clickAcceptButton();
+    }
+
+    @Then("'WorkItem' deleted is removed from 'Work item list' page")
+    public void deletedWorkItemIsNotShowedInWorkItemListPage() throws Throwable {
+        Assert.assertNotEquals(workItemList.getLastWorkItemNameInTable(), workItemDelete.getWorkItemName(), "Fail, Work Item is not deleted");
+    }
+
+    @And("click in button 'Edit' of 'Work Item list' page")
+    public void clickInButtonEditOfWorkItemListPage() throws Throwable {
+        workItemUpdate = workItemList.clickEditButton();
+    }
+
+    @And("click in button 'Update' into update 'WorkItem' form page")
+    public void clickInButtonUpdateIntoUpdateWorkItemFormPage() throws Throwable {
+        workItemList = workItemUpdate.clickUpdateButton();
+    }
+    @Then("updated 'WorkItem' is showed in 'Work Item list' page")
+    public void updatedWorkItemIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.update.name"), "Fail, WorkItem is not updated");
+
+
+    }
+
     @And("click 'Item Classification' sub menu on 'Work Items' menu")
     public void clickItemClassificationSubMenu() throws Throwable {
         itemClassificationList = workItemsMenu.clickItemClassificationtMenu();
@@ -349,18 +407,19 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @And("click in button 'New Work Item Classification' of Item Classification list page")
-    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+    public void clickInButtonNewWorkItemOfItemListPage() throws Throwable {
         itemClassificationCreate = itemClassificationList.clickNewCreateItemButton();
     }
 
     @And("fill 'Item Classification' in Classification form page")
-    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+    public void fillItemFormUsingDataDriverTestOnCreateItemPage() throws Throwable {
         itemClassificationCreate.fillItemClassification();
     }
 
     @And("click in button 'Save' into create Item Classification form page")
-    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+    public void clickInButtonCreateIntoItemCreateFormPage() throws Throwable {
         workItemList = itemClassificationCreate.clickSaveButton();
+
     }
 
     // Manual List
