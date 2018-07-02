@@ -8,6 +8,7 @@ import org.umssdiplo.automationv01.core.managepage.audit.ReportAuditPeriodicity;
 import org.umssdiplo.automationv01.core.managepage.audit.SafetyRulesList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.utils.CommonEvents;
@@ -21,6 +22,9 @@ public class SSIAHome extends BasePage {
 
     @FindBy(id = "personnelMenu")
     private WebElement personnelMenu;
+
+    @FindBy(id = "ppeMenu")
+    private WebElement ppeMenu;
 
     @FindBy(id = "employeeMenu")
     private WebElement employeeMenu;
@@ -49,16 +53,23 @@ public class SSIAHome extends BasePage {
     @FindBy(id = "safetyRuleMenu")
     private WebElement safetyRulesMenu;
 
-    public void clickOnPersonnelMenu() {
+    @FindBy(id = "ppeClassificationSubMenu")
+    private WebElement ppeClassificationSubMenu;
+
+    public void clickPersonnelMenu() {
         CommonEvents.clickButton(personnelMenu);
     }
 
-    public EmployeeList clickOnEmployeeMenu() {
+    public void clickPPEMenu() {
+        CommonEvents.clickButton(ppeMenu);
+    }
+
+    public EmployeeList clickEmployeeMenu() {
         CommonEvents.clickButton(employeeMenu);
         return new EmployeeList();
     }
 
-    public RoleList clickOnRoleMenu() {
+    public RoleList clickRoleMenu() {
         CommonEvents.clickButton(roleMenu);
         return new RoleList();
     }
@@ -89,5 +100,10 @@ public class SSIAHome extends BasePage {
         CommonEvents.clickButton(auditsMenu);
         CommonEvents.clickButton(safetyRulesMenu);
         return new SafetyRulesList();
+    }
+
+    public PPEClassificationList clickPPEClassificationSubMenu() {
+        CommonEvents.clickButton(ppeClassificationSubMenu);
+        return new PPEClassificationList();
     }
 }
