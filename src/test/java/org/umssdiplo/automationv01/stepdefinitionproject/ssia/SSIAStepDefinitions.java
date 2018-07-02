@@ -3,11 +3,18 @@ package org.umssdiplo.automationv01.stepdefinitionproject.ssia;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentDeleteAlert;
+import org.umssdiplo.automationv01.core.managepage.accident.UpdateAccidentForm;
+import org.umssdiplo.automationv01.core.managepage.audit.AuditList;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
 import org.umssdiplo.automationv01.core.managepage.audit.*;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentCreate;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentEdit;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
@@ -34,6 +41,9 @@ import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @Author: Lizeth Salazar
@@ -88,6 +98,79 @@ public class SSIAStepDefinitions extends BasePage {
     @And("click 'OK' button in 'Alert'")
     public void clickOKBtnInAlert() throws Throwable {
         employeeCreate.clickOKInAlert();
+    }
+
+    // Department List
+    private DepartmentList departmentList;
+    private DepartmentCreate departmentCreate;
+    private DepartmentEdit departmentEdit;
+
+    @And("click 'Department' submenu into 'Personnel' menu")
+    public void clickDepartmentMenu() throws Throwable{
+        departmentList = ssiaHome.clickDepartmentMenu();
+    }
+
+    @And("click 'New Department' button in 'Departments List' page")
+    public void clickNewDepartmentBtn() throws Throwable{
+        departmentCreate = departmentList.clickNewDepartmentButton();
+    }
+
+    @And("click 'Edit Department' button in 'Departments List' page")
+    public void clickEditDepartmentBtn() throws Throwable{
+        departmentEdit = departmentList.clickEditDepartmentButton();
+    }
+
+    @Then("'Department List' page loads correctly")
+    public void isDepartmentListPresent() throws Throwable {
+        boolean result = departmentList.isDepartmentListPresent();
+        Assert.assertTrue(result, "Fail, Department list is not loaded");
+    }
+
+    @Then("\"(.*)\" and \"(.*)\" are displayed in 'Department List' page")
+    public void isNewDepartmentDisplayedInList(String departmentName, String departmentDescription) throws Throwable {
+        boolean dptoName = departmentList.isDepartmentNamePresent(departmentName);
+        boolean dptoDesc = departmentList.isDepartmentNamePresent(departmentDescription);
+        Assert.assertTrue(dptoName & dptoDesc, "Fail, Department list is not loaded");
+    }
+
+    // Department Create
+    @And("fill \"(.*)\" in 'Name' text box in 'New Department' page")
+    public void fillNameInput(String departmentName) throws Throwable{
+        departmentCreate.fillNameInput(departmentName + new Timestamp(new Date().getTime()));
+    }
+    @And("fill \"(.*)\" in 'Description' text box in 'New Department' page")
+    public void fillDescriptionInput(String departmentDescription) throws Throwable{
+        departmentCreate.fillDescriptionInput(departmentDescription + new Timestamp(new Date().getTime()));
+    }
+
+    @And("click 'Save' button in 'New Department' page")
+    public void clickSaveDepartment() throws Throwable{
+        departmentList = departmentCreate.clickSaveDepartmentBtn();
+    }
+
+    @And("click 'Cancel' button in 'New Department' page")
+    public void clickCancelDepartment() throws Throwable{
+        departmentList = departmentCreate.clickCancelDepartmentBtn();
+    }
+
+    // Department Edit
+    @And("fill \"(.*)\" in 'Name' text box in 'Edit Department' page")
+    public void editNameInput(String departmentName) throws Throwable{
+        departmentEdit.fillNameInput(departmentName + new Timestamp(new Date().getTime()));
+    }
+    @And("fill \"(.*)\" in 'Description' text box in 'Edit Department' page")
+    public void editDescriptionInput(String departmentDescription) throws Throwable{
+        departmentEdit.fillDescriptionInput(departmentDescription + new Timestamp(new Date().getTime()));
+    }
+
+    @And("click 'Update' button in 'Edit Department' page")
+    public void clickUpdateDepartment() throws Throwable{
+        departmentList = departmentEdit.clickUpdateDepartmentBtn();
+    }
+
+    @And("click 'Cancel' button in 'Edit Department' page")
+    public void clickCancelEditionDepartment() throws Throwable{
+        departmentList = departmentEdit.clickCancelDepartmentBtn();
     }
 
     // Role List
@@ -309,6 +392,9 @@ public class SSIAStepDefinitions extends BasePage {
     private AccidentList accidentList;
     private AccidentForm accidentForm;
 
+    private UpdateAccidentForm updateAccidentForm;
+    private AccidentDeleteAlert accidentDeleteAlert;
+
     @Given("click 'Safety' menu on 'Header' page")
     public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
@@ -322,6 +408,41 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Accident list' page loads correctly")
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
+
+    @And("click 'pencil' button on 'Accident' list page")
+    public void clickEditButton() {
+        updateAccidentForm = accidentList.clickEditAccidentButton();
+    }
+
+    @And("set all information required on 'Accident' form")
+    public void updateAccidentForm() {
+        updateAccidentForm.updateAccidentInformationForm();
+    }
+
+    @And("click 'update' button on 'Accident' form")
+    public void saveUpdatedAccidentForm() {
+        accidentList = updateAccidentForm.clickUpdateButton();
+    }
+
+    @Then("'Accident list' page loads with records edited")
+    public void isEditedAccidentPresent() throws Throwable {
+        Assert.assertEquals(accidentList.getLastDescriptionInTable(), DataDriverTest.readValues.getValue("Accident.update.accidentDescription"), "Fail, edited Accident record is not changed");
+    }
+
+    @And("click 'trash' button on 'Accident' list page")
+    public void clickDeleteAccidentButton() throws Throwable {
+        accidentDeleteAlert = accidentList.clickDeleteAccidentButton();
+    }
+
+    @And("click Accept button on popup to confirm delete 'Accident'")
+    public void clickAcceptButtonAccidentAlert() throws Throwable {
+        accidentList = accidentDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("'Accident list' page loads without record deleted")
+    public void deletedAccidentIsNotLoaded() {
+        Assert.assertNotEquals(accidentList.getLastDescriptionInTable(), accidentDeleteAlert.getAccidentDescription(), "Fail, Accident is not deleted");
     }
 
     @And("click 'New accident for Employee' button on 'Accident' list page")

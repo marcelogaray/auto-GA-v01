@@ -199,4 +199,8 @@ public class CommonEvents {
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).accept();
     }
 
+    public static boolean isTextPresent(String text){
+        return ManageDriver.getInstance().getWebDriver().getPageSource().contains(text);
+    }
+
 }
