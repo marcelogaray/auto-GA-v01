@@ -23,6 +23,9 @@ public class AccidentList extends BasePage {
     @FindBy(xpath = "//table[@id='accidentTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' deleteBtn ')]")
     private WebElement deleteAccidentButton;
 
+    @FindBy(xpath = "//*[@id=\"accidentTable\"]/descendant::td[contains(text(), 'Fred Mour')]")
+    private WebElement newAccidentAdded;
+
     public boolean isAccidentListPresent() {
         return CommonEvents.isPresent(btnCreateAccident);
     }
@@ -40,6 +43,15 @@ public class AccidentList extends BasePage {
         String accidentDescription = getLastDescriptionInTable();
         CommonEvents.clickButton(deleteAccidentButton);
         return new AccidentDeleteAlert(accidentDescription);
+    }
+
+    public AccidentForm clickCreateAccidentButton() {
+        CommonEvents.clickButton(btnCreateAccident);
+        return new AccidentForm();
+    }
+
+    public boolean isNewRecordPresent(){
+        return CommonEvents.isPresent(newAccidentAdded);
     }
 
 }

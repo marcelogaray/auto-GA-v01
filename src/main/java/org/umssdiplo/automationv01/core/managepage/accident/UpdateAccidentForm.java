@@ -43,7 +43,6 @@ public class UpdateAccidentForm extends BasePage {
     }
 
     public void updateAccidentInformationForm() {
-
         updateAccidentDescription(DataDriverTest.readValues.getValue("Accident.update.accidentDescription"));
         updateWhereOccurredAccident(DataDriverTest.readValues.getValue("Accident.update.WhereOccurredAccident"));
         updateDaysOutOfWork(DataDriverTest.readValues.getValue("Accident.update.DaysOutOfWork"));
