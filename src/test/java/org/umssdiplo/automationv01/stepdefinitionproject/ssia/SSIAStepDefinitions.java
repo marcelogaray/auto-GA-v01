@@ -89,8 +89,8 @@ public class SSIAStepDefinitions extends BasePage {
     private RoleUpdate roleUpdate;
     private RoleDeleteAlert roleDeleteAlert;
 
-    @And("^Click in sub menu 'Roles' of menu 'personnel'$")
-    public void clickInSubMenuRolesOfMenuPersonnel() throws Throwable {
+    @And("^click sub menu 'Roles' of menu 'personnel'$")
+    public void clickSubMenuRolesOfMenuPersonnel() throws Throwable {
         roleList = ssiaHome.clickRoleMenu();
     }
 
