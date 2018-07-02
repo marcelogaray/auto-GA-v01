@@ -22,13 +22,6 @@ public class CommonEvents {
     }
 
     /**
-<<<<<<< HEAD
-       * This method choose an option from web element.
-       *
-       * @param webElement Is web element.
-       * @param content    Is the content that will be set to the web element.
-    */
-=======
      * This method set date content to web element.
      * Format: DD/MM/YYYY
      *
@@ -85,7 +78,6 @@ public class CommonEvents {
      * @param webElement Is web element.
      * @param content    Is the content that will be set to the web element.
      */
->>>>>>> 128a25d62071dde1b1b55c447b032b389f0e6c7d
     public static void selectOptionFieldByValue(WebElement webElement, String content) {
         try {
             Select selectWebElement = new Select(webElement);
@@ -205,23 +197,5 @@ public class CommonEvents {
     public static void clickOKInWindowsAlert(){
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent()).accept();
     }
-
-    /**
-    * This method wait for alert is visible.
-    *
-    */
-    public static void waitForAlertVisible() {
-                ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
-            }
-
-    /**
-    * This method perform a click action in alert accept button
-    *
-    */
-    public static void clickAlertAcceptButton() {
-        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.alertIsPresent());
-        Alert alert = ManageDriver.getInstance().getWebDriver().switchTo().alert();
-        alert.accept();
-     }
 
 }
