@@ -18,6 +18,10 @@ public class DepartmentEdit extends BasePage {
     @FindBy(id = "descriptionInput")
     private WebElement descriptionTextBox;
 
+    public DepartmentEdit() {
+        CommonEvents.isVisible(updateBtn);
+    }
+
     public DepartmentList clickUpdateDepartmentBtn(){
         CommonEvents.clickButton(updateBtn);
         return new DepartmentList();

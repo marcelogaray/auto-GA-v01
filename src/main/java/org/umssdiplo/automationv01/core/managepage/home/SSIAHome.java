@@ -82,7 +82,6 @@ public class SSIAHome extends BasePage {
         return new DepartmentList();
     }
 
-    public RoleList clickOnRoleMenu() {
     public RoleList clickRoleMenu() {
         CommonEvents.clickButton(roleMenu);
         return new RoleList();

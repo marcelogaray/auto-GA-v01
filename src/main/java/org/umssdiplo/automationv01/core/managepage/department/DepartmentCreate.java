@@ -22,6 +22,10 @@ public class DepartmentCreate extends BasePage {
     @FindBy(id = "descriptionInput")
     private WebElement descriptionTextBox;
 
+    public DepartmentCreate() {
+        CommonEvents.isVisible(saveBtn);
+    }
+
     public DepartmentList clickSaveDepartmentBtn(){
         CommonEvents.clickButton(saveBtn);
         return new DepartmentList();

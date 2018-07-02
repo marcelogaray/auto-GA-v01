@@ -20,6 +20,10 @@ public class DepartmentList extends BasePage {
     @FindBy(id = "deleteDeparmentBtn")
     private WebElement deleteDepartmentButton;
 
+    public DepartmentList() {
+        CommonEvents.isVisible(newDepartmentButton);
+    }
+
     public DepartmentCreate clickNewDepartmentButton(){
         CommonEvents.clickButton(newDepartmentButton);
         return new DepartmentCreate();
