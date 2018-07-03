@@ -23,10 +23,7 @@ import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.ExistingPPEList;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
+import org.umssdiplo.automationv01.core.managepage.ppe.*;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -52,7 +49,6 @@ public class SSIAStepDefinitions extends BasePage {
     private EmployeeCreate employeeCreate;
 
     //SSIA Home
-
     @Given("'SSI-A' home page is loaded")
     public void ssiAHomePageIsLoaded() throws Throwable {
         ssiaHome = LoadPage.SSIAHomePage();
@@ -501,7 +497,6 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
 
-
     @And("click 'pencil' button on 'Accident' list page")
     public void clickEditButton() {
         updateAccidentForm = accidentList.clickEditAccidentButton();
@@ -626,6 +621,17 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     // Existing PPE Assigned List
+    private PPEAssignedList ppeAssignedList;
+
+    @And("^click 'Assigned PPE' sub menu of 'PPE' menu$")
+    public void clickSubMenuAssignedPPE() throws Throwable {
+        ppeAssignedList = ssiaHome.clickExistingPPEAssignedSubMenu();
+    }
+
+    @Then("^'Assigned PPE list' page loads correctly$")
+    public void AssignedPPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeAssignedList.isPPEAssignedListPresent(), "Fail, Assigned PPE list is not loaded");
+    }
 
     // Audit List
     private AuditList auditList;
