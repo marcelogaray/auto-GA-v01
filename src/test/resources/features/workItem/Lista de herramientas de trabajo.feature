@@ -1,8 +1,8 @@
 # @Author: Linet Torrico
 # Feature: Work Item List
 
-Feature: WorkItemList
-  Scenario: List of work items is displayed after selecting "WorkItems" option
+Feature: Lista de herramientas de trabajo
+  Scenario: Todos los datos de herramientas de trabajo son mostrados en una lista
     Given 'SSI-A' home page is loaded
     And click Work Items 'menu' on 'Header' page
     And click 'Work Item' sub menu on 'Work Items' menu

@@ -1,6 +1,5 @@
 package org.umssdiplo.automationv01.core.managepage.functionmanual;
 
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
@@ -20,6 +19,9 @@ public class FunctionManual extends BasePage {
 
     public boolean isFuntionalManualTableDisplayed() {
         return CommonEvents.isPresent(functionManual);
+    }
+    public boolean isFuntionalManualtableDisplayed() {
+        return CommonEvents.isVisible(functionManual);
     }
 
     public CreateFunctionManual clickNewManualButton(){
