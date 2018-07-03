@@ -2,7 +2,7 @@
 # feature to review behaviour of assigned ppe list
 Feature: AssignedPPEList
 
-  Scenario: Una vez seleccionado el menu PPE asigned todos los equipos asignados deben ser mostrados en una lista.
+  Scenario: Asignación EPP - Lista - Todos los datos de equipo de protección personal asignados son mostrados en una lista después de seleccionar la opción "Assing PPE" del menú "PPE"
     Given 'SSI-A' home page is loaded
     And click 'PPE' menu on 'Header' page
     And click 'Assigned PPE' sub menu of 'PPE' menu
