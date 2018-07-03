@@ -643,7 +643,7 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @And("^fill 'PPE' form using Data Driver Test on create 'PPE' page$")
-    public void fillPPEFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+    public void fillPPEFormUsingDataDriverTestOnCreatePPEPage() throws Throwable {
         ppeCreate.fillPPEUsingDataDriverTest();
     }
 
@@ -652,9 +652,31 @@ public class SSIAStepDefinitions extends BasePage {
         ppeList = ppeCreate.clickSaveButton();
     }
 
+    private PPECancelCreate ppeCancelCreate;
+
+    @And("^click 'New PPE' for cancel button of 'PPE list' page$")
+    public void clickButtonNewPPECancel() throws Throwable {
+        ppeCancelCreate = ppeList.clickNewPPECancel();
+    }
+
+    @And("^fill 'PPE' form using Data Driver Test on cancel create 'PPE' page$")
+    public void fillPPEFormUsingDataDriverTestOnCancelCreatePPEPage() throws Throwable {
+        ppeCancelCreate.fillPPEUsingDataDriverTest();
+    }
+
+    @And("^click 'Cancel' button into create 'PPE' form page$")
+    public void clickCancelButtonInCreateNewPPEFormPage() throws Throwable {
+        ppeList = ppeCancelCreate.clickCancelButton();
+    }
+
     @Then("^created 'PPE' is showed in PPE list page$")
     public void createdPPEIsShowedInPPEListPage() throws Throwable {
         Assert.assertEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.create.name"), "Fail, PPE is not created");
+    }
+
+    @Then("^created 'PPE' is not showed in PPE list page$")
+    public void createdPPEIsNotShowedInPPEListPage() throws Throwable {
+        Assert.assertNotEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.cancelCreate.name"), "Fail, PPE is created");
     }
 
     // Existing PPE List

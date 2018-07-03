@@ -32,6 +32,11 @@ public class PPEList extends BasePage {
         return new PPECreate();
     }
 
+    public PPECancelCreate clickNewPPECancel() {
+        CommonEvents.clickButton(newPPEButton);
+        return new PPECancelCreate();
+    }
+
     public String getLastPPENameInTable() {
         return CommonEvents.getTextContent(lastPPEName);
     }
