@@ -4,6 +4,7 @@
 Feature: EmployeeList
   Scenario: List of employees is displayed after selecting "Employee" option
     Given 'SSI-A' home page is loaded
-    And click 'Personnel' menu on 'Header' page
-    And click 'Employee' submenu into 'Personnel' menu
+    And Clicking on Personnel menu on 'Header' page
+    And Clicking on Employee submenu into 'Personnel' menu
     Then 'Employee List' page loads correctly
+

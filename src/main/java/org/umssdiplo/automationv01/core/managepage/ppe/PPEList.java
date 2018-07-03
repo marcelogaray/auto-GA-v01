@@ -16,11 +16,23 @@ public class PPEList extends BasePage {
     @FindBy(className = "container")
     private WebElement ppeContainer;
 
+    @FindBy(xpath = "//table[@id='tblPpe']/descendant::tr[last()]/td[count(//table[@id='tblPpe']/descendant::th[text()='Name'])]")
+    private WebElement lastPPEName;
+
     public PPEList() {
         CommonEvents.isVisible(ppeContainer);
     }
 
     public boolean isPPEListPresent() {
         return CommonEvents.isPresent(newPPEButton);
+    }
+
+    public PPECreate clickNewPPE() {
+        CommonEvents.clickButton(newPPEButton);
+        return new PPECreate();
+    }
+
+    public String getLastPPENameInTable() {
+        return CommonEvents.getTextContent(lastPPEName);
     }
 }
