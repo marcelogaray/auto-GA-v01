@@ -17,8 +17,11 @@ public class FunctionManual extends BasePage {
     @FindBy(id="manualEditBtn")
     private WebElement editManualButton;
 
+    @FindBy(xpath = "//table[@id='manualTable']/descendant::tr[last()]/descendant::button[contains(concat(' ', normalize-space(@class), ' '), ' deleteBtn ')]")
+    private WebElement deleteManualButton;
 
-    public boolean isFuntionalManualTableDisplayed() {
+    @FindBy(xpath = "//table[@id='manualTable']/descendant::tr[last()]/td[count(//table[@id='manualTable']/descendant::th[text()='id'])]")
+    private WebElement lastManualName;   public boolean isFuntionalManualTableDisplayed() {
         return CommonEvents.isPresent(functionManual);
     }
 
@@ -30,5 +33,15 @@ public class FunctionManual extends BasePage {
     public EditFunctionManual clickEditManualButton(){
         CommonEvents.clickButton(editManualButton);
         return new EditFunctionManual();
+    }
+
+    public DeleteFunctionManual clickDeleteManualButton() {
+        String manualName = getLastRoleNameInTable();
+        CommonEvents.clickButton(deleteManualButton);
+        return new DeleteFunctionManual(manualName);
+    }
+
+    public String getLastRoleNameInTable() {
+        return lastManualName.getText();
     }
 }

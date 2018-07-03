@@ -12,6 +12,7 @@ import org.umssdiplo.automationv01.core.managepage.audit.*;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.CreateFunctionManual;
+import org.umssdiplo.automationv01.core.managepage.functionmanual.DeleteFunctionManual;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.EditFunctionManual;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
@@ -252,6 +253,7 @@ public class SSIAStepDefinitions extends BasePage {
     private FunctionManual functionManual;
     private CreateFunctionManual createFunctionManual;
     private EditFunctionManual editFunctionManual;
+    private DeleteFunctionManual deleteFunctionManual;
 
     @And("^click 'function manual' on 'Header' page$")
     public void selectFunctionManualLink() throws  Throwable{
@@ -303,6 +305,21 @@ public class SSIAStepDefinitions extends BasePage {
     public void verifyEditManualInLIst() throws  Throwable{
         boolean result = functionManual.isFuntionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    }
+
+    @And("^click 'delete' button of a selected function manual$")
+    public void clickDeleteManualButton() throws  Throwable{
+        deleteFunctionManual = functionManual.clickDeleteManualButton();
+    }
+
+    @And("^click 'Accept' of delete 'Manual' confirmation popup$")
+    public void clickAcceptManualButton() throws  Throwable{
+        deleteFunctionManual.clickAcceptManualButton();
+    }
+
+    @Then("^deleted 'Manual' is not showed in 'Manual list' page$")
+    public  void verifyDeleteManualNotDisplayed() throws Throwable{
+        Assert.assertNotEquals(functionManual.getLastRoleNameInTable(), deleteFunctionManual.getManualName(), "Fail, Function Manual is not deleted");
     }
 
     // Safety List
