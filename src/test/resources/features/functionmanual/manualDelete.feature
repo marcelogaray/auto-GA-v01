@@ -1,5 +1,7 @@
-# feature to review behaviour of update role
+# @Author: Marcelo Loayza
+# Feature: Function manual Edit
 Feature: FunctionManualDelete
+
   Scenario: Function manual deleted is not displayed
     Given 'SSI-A' home page is loaded
     And click 'function manual' on 'Header' page
