@@ -35,6 +35,11 @@ public class PPEClassificationCreate extends BasePage {
         fillDescription(DataDriverTest.readValues.getValue("PPEClassification.create.description"));
     }
 
+    public void fillPPEClassificationtoCancelUsingDataDriverTest() {
+        fillName(DataDriverTest.readValues.getValue("PPEClassification.cancelCreate.name"));
+        fillDescription(DataDriverTest.readValues.getValue("PPEClassification.cancelCreate.description"));
+    }
+
     private void fillName(String name) {
         CommonEvents.setInputField(nameTextInput, name);
     }
