@@ -487,7 +487,6 @@ public class SSIAStepDefinitions extends BasePage {
     public  void verifyDeleteManualNotDisplayed() throws Throwable{
         Assert.assertNotEquals(functionManual.getLastRoleNameInTable(), deleteFunctionManual.getManualName(), "Fail, Function Manual is not deleted");
     }
-
     // Safety List
 
     private SafetyMenu safetyMenu;
