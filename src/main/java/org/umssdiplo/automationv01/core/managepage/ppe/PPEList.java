@@ -20,11 +20,16 @@ public class PPEList extends BasePage {
     private WebElement lastPPEName;
 
     public PPEList() {
-        CommonEvents.isPresent(ppeContainer);
+        CommonEvents.isVisible(ppeContainer);
     }
 
     public boolean isPPEListPresent() {
         return CommonEvents.isPresent(newPPEButton);
+    }
+
+    public PPECreate clickNewPPE() {
+        CommonEvents.clickButton(newPPEButton);
+        return new PPECreate();
     }
 
     public PPECancelCreate clickNewPPE(){
@@ -33,6 +38,6 @@ public class PPEList extends BasePage {
     }
 
     public String getLastPPENameInTable() {
-        return lastPPEName.getText();
+        return CommonEvents.getTextContent(lastPPEName);
     }
 }
