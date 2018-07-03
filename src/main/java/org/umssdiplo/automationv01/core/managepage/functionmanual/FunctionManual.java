@@ -17,10 +17,7 @@ public class FunctionManual extends BasePage {
     private WebElement editManualButton;
 
 
-    public boolean isFuntionalManualTableDisplayed() {
-        return CommonEvents.isPresent(functionManual);
-    }
-    public boolean isFuntionalManualtableDisplayed() {
+    public boolean isFunctionalManualTableDisplayed() {
         return CommonEvents.isVisible(functionManual);
     }
 

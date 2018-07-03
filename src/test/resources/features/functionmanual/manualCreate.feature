@@ -2,7 +2,6 @@
 # Feature: Function manual List
 
 Feature: Function Manual
-
   Scenario: new function manual created is displayed in the page
     Given 'SSI-A' home page is loaded
     And click 'function manual' on 'Header' page

@@ -2,7 +2,6 @@
 # Feature: Function manual List
 
 Feature: Function Manual
-
   Scenario: Function manual is updated after an edit was completed
     Given 'SSI-A' home page is loaded
     And click 'function manual' on 'Header' page

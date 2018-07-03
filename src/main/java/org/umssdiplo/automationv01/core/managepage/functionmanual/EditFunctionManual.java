@@ -45,7 +45,7 @@ public class EditFunctionManual extends BasePage {
     private WebElement updateFunctionManualButton;
 
     public EditFunctionManual(){
-        CommonEvents.isPresent(formTableFunctionManual);
+        CommonEvents.isVisible(formTableFunctionManual);
     }
 
     public void fillupdateManualForm() {
