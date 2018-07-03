@@ -6,9 +6,14 @@ import cucumber.api.java.en.Then;
 import gherkin.lexer.Th;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
+import org.umssdiplo.automationv01.core.managepage.accident.AccidentDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentForm;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentList;
+import org.umssdiplo.automationv01.core.managepage.accident.UpdateAccidentForm;
 import org.umssdiplo.automationv01.core.managepage.audit.*;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentCreate;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentEdit;
+import org.umssdiplo.automationv01.core.managepage.department.DepartmentList;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeCreate;
 import org.umssdiplo.automationv01.core.managepage.employee.EmployeeList;
 import org.umssdiplo.automationv01.core.managepage.functionmanual.CreateFunctionManual;
@@ -17,10 +22,9 @@ import org.umssdiplo.automationv01.core.managepage.functionmanual.EditFunctionMa
 import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual;
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
+import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
+import org.umssdiplo.automationv01.core.managepage.ppe.*;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -29,9 +33,12 @@ import org.umssdiplo.automationv01.core.managepage.sickness.SicknessCreate;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessList;
 import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
+import org.umssdiplo.automationv01.core.managepage.workItem.*;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @Author: Lizeth Salazar
@@ -86,6 +93,81 @@ public class SSIAStepDefinitions extends BasePage {
     @And("click 'OK' button in 'Alert'")
     public void clickOKBtnInAlert() throws Throwable {
         employeeCreate.clickOKInAlert();
+    }
+
+    // Department List
+    private DepartmentList departmentList;
+    private DepartmentCreate departmentCreate;
+    private DepartmentEdit departmentEdit;
+
+    @And("click 'Department' submenu into 'Personnel' menu")
+    public void clickDepartmentMenu() throws Throwable {
+        departmentList = ssiaHome.clickDepartmentMenu();
+    }
+
+    @And("click 'New Department' button in 'Departments List' page")
+    public void clickNewDepartmentBtn() throws Throwable {
+        departmentCreate = departmentList.clickNewDepartmentButton();
+    }
+
+    @And("click 'Edit Department' button in 'Departments List' page")
+    public void clickEditDepartmentBtn() throws Throwable {
+        departmentEdit = departmentList.clickEditDepartmentButton();
+    }
+
+    @Then("'Department List' page loads correctly")
+    public void isDepartmentListPresent() throws Throwable {
+        boolean result = departmentList.isDepartmentListPresent();
+        Assert.assertTrue(result, "Fail, Department list is not loaded");
+    }
+
+    @Then("\"(.*)\" and \"(.*)\" are displayed in 'Department List' page")
+    public void isNewDepartmentDisplayedInList(String departmentName, String departmentDescription) throws Throwable {
+        boolean dptoName = departmentList.isDepartmentNamePresent(departmentName);
+        boolean dptoDesc = departmentList.isDepartmentNamePresent(departmentDescription);
+        Assert.assertTrue(dptoName & dptoDesc, "Fail, Department list is not loaded");
+    }
+
+    // Department Create
+    @And("fill \"(.*)\" in 'Name' text box in 'New Department' page")
+    public void fillNameInput(String departmentName) throws Throwable {
+        departmentCreate.fillNameInput(departmentName + new Timestamp(new Date().getTime()));
+    }
+
+    @And("fill \"(.*)\" in 'Description' text box in 'New Department' page")
+    public void fillDescriptionInput(String departmentDescription) throws Throwable {
+        departmentCreate.fillDescriptionInput(departmentDescription + new Timestamp(new Date().getTime()));
+    }
+
+    @And("click 'Save' button in 'New Department' page")
+    public void clickSaveDepartment() throws Throwable {
+        departmentList = departmentCreate.clickSaveDepartmentBtn();
+    }
+
+    @And("click 'Cancel' button in 'New Department' page")
+    public void clickCancelDepartment() throws Throwable {
+        departmentList = departmentCreate.clickCancelDepartmentBtn();
+    }
+
+    // Department Edit
+    @And("fill \"(.*)\" in 'Name' text box in 'Edit Department' page")
+    public void editNameInput(String departmentName) throws Throwable {
+        departmentEdit.fillNameInput(departmentName + new Timestamp(new Date().getTime()));
+    }
+
+    @And("fill \"(.*)\" in 'Description' text box in 'Edit Department' page")
+    public void editDescriptionInput(String departmentDescription) throws Throwable {
+        departmentEdit.fillDescriptionInput(departmentDescription + new Timestamp(new Date().getTime()));
+    }
+
+    @And("click 'Update' button in 'Edit Department' page")
+    public void clickUpdateDepartment() throws Throwable {
+        departmentList = departmentEdit.clickUpdateDepartmentBtn();
+    }
+
+    @And("click 'Cancel' button in 'Edit Department' page")
+    public void clickCancelEditionDepartment() throws Throwable {
+        departmentList = departmentEdit.clickCancelDepartmentBtn();
     }
 
     // Role List
@@ -233,6 +315,14 @@ public class SSIAStepDefinitions extends BasePage {
     // Work Item List
     private WorkItemsMenu workItemsMenu;
     private WorkItemList workItemList;
+    private WorkItemCreate workItemCreate;
+    private WorkItemDelete workItemDelete;
+    private WorkItemUpdate workItemUpdate;
+
+    private ItemClassificationMenu itemClassMenu;
+    private ItemClassificationList itemClassificationList;
+    private ItemClassificationCreate itemClassificationCreate;
+
 
     @Given("click Work Items 'menu' on 'Header' page")
     public void clickWorkItemsMenu() throws Throwable {
@@ -241,12 +331,89 @@ public class SSIAStepDefinitions extends BasePage {
 
     @And("click 'Work Item' sub menu on 'Work Items' menu")
     public void clickWorkItemSubMenu() throws Throwable {
-        workItemList = workItemsMenu.clickAccidentMenu();
+        workItemList = workItemsMenu.clickWorkItemtMenu();
     }
 
     @Then("'Work Item List' page loads correctly")
     public void workItemListIsShowedInPage() throws Throwable {
         Assert.assertTrue(workItemList.isWorkItemListPresent(), "Fail, Work Item List is not loaded");
+    }
+
+
+    @And("click in button 'New Work Item' of Work Item list page")
+    public void clickInButtonNewWorkItemOfWorkItemListPage() throws Throwable {
+        workItemCreate = workItemList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Work Item' form using Data Driver Test on create 'Work Item' page")
+    public void fillItemFormUsingDataDriverTestOnCreateWorkItemPage() throws Throwable {
+        workItemCreate.fillWorkItemUsingDataDriverTest();
+    }
+
+    @And("click in button 'Create' into create form page")
+    public void clickInButtonCreateIntoCreateFormPage() throws Throwable {
+        workItemList = workItemCreate.clickSaveButton();
+    }
+
+    @Then("created 'WorkItem' is showed in Work Item List page")
+    public void createdItemIsShowedInWorkItemListPage() throws Throwable {
+        Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.create.name"), "Fail, Work Item is not created");
+    }
+
+    @And("click in button 'Delete' of 'Work Item list' page")
+    public void clickInButtonDeleteOfWorkItemListPage() throws Throwable {
+        workItemDelete = workItemList.clickDeleteButton();
+    }
+
+    @And("click in button 'Accept' of delete 'WorkItem' confirmation popup")
+    public void clickInButtonAcceptOfDeleteWorkItemConfirmationPopup() throws Throwable {
+        workItemList = workItemDelete.clickAcceptButton();
+    }
+
+    @Then("'WorkItem' deleted is removed from 'Work item list' page")
+    public void deletedWorkItemIsNotShowedInWorkItemListPage() throws Throwable {
+        Assert.assertNotEquals(workItemList.getLastWorkItemNameInTable(), workItemDelete.getWorkItemName(), "Fail, Work Item is not deleted");
+    }
+
+    @And("click in button 'Edit' of 'Work Item list' page")
+    public void clickInButtonEditOfWorkItemListPage() throws Throwable {
+        workItemUpdate = workItemList.clickEditButton();
+    }
+
+    @And("click in button 'Update' into update 'WorkItem' form page")
+    public void clickInButtonUpdateIntoUpdateWorkItemFormPage() throws Throwable {
+        workItemList = workItemUpdate.clickUpdateButton();
+    }
+
+    @Then("updated 'WorkItem' is showed in 'Work Item list' page")
+    public void updatedWorkItemIsShowedInRoleListPage() throws Throwable {
+        Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.update.name"), "Fail, WorkItem is not updated");
+    }
+
+    @And("click 'Item Classification' sub menu on 'Work Items' menu")
+    public void clickItemClassificationSubMenu() throws Throwable {
+        itemClassificationList = workItemsMenu.clickItemClassificationtMenu();
+    }
+
+    @Then("'Item Classification List' page loads correctly")
+    public void ItemClassIsShowedInPage() throws Throwable {
+        Assert.assertTrue(itemClassificationList.isItemClassListPresent(), "Fail, Item Classification List is not loaded");
+    }
+
+    @And("click in button 'New Work Item Classification' of Item Classification list page")
+    public void clickInButtonNewWorkItemOfItemListPage() throws Throwable {
+        itemClassificationCreate = itemClassificationList.clickNewCreateItemButton();
+    }
+
+    @And("fill 'Item Classification' in Classification form page")
+    public void fillItemFormUsingDataDriverTestOnCreateItemPage() throws Throwable {
+        itemClassificationCreate.fillItemClassification();
+    }
+
+    @And("click in button 'Save' into create Item Classification form page")
+    public void clickInButtonCreateIntoItemCreateFormPage() throws Throwable {
+        workItemList = itemClassificationCreate.clickSaveButton();
+
     }
 
     // Manual List
@@ -256,13 +423,13 @@ public class SSIAStepDefinitions extends BasePage {
     private DeleteFunctionManual deleteFunctionManual;
 
     @And("^click 'function manual' on 'Header' page$")
-    public void selectFunctionManualLink() throws  Throwable{
+    public void selectFunctionManualLink() throws Throwable {
         functionManual = ssiaHome.clickManualMenu();
     }
 
     @Then("^'function manual' page loads correctly$")
     public void verifyFunctionManualList() throws Throwable{
-        boolean result = functionManual.isFuntionalManualTableDisplayed();
+        boolean result = functionManual.isFunctionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
@@ -283,7 +450,7 @@ public class SSIAStepDefinitions extends BasePage {
 
     @Then("^new function manual is showed in page$")
     public void verifyNewManualInLIst() throws  Throwable{
-        boolean result = functionManual.isFuntionalManualTableDisplayed();
+        boolean result = functionManual.isFunctionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
@@ -302,9 +469,8 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @Then("^edited changes of the function manual are displayed in page$")
-    public void verifyEditManualInLIst() throws  Throwable{
-        boolean result = functionManual.isFuntionalManualTableDisplayed();
-        Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
+    public void verifyEditManualInLIst() throws  Throwable {
+        boolean result = functionManual.isFunctionalManualTableDisplayed();
     }
 
     @And("^click 'delete' button of a selected function manual$")
@@ -328,6 +494,9 @@ public class SSIAStepDefinitions extends BasePage {
     private AccidentList accidentList;
     private AccidentForm accidentForm;
 
+    private UpdateAccidentForm updateAccidentForm;
+    private AccidentDeleteAlert accidentDeleteAlert;
+
     @Given("click 'Safety' menu on 'Header' page")
     public void clickSafetyMenu() throws Throwable {
         safetyMenu = ssiaHome.clickSafetyMenu();
@@ -341,6 +510,41 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("'Accident list' page loads correctly")
     public void isAccidentListPresent() throws Throwable {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
+    }
+
+    @And("click 'pencil' button on 'Accident' list page")
+    public void clickEditButton() {
+        updateAccidentForm = accidentList.clickEditAccidentButton();
+    }
+
+    @And("set all information required on 'Accident' form")
+    public void updateAccidentForm() {
+        updateAccidentForm.updateAccidentInformationForm();
+    }
+
+    @And("click 'update' button on 'Accident' form")
+    public void saveUpdatedAccidentForm() {
+        accidentList = updateAccidentForm.clickUpdateButton();
+    }
+
+    @Then("'Accident list' page loads with records edited")
+    public void isEditedAccidentPresent() throws Throwable {
+        Assert.assertEquals(accidentList.getLastDescriptionInTable(), DataDriverTest.readValues.getValue("Accident.update.accidentDescription"), "Fail, edited Accident record is not changed");
+    }
+
+    @And("click 'trash' button on 'Accident' list page")
+    public void clickDeleteAccidentButton() throws Throwable {
+        accidentDeleteAlert = accidentList.clickDeleteAccidentButton();
+    }
+
+    @And("click Accept button on popup to confirm delete 'Accident'")
+    public void clickAcceptButtonAccidentAlert() throws Throwable {
+        accidentList = accidentDeleteAlert.clickAcceptButton();
+    }
+
+    @Then("'Accident list' page loads without record deleted")
+    public void deletedAccidentIsNotLoaded() {
+        Assert.assertNotEquals(accidentList.getLastDescriptionInTable(), accidentDeleteAlert.getAccidentDescription(), "Fail, Accident is not deleted");
     }
 
     @And("click 'New accident for Employee' button on 'Accident' list page")
@@ -395,6 +599,11 @@ public class SSIAStepDefinitions extends BasePage {
         ppeClassificationCreate.fillPPEClassificationUsingDataDriverTest();
     }
 
+    @And("^fill 'PPE Classification' form using Data Driver Test on cancel create 'PPE Classification' page$")
+    public void fillPPEClassificationFormUsingDataDriverTestOnCancelCreatePPEClassificationPage() throws Throwable {
+        ppeClassificationCreate.fillPPEClassificationtoCancelUsingDataDriverTest();
+    }
+
     @And("^click 'Save' button into create 'PPE Classification' form page$")
     public void clickSaveButtonInCreateNewPPEClassificationFormPage() throws Throwable {
         ppeClassificationList = ppeClassificationCreate.clickSaveButton();
@@ -403,6 +612,16 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^created 'PPE Classification' is showed in 'PPE Classification list' page$")
     public void createdPPEClassificationIsShowedInPPEClassificationListPage() throws Throwable {
         Assert.assertEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
+    }
+
+    @And("^click 'Cancel' button into create 'PPE Classification' form page$")
+    public void clickCancelButtonInCreateNewPPEClassificationFormPage() throws Throwable {
+        ppeClassificationList = ppeClassificationCreate.clickCancelButton();
+    }
+
+    @Then("^cancel creation 'PPE Classification' is not showed in PPE Classification list page$")
+    public void cancelCreationPPEClassificationIsNotShowedInPPEClassificationListPage() throws Throwable {
+        Assert.assertNotEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.cancelCreate.name"), "Fail, PPE Classification is created");
     }
 
     // PPE List
@@ -416,6 +635,32 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^'PPE list' page loads correctly$")
     public void PPEListIsShowedInPage() throws Throwable {
         Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
+    }
+
+    // Existing PPE List
+    private ExistingPPEList existingPPEList;
+
+    @And("^click 'Existing PPE' sub menu of 'PPE' menu$")
+    public void clickExistingPpeSubMenu() throws Throwable {
+        existingPPEList = ssiaHome.clickExistingPpeSubMenu();
+    }
+
+    @Then("^'Existing PPE list' page loads correctly$")
+    public void ExitingPPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(existingPPEList.isExistingPPEListPresent(), "Fail, PPE list is not loaded");
+    }
+
+    // Existing PPE Assigned List
+    private PPEAssignedList ppeAssignedList;
+
+    @And("^click 'Assigned PPE' sub menu of 'PPE' menu$")
+    public void clickSubMenuAssignedPPE() throws Throwable {
+        ppeAssignedList = ssiaHome.clickExistingPPEAssignedSubMenu();
+    }
+
+    @Then("^'Assigned PPE list' page loads correctly$")
+    public void AssignedPPEListIsShowedInPage() throws Throwable {
+        Assert.assertTrue(ppeAssignedList.isPPEAssignedListPresent(), "Fail, Assigned PPE list is not loaded");
     }
 
     // Audit List

@@ -1,6 +1,5 @@
 # @Author: Marcelo Loayza
 # Feature: Function manual List
-
 Feature: Function Manual
 
   Scenario: Function manual is updated after an edit was completed

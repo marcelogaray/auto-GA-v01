@@ -45,7 +45,7 @@ public class CreateFunctionManual extends BasePage {
     private WebElement saveFunctionManualButton;
 
     public CreateFunctionManual() {
-        CommonEvents.isPresent(formTableFunctionManual);
+        CommonEvents.isVisible(formTableFunctionManual);
     }
 
     public void fillNewManualForm() {

@@ -1,6 +1,5 @@
 package org.umssdiplo.automationv01.core.managepage.functionmanual;
 
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
@@ -21,8 +20,10 @@ public class FunctionManual extends BasePage {
     private WebElement deleteManualButton;
 
     @FindBy(xpath = "//table[@id='manualTable']/descendant::tr[last()]/td[count(//table[@id='manualTable']/descendant::th[text()='id'])]")
-    private WebElement lastManualName;   public boolean isFuntionalManualTableDisplayed() {
-        return CommonEvents.isPresent(functionManual);
+    private WebElement lastManualName;
+
+    public boolean isFunctionalManualTableDisplayed() {
+        return CommonEvents.isVisible(functionManual);
     }
 
     public CreateFunctionManual clickNewManualButton(){

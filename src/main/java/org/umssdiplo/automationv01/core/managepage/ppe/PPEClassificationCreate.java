@@ -23,6 +23,9 @@ public class PPEClassificationCreate extends BasePage {
     @FindBy(id = "btnPpeClassificationSave")
     private WebElement saveButton;
 
+    @FindBy(id = "btnPpeClassificationCancel")
+    private WebElement cancelButton;
+
     public PPEClassificationCreate() {
         CommonEvents.isVisible(saveButton);
     }
@@ -30,6 +33,11 @@ public class PPEClassificationCreate extends BasePage {
     public void fillPPEClassificationUsingDataDriverTest() {
         fillName(DataDriverTest.readValues.getValue("PPEClassification.create.name"));
         fillDescription(DataDriverTest.readValues.getValue("PPEClassification.create.description"));
+    }
+
+    public void fillPPEClassificationtoCancelUsingDataDriverTest() {
+        fillName(DataDriverTest.readValues.getValue("PPEClassification.cancelCreate.name"));
+        fillDescription(DataDriverTest.readValues.getValue("PPEClassification.cancelCreate.description"));
     }
 
     private void fillName(String name) {
@@ -42,6 +50,11 @@ public class PPEClassificationCreate extends BasePage {
 
     public PPEClassificationList clickSaveButton() {
         CommonEvents.clickButton(saveButton);
+        return new PPEClassificationList();
+    }
+
+    public PPEClassificationList clickCancelButton() {
+        CommonEvents.clickButton(cancelButton);
         return new PPEClassificationList();
     }
 }

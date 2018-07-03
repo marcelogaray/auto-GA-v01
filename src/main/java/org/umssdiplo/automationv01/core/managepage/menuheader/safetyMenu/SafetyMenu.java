@@ -19,6 +19,10 @@ public class SafetyMenu extends BasePage {
     @FindBy(id = "accidentMenu")
     private WebElement accidentMenu;
 
+    public SafetyMenu() {
+        CommonEvents.isVisible(accidentMenu);
+    }
+
     public SicknessList clickSicknessMenu() {
         CommonEvents.clickButton(sicknessMenu);
         return new SicknessList();

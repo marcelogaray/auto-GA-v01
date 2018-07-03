@@ -1,6 +1,5 @@
 # @Author: Marcelo Loayza
 # Feature: Function manual List
-
 Feature: Function Manual
 
   Scenario: Function manual is displayed ones you select the tab function manual
