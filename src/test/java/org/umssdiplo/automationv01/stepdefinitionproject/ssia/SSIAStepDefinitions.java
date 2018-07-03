@@ -387,8 +387,6 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("updated 'WorkItem' is showed in 'Work Item list' page")
     public void updatedWorkItemIsShowedInRoleListPage() throws Throwable {
         Assert.assertEquals(workItemList.getLastWorkItemNameInTable(), DataDriverTest.readValues.getValue("WorkItem.update.name"), "Fail, WorkItem is not updated");
-
-
     }
 
     @And("click 'Item Classification' sub menu on 'Work Items' menu")
@@ -584,6 +582,11 @@ public class SSIAStepDefinitions extends BasePage {
         ppeClassificationCreate.fillPPEClassificationUsingDataDriverTest();
     }
 
+    @And("^fill 'PPE Classification' form using Data Driver Test on cancel create 'PPE Classification' page$")
+    public void fillPPEClassificationFormUsingDataDriverTestOnCancelCreatePPEClassificationPage() throws Throwable {
+        ppeClassificationCreate.fillPPEClassificationtoCancelUsingDataDriverTest();
+    }
+
     @And("^click 'Save' button into create 'PPE Classification' form page$")
     public void clickSaveButtonInCreateNewPPEClassificationFormPage() throws Throwable {
         ppeClassificationList = ppeClassificationCreate.clickSaveButton();
@@ -592,6 +595,16 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^created 'PPE Classification' is showed in 'PPE Classification list' page$")
     public void createdPPEClassificationIsShowedInPPEClassificationListPage() throws Throwable {
         Assert.assertEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.create.name"), "Fail, PPE Classification is not created");
+    }
+
+    @And("^click 'Cancel' button into create 'PPE Classification' form page$")
+    public void clickCancelButtonInCreateNewPPEClassificationFormPage() throws Throwable {
+        ppeClassificationList = ppeClassificationCreate.clickCancelButton();
+    }
+
+    @Then("^cancel creation 'PPE Classification' is not showed in PPE Classification list page$")
+    public void cancelCreationPPEClassificationIsNotShowedInPPEClassificationListPage() throws Throwable {
+        Assert.assertNotEquals(ppeClassificationList.getLastPPEClassificationNameInTable(), DataDriverTest.readValues.getValue("PPEClassification.cancelCreate.name"), "Fail, PPE Classification is created");
     }
 
     // PPE List
