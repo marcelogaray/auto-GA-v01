@@ -35,8 +35,8 @@ public class PPECancelCreate extends BasePage {
     }
 
     public void fillPPEUsingDataDriverTest() {
-        fillName(DataDriverTest.readValues.getValue("PPE.create.name"));
-        fillDescription(DataDriverTest.readValues.getValue("PPE.create.description"));
+        fillName(DataDriverTest.readValues.getValue("PPE.cancelCreate.name"));
+        fillDescription(DataDriverTest.readValues.getValue("PPE.cancelCreate.description"));
         selectOptionPPEClassification();
     }
 

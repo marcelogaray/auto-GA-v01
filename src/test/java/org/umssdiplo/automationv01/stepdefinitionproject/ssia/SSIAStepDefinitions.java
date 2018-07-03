@@ -22,10 +22,6 @@ import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPECancelCreate;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
-import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.*;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
@@ -646,15 +642,8 @@ public class SSIAStepDefinitions extends BasePage {
         ppeCreate = ppeList.clickNewPPE();
     }
 
-    private PPECancelCreate ppeCreate;
-
-    @And("^Click 'New PPE' button of 'PPE list' page$")
-    public void clickButtonNewPPE() throws Throwable {
-        ppeCreate = ppeList.clickNewPPE();
-    }
-
     @And("^fill 'PPE' form using Data Driver Test on create 'PPE' page$")
-    public void fillPPEFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+    public void fillPPEFormUsingDataDriverTestOnCreatePPEPage() throws Throwable {
         ppeCreate.fillPPEUsingDataDriverTest();
     }
 
@@ -663,9 +652,21 @@ public class SSIAStepDefinitions extends BasePage {
         ppeList = ppeCreate.clickSaveButton();
     }
 
-    @And("^Click 'Cancel' button into create 'PPE' form page$")
+    private PPECancelCreate ppeCancelCreate;
+
+    @And("^click 'New PPE' for cancel button of 'PPE list' page$")
+    public void clickButtonNewPPECancel() throws Throwable {
+        ppeCancelCreate = ppeList.clickNewPPECancel();
+    }
+
+    @And("^fill 'PPE' form using Data Driver Test on cancel create 'PPE' page$")
+    public void fillPPEFormUsingDataDriverTestOnCancelCreatePPEPage() throws Throwable {
+        ppeCancelCreate.fillPPEUsingDataDriverTest();
+    }
+
+    @And("^click 'Cancel' button into create 'PPE' form page$")
     public void clickCancelButtonInCreateNewPPEFormPage() throws Throwable {
-        ppeList = ppeCreate.clickCancelButton();
+        ppeList = ppeCancelCreate.clickCancelButton();
     }
 
     @Then("^created 'PPE' is showed in PPE list page$")
@@ -673,9 +674,9 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.create.name"), "Fail, PPE is not created");
     }
 
-    @Then("^Created 'PPE' is not showed in PPE list page$")
+    @Then("^created 'PPE' is not showed in PPE list page$")
     public void createdPPEIsNotShowedInPPEListPage() throws Throwable {
-        Assert.assertNotEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.create.name"), "Fail, PPE is not created");
+        Assert.assertNotEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.cancelCreate.name"), "Fail, PPE is created");
     }
 
     // Existing PPE List
