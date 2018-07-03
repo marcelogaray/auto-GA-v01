@@ -17,7 +17,7 @@ public class PPEAssignedList extends BasePage {
     private WebElement ppeContainer;
 
     public PPEAssignedList() {
-        CommonEvents.isPresent(ppeContainer);
+        CommonEvents.isVisible(ppeContainer);
     }
 
     public boolean isPPEAssignedListPresent() {

@@ -19,14 +19,8 @@ import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEAssignedList;
-import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.ExistingPPEList;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationCreate;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEClassificationList;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
+import org.umssdiplo.automationv01.core.managepage.ppe.*;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
 import org.umssdiplo.automationv01.core.managepage.role.RoleDeleteAlert;
 import org.umssdiplo.automationv01.core.managepage.role.RoleList;
@@ -38,6 +32,7 @@ import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.*;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -59,11 +54,6 @@ public class SSIAStepDefinitions extends BasePage {
     @And("click 'Personnel' menu on 'Header' page")
     public void clickPersonnelMenu() throws Throwable {
         ssiaHome.clickPersonnelMenu();
-    }
-
-    @And("Click 'PPE' menu on 'Header' page")
-    public void clickPPEMenu() throws Throwable {
-        ssiaHome.clickPPEMenu();
     }
 
     @And("click 'Employee' submenu into 'Personnel' menu")
@@ -462,7 +452,6 @@ public class SSIAStepDefinitions extends BasePage {
         Assert.assertTrue(accidentList.isAccidentListPresent(), "Fail, Accident List is not loaded");
     }
 
-
     @And("click 'pencil' button on 'Accident' list page")
     public void clickEditButton() {
         updateAccidentForm = accidentList.clickEditAccidentButton();
@@ -587,16 +576,16 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     // Existing PPE Assigned List
-    private PPEAssignedList ppeList;
+    private PPEAssignedList ppeAssignedList;
 
-    @And("^Click 'Assigned PPE' sub menu of 'PPE' menu$")
+    @And("^click 'Assigned PPE' sub menu of 'PPE' menu$")
     public void clickSubMenuAssignedPPE() throws Throwable {
-        ppeList = ssiaHome.clickExistingPPEAssignedSubMenu();
+        ppeAssignedList = ssiaHome.clickExistingPPEAssignedSubMenu();
     }
 
     @Then("^'Assigned PPE list' page loads correctly$")
     public void AssignedPPEListIsShowedInPage() throws Throwable {
-        Assert.assertTrue(ppeList.isPPEAssignedListPresent(), "Fail, Assigned PPE list is not loaded");
+        Assert.assertTrue(ppeAssignedList.isPPEAssignedListPresent(), "Fail, Assigned PPE list is not loaded");
     }
 
     // Audit List
