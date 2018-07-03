@@ -20,7 +20,7 @@ public class PPEList extends BasePage {
     private WebElement lastPPEName;
 
     public PPEList() {
-        CommonEvents.isPresent(ppeContainer);
+        CommonEvents.isVisible(ppeContainer);
     }
 
     public boolean isPPEListPresent() {
@@ -33,6 +33,6 @@ public class PPEList extends BasePage {
     }
 
     public String getLastPPENameInTable() {
-        return lastPPEName.getText();
+        return CommonEvents.getTextContent(lastPPEName);
     }
 }
