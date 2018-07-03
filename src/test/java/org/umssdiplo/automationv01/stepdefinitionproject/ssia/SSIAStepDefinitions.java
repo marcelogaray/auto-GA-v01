@@ -3,7 +3,6 @@ package org.umssdiplo.automationv01.stepdefinitionproject.ssia;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import gherkin.lexer.Th;
 import org.testng.Assert;
 import org.umssdiplo.automationv01.core.managepage.BasePage;
 import org.umssdiplo.automationv01.core.managepage.accident.AccidentDeleteAlert;
@@ -23,10 +22,6 @@ import org.umssdiplo.automationv01.core.managepage.functionmanual.FunctionManual
 import org.umssdiplo.automationv01.core.managepage.home.SSIAHome;
 import org.umssdiplo.automationv01.core.managepage.menuheader.safetyMenu.SafetyMenu;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.ItemClassificationMenu;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPECreate;
-import org.umssdiplo.automationv01.core.managepage.ppe.PPEList;
-import org.umssdiplo.automationv01.core.managepage.role.RoleList;
-import org.umssdiplo.automationv01.core.managepage.workItem.WorkItemList;
 import org.umssdiplo.automationv01.core.managepage.menuheader.workItemsMenu.WorkItemsMenu;
 import org.umssdiplo.automationv01.core.managepage.ppe.*;
 import org.umssdiplo.automationv01.core.managepage.role.RoleCreate;
@@ -40,6 +35,7 @@ import org.umssdiplo.automationv01.core.managepage.sickness.SicknessUpdate;
 import org.umssdiplo.automationv01.core.managepage.workItem.*;
 import org.umssdiplo.automationv01.core.utils.DataDriverTest;
 import org.umssdiplo.automationv01.core.utils.LoadPage;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -430,63 +426,64 @@ public class SSIAStepDefinitions extends BasePage {
     }
 
     @Then("^'function manual' page loads correctly$")
-    public void verifyFunctionManualList() throws Throwable{
+    public void verifyFunctionManualList() throws Throwable {
         boolean result = functionManual.isFunctionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
     @And("^click 'New Manual' button$")
-    public void clickNewManualButton() throws Throwable{
-       createFunctionManual = functionManual.clickNewManualButton();
+    public void clickNewManualButton() throws Throwable {
+        createFunctionManual = functionManual.clickNewManualButton();
     }
 
     @And("^fill the 'New Manual' form$")
-    public void fillNewManualForm() throws  Throwable{
+    public void fillNewManualForm() throws Throwable {
         createFunctionManual.fillNewManualForm();
     }
 
     @And("^click on the 'Save' button$")
-    public void clickSaveButton() throws Throwable{
+    public void clickSaveButton() throws Throwable {
         functionManual = createFunctionManual.clickSaveManualButton();
     }
 
     @Then("^new function manual is showed in page$")
-    public void verifyNewManualInLIst() throws  Throwable{
+    public void verifyNewManualInLIst() throws Throwable {
         boolean result = functionManual.isFunctionalManualTableDisplayed();
         Assert.assertTrue(result, "Fail, Function Manual list is not loaded");
     }
 
     @And("^click 'edit' button of a selected function manual$")
-    public void clickeditManualbutton() throws  Throwable{
+    public void clickeditManualbutton() throws Throwable {
         editFunctionManual = functionManual.clickEditManualButton();
     }
+
     @And("^fill the 'edit Manual' form$")
-    public  void fillEditManualForm() throws Throwable{
+    public void fillEditManualForm() throws Throwable {
         editFunctionManual.fillupdateManualForm();
     }
 
     @And("^click on the 'Update' button$")
-    public void clickUpdateButton() throws Throwable{
+    public void clickUpdateButton() throws Throwable {
         functionManual = editFunctionManual.clickSaveManualButton();
     }
 
     @Then("^edited changes of the function manual are displayed in page$")
-    public void verifyEditManualInLIst() throws  Throwable {
+    public void verifyEditManualInLIst() throws Throwable {
         boolean result = functionManual.isFunctionalManualTableDisplayed();
     }
 
     @And("^click 'delete' button of a selected function manual$")
-    public void clickDeleteManualButton() throws  Throwable{
+    public void clickDeleteManualButton() throws Throwable {
         deleteFunctionManual = functionManual.clickDeleteManualButton();
     }
 
     @And("^click 'Accept' of delete 'Manual' confirmation popup$")
-    public void clickAcceptManualButton() throws  Throwable{
+    public void clickAcceptManualButton() throws Throwable {
         deleteFunctionManual.clickAcceptManualButton();
     }
 
     @Then("^deleted 'Manual' is not showed in 'Manual list' page$")
-    public  void verifyDeleteManualNotDisplayed() throws Throwable{
+    public void verifyDeleteManualNotDisplayed() throws Throwable {
         Assert.assertNotEquals(functionManual.getLastRoleNameInTable(), deleteFunctionManual.getManualName(), "Fail, Function Manual is not deleted");
     }
     // Safety List
@@ -636,6 +633,28 @@ public class SSIAStepDefinitions extends BasePage {
     @Then("^'PPE list' page loads correctly$")
     public void PPEListIsShowedInPage() throws Throwable {
         Assert.assertTrue(ppeList.isPPEListPresent(), "Fail, PPE list is not loaded");
+    }
+
+    private PPECreate ppeCreate;
+
+    @And("^click 'New PPE' button of 'PPE list' page$")
+    public void clickButtonNewPPE() throws Throwable {
+        ppeCreate = ppeList.clickNewPPE();
+    }
+
+    @And("^fill 'PPE' form using Data Driver Test on create 'PPE' page$")
+    public void fillPPEFormUsingDataDriverTestOnCreateRolePage() throws Throwable {
+        ppeCreate.fillPPEUsingDataDriverTest();
+    }
+
+    @And("^click 'Save' button into create 'PPE' form page$")
+    public void clickSaveButtonInCreateNewPPEFormPage() throws Throwable {
+        ppeList = ppeCreate.clickSaveButton();
+    }
+
+    @Then("^created 'PPE' is showed in PPE list page$")
+    public void createdPPEIsShowedInPPEListPage() throws Throwable {
+        Assert.assertEquals(ppeList.getLastPPENameInTable(), DataDriverTest.readValues.getValue("PPE.create.name"), "Fail, PPE is not created");
     }
 
     // Existing PPE List

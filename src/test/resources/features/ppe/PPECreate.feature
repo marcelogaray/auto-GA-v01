@@ -2,11 +2,11 @@
 # feature to review behaviour of create ppe classification
 Feature: PPECreate
 
-  Scenario: La insercion de registro para un de equipo de proteccion personal se muestra en la lista de de equipo de proteccion personal cuando presiono boton Save
+  Scenario: EPP - Registro - Después de registrar datos de un equipo de protección personal, estos se despliegan en la lista de equipo de protección personal
     Given 'SSI-A' home page is loaded
-    And Click 'PPE' menu on 'Header' page
-    And Click 'PPE' sub menu of 'PPE' menu
-    And Click 'New PPE' button of 'PPE list' page
-    And Fill 'PPE' form using Data Driver Test on create 'PPE' page
-    And Click 'Save' button into create 'PPE' form page
-    Then Created 'PPE' is showed in PPE list page
+    And click 'PPE' menu on 'Header' page
+    And click 'PPE' sub menu of 'PPE' menu
+    And click 'New PPE' button of 'PPE list' page
+    And fill 'PPE' form using Data Driver Test on create 'PPE' page
+    And click 'Save' button into create 'PPE' form page
+    Then created 'PPE' is showed in PPE list page

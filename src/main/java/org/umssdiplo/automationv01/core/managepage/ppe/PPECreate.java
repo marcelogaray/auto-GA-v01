@@ -28,7 +28,7 @@ public class PPECreate extends BasePage {
     private WebElement saveButton;
 
     public PPECreate() {
-        CommonEvents.isPresent(saveButton);
+        CommonEvents.isVisible(saveButton);
     }
 
     public void fillPPEUsingDataDriverTest() {

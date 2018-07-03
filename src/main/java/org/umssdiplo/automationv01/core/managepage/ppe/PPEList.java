@@ -27,7 +27,7 @@ public class PPEList extends BasePage {
         return CommonEvents.isPresent(newPPEButton);
     }
 
-    public PPECreate clickNewPPE(){
+    public PPECreate clickNewPPE() {
         CommonEvents.clickButton(newPPEButton);
         return new PPECreate();
     }
