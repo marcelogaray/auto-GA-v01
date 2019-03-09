@@ -1,10 +1,14 @@
 package org.umssdiplo.automationv01.core.utils;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 public class CommonEvents {
@@ -22,6 +26,17 @@ public class CommonEvents {
     }
 
     /**
+     * This method perform a search in a WebElement list based on a content string parameter.
+     *
+     * @param xpath web element container at the list
+     * @return the List of WebElements that is searching.
+     */
+    public static List<WebElement> findWebElements(String xpath) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.elementToBeClickable(ManageDriver.getInstance().getWebDriver().findElement(By.xpath(xpath))));
+        return ManageDriver.getInstance().getWebDriver().findElements(By.xpath(xpath));
+    }
+
+    /**
      * This method set date content to web element.
      * Format: DD/MM/YYYY
      *
@@ -31,6 +46,20 @@ public class CommonEvents {
     public static void setInputDateField(WebElement webElement, String content) {
         ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.sendKeys(content);
+    }
+
+    /**
+     * Force to wait a time in millisecond, try not to use it.
+     *
+     * @param timeMilliSeconds timeout in milliseconds to generate a loop
+     */
+    public static void noUseThisWait(int timeMilliSeconds) {
+        try {
+            Thread.sleep(timeMilliSeconds);
+        } catch (InterruptedException e) {
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+        }
     }
 
     /**
@@ -99,6 +128,16 @@ public class CommonEvents {
     }
 
     /**
+     * This method perform a click action in a web element dynamic by xpath.
+     *
+     * @param xpath Is the web element that will be pressed.
+     */
+    public static void clickButton(String xpath) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.elementToBeClickable(ManageDriver.getInstance().getWebDriver().findElement(By.xpath(xpath))));
+        ManageDriver.getInstance().getWebDriver().findElement(By.xpath(xpath)).click();
+    }
+
+    /**
      * This method perform a click in a non visible element in the UI.
      *
      * @param webElement the WebElement non visible in the UI.
@@ -114,13 +153,38 @@ public class CommonEvents {
      * @param webElement is the web element.
      * @return true if web element is visible or false if it isn't visible.
      */
-    public static boolean isVisible(WebElement webElement) {
+    public static boolean isWebElementDisplayed(WebElement webElement) {
         try {
             return webElement.isDisplayed();
         } catch (NoSuchElementException e) {
             System.out.println("Element do not exits.");
             return false;
         }
+    }
+
+    /**
+     * Getting dynamic elements if it is displayed, using xpath locators dynamic
+     * it should have the keys works: %s, it will means the dynamic value
+     *
+     * @param xpath  with dynamic value which locates elements via XPath
+     * @return true when element is displayed by UI, otherwise false
+     */
+    public static boolean isDynamicElementDisplayed(String xpath) {
+        try {
+            return ManageDriver.getInstance().getWebDriver().findElement(By.xpath(xpath)).isDisplayed();
+        } catch (NoSuchElementException e) {
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+            return false;
+        }
+    }
+
+    public static void waitToPageCompleted(){
+        ManageDriver.getInstance().getWebDriverWait().until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor) ManageDriver.getInstance().getWebDriver()).executeScript("return document.readyState").equals("complete");
+            }
+        });
     }
 
     /**
@@ -164,6 +228,16 @@ public class CommonEvents {
     }
 
     /**
+     * This method return the text content of a xpath as string.
+     *
+     * @param xpath is the WebElement as XPATH to extract the text.
+     * @return the text content of the WebElement.
+     */
+    public static String getTextContent(String xpath) {
+        return ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(ManageDriver.getInstance().getWebDriver().findElement(By.xpath(xpath)))).getText();
+    }
+
+    /**
      * This method get title of current page.
      *
      * @return title of the current page.
@@ -202,4 +276,14 @@ public class CommonEvents {
         return ManageDriver.getInstance().getWebDriver().getPageSource().contains(text);
     }
 
+    /**
+     * Hover WebElement using a wait
+     *
+     * @param webElement is the WebElement to extract the text.
+     */
+    public static void hoverWebElement(WebElement webElement) {
+        ManageDriver.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        Actions action = new Actions(ManageDriver.getInstance().getWebDriver());
+        action.moveToElement(webElement).build().perform();
+    }
 }
